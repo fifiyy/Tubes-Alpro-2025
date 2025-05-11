@@ -24,3 +24,7 @@ $(OUT): $(SRC)
 # Clean target to remove compiled files
 clean:
 	rm -rf $(OUTDIR)
+
+run: $(OUT)
+	@echo "Menjalankan program..."
+	@./$(OUT)
