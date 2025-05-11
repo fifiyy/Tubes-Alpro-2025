@@ -117,3 +117,27 @@ Dan karena hidup bersama ratusan makhluk kuning berbentuk kapsul adalah sumber k
 
 ### **F18 – Exit**
 > Keluar dari program dan menyimpan seluruh data
+
+# Cara Menjalankan Program
+
+## Prerequisites
+- **GCC** (GNU Compiler Collection) sudah terinstall
+- **Make** sudah terinstall
+
+**CATATAN PENTING**
+1. **Pastikan WSL sudah terinstall (Windows)** dan distro Linux aktif (Ubuntu disarankan).  
+
+2. **Clone repo di lingkungan WSL (bukan di Windows filesystem)**
+
+## Instalasi & Kompilasi
+1. Clone repository ini:
+   git clone https://github.com/Labpro-22/if1210-tubes-2025-k03-a.git
+   cd if1210-tubes-2025-k03-a
+
+2. Kompilasi Program
+lakukan: 
+make
+
+3. Menjalankan Program
+Setelah kompilasi, lakukan: 
+make run
