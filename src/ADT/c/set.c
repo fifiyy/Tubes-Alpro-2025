@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "../header/set.h"
 
 void set_create_empty (Set *S) {

@@ -1,7 +1,6 @@
 #ifndef SET_H
 #define SET_H
 
-#include <stdio.h>
 #include <string.h> // Untuk operasi string
 #include "boolean.h"
 

@@ -1,3 +1,4 @@
+#include <string.h>
 #include "boolean.h"
 
 #ifndef STACK_H

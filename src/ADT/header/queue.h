@@ -1,8 +1,6 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include <stdbool.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include "boolean.h"
 
@@ -29,7 +27,7 @@ void queue_init_queue(struct Queue *q);
  * Return:
  * - true jika queue kosong (count == 0), false jika tidak.
  */
-bool queue_is_empty(struct Queue *q);
+boolean queue_is_empty(struct Queue *q);
 
 /*
  * Fungsi untuk mengecek apakah queue penuh.
@@ -38,7 +36,7 @@ bool queue_is_empty(struct Queue *q);
  * Return:
  * - true jika queue penuh (count == MAX_SIZE - 1), false jika tidak.
  */
-bool queue_is_full(struct Queue *q);
+boolean queue_is_full(struct Queue *q);
 
 /*
  * Fungsi untuk menambahkan elemen ke belakang (enqueue) queue.
