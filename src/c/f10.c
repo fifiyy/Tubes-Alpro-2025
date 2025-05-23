@@ -51,7 +51,7 @@ void tambah_dokter (ListUser *users, Set *usernames){
 
     SetEl(users, NbElmt(*users), new_user);
     SetLength(users, NbElmt(*users) + 1);
-    Insert(usernames, username); // Tambahkan username ke dalam Set
+    set_insert(usernames, username); // Tambahkan username ke dalam Set
     
     printf("Dokter %s berhasil ditambahkan!\n", username);
 }

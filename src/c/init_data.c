@@ -4,16 +4,16 @@
 
 void init_data(ListUser *users, Set *usernames) {
     MakeEmpty(users); // Inisialisasi list
-    CreateEmpty(usernames); // Inisialisasi set
+    set_create_empty(usernames); // Inisialisasi set
 
     // Tambahkan pengguna awal ke ListUser dan Set
     SetEl(users, 0, (User){"nimonsslatte", "nimonatutgajah23", ROLE_MANAGER});
-    Insert(usernames, "nimonsslatte");
+    set_insert(usernames, "nimonsslatte");
     SetEl(users, 1, (User){"Neroifa", "Neroifa123", ROLE_DOKTER});
-    Insert(usernames, "Neroifa");
+    set_insert(usernames, "Neroifa");
     SetEl(users, 2, (User){"GRO", "NeroifaCantik", ROLE_PASIEN});
-    Insert(usernames, "GRO");
+    set_insert(usernames, "GRO");
     SetEl(users, 3, (User){"nimonsganteng", "KelompokAmatGacor", ROLE_PASIEN});
-    Insert(usernames, "nimonsganteng");
+    set_insert(usernames, "nimonsganteng");
     SetLength(users, 4);
 }

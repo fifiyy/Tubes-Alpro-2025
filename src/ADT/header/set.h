@@ -24,34 +24,34 @@ extern Set doctor_usernames;
 /* ********* Prototype ********* */
 
 /* *** Konstruktor/Kreator *** */
-void CreateEmpty(Set *S);
+void set_create_empty(Set *S);
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah Set S kosong berkapasitas MaxEl */
 /* Ciri Set kosong : count bernilai Nil */
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
-boolean Set_IsEmpty(Set S);
+boolean set_is_empty(Set S);
 /* Mengirim true jika Set S kosong */
 /* Ciri Set kosong : count bernilai Nil */
 
-boolean Set_IsFull(Set S);
+boolean set_is_full(Set S);
 /* Mengirim true jika Set S penuh */
 /* Ciri Set penuh : count bernilai MaxEl */
 
 /* ********** Operator Dasar Set ********* */
-void Insert(Set *S, const char *Elmt);
+void set_insert(Set *S, const char *Elmt);
 /* Menambahkan Elmt sebagai elemen Set S. */
 /* I.S. S mungkin kosong, S tidak penuh
         S mungkin sudah beranggotakan Elmt */
 /* F.S. Elmt menjadi anggota dari S. Jika Elmt sudah merupakan anggota, operasi tidak dilakukan */
 
-void Delete(Set *S, const char *Elmt);
+void set_delete(Set *S, const char *Elmt);
 /* Menghapus Elmt dari Set S. */
 /* I.S. S tidak kosong
         Elmt mungkin anggota / bukan anggota dari S */
 /* F.S. Elmt bukan anggota dari S */
 
-boolean IsMember(Set S, const char *Elmt);
+boolean set_is_member(Set S, const char *Elmt);
 /* Mengembalikan true jika Elmt adalah anggota dari S */
 
 #endif

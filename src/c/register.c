@@ -4,7 +4,7 @@
 #include "../header/user.h"    
 
 boolean is_username_unique(const Set *usernames, const char* username) {
-    return !IsMember(*usernames, username); // Gunakan fungsi IsMember dari Set
+    return !set_is_member(*usernames, username); // Gunakan fungsi IsMember dari Set
 }
 
 void register_pasien(ListUser *users, Set *usernames) {
@@ -52,7 +52,7 @@ void register_pasien(ListUser *users, Set *usernames) {
 
     SetEl(users, NbElmt(*users), new_user);
     SetLength(users, NbElmt(*users) + 1);
-    Insert(usernames, username); // Tambahkan username ke dalam Set
+    set_insert(usernames, username); // Tambahkan username ke dalam Set
     
     printf("Pasien %s berhasil ditambahkan!\n", username);
 }

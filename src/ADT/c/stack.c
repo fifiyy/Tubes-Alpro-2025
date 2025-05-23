@@ -3,7 +3,7 @@
 #include "../header/stack.h"
 
 /*** Konstruktor/Kreator ***/
-void CreateStack(Stack *s) {
+void create_stack(Stack *s) {
     IDX_TOP(*s) = IDX_UNDEF;
 }
 /* I.S. Sembarang */
@@ -12,18 +12,18 @@ void CreateStack(Stack *s) {
 
 /* Ciri stack kosong: idxTop bernilai IDX_UNDEF */
 /********** Predikat Untuk test keadaan KOLEKSI **********/
-boolean isEmpty(Stack s) {
+boolean stack_is_empty(Stack s) {
     return IDX_TOP(s) == IDX_UNDEF;
 }
 /* Mengirim true jika Stack kosong: lihat definisi di atas */
 
-boolean isFull(Stack s) {
+boolean stack_is_full(Stack s) {
     return IDX_TOP(s) == CAPACITY - 1;
 }
 /* Mengirim true jika Stack penuh */
 
-int length(Stack s) {
-    if (isEmpty(s)) {
+int stack_length (Stack s) {
+    if (stack_is_empty(s)) {
         return 0;
     } else {
         return IDX_TOP(s) + 1;
@@ -32,7 +32,7 @@ int length(Stack s) {
 /* Mengirim ukuran Stack s saat ini */
 
 /*********** Menambahkan sebuah elemen ke Stack **********/
-void push(Stack *s, ElType val) {
+void stack_push (Stack *s, ElType val) {
         IDX_TOP(*s)++;
         TOP(*s) = val;
 }
@@ -41,7 +41,7 @@ I.S. s mungkin kosong, tidak penuh
 F.S. val menjadi TOP yang baru, TOP bertambah 1 */
 
 /*********** Menghapus sebuah elemen Stack **********/
-void pop(Stack *s, ElType *val) {
+void stack_pop (Stack *s, ElType *val) {
     *val = TOP(*s);
     IDX_TOP(*s)--;
 }

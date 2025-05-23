@@ -6,6 +6,6 @@ void init_ruang (ListRuangan *ruang){
         ruang->ruang[i].nomor = i + 1;
         ruang->ruang[i].kapasitas = 3;
         strcpy(ruang->ruang[i].dokter, "");
-        CreateEmpty(&(ruang->ruang[i].pasien));
+        set_create_empty(&(ruang->ruang[i].pasien));
     }
 }
