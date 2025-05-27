@@ -12,9 +12,13 @@ void exit_system(ListUser *users) {
     while (1) {
         printf("Pilihan Anda: ");
         scanf("%s", input);
-
+    
         if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-            printf("\n%s keluar dari Rumah Sakit,\nSampai jumpa!\n", current_user->username);
+            if (current_user == NULL) {
+                printf("\nUser keluar dari Rumah Sakit,\nSampai jumpa!\n");
+            } else {
+                printf("\n%s keluar dari Rumah Sakit,\nSampai jumpa!\n", current_user->username);
+            }
             exit(0);
         } else if (strcmp(input, "N") == 0 || strcmp(input, "n") == 0) {
             printf("\nKembali ke menu utama...\n");
@@ -22,5 +26,5 @@ void exit_system(ListUser *users) {
         } else {
             printf("Tidak valid. Pilih Y atau N ya!\n");
         }
-    }
+    }    
 }
