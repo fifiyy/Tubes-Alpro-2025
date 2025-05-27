@@ -5,12 +5,6 @@
 #include "../header/user.h" // Untuk akses current_user
 
 void exit_system(ListUser *users) {
-    // Cek apakah ada pengguna yang sedang login
-    if (current_user == NULL) {
-        printf("\nTidak ada pengguna yang sedang login. Silakan login terlebih dahulu untuk keluar.\n");
-        return;
-    }
-
     char input[10];
 
     printf("\nApakah Anda mau keluar dari rumah sakit? (y/n)\n");
