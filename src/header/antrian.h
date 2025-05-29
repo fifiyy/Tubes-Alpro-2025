@@ -2,6 +2,7 @@
 #define ANTRIAN_H
 
 #include "user.h"
+#include "../ADT/header/list_user.h"
 #include "boolean.h"
 
 /**
