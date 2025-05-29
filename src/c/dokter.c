@@ -47,3 +47,13 @@ Pasien* assignPasienKeDokter(Dokter* dokter, Pasien* pasien) {
     printf("Gagal mendaftarkan pasien ke antrian\n");
     return NULL;
 }
+
+User* getUserByIDDokter (int idDokter, ListUser *users) {
+    for (int i = 0; i < users->length; i++) {
+        User *user = &users->data[i];
+        if (user->role == ROLE_DOKTER && user->dokter_data->id == idDokter) {
+            return user;
+        }
+    }
+    return NULL;
+}
