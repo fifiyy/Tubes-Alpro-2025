@@ -13,7 +13,7 @@
  * @return Nama penyakit pertama yang memenuhi semua kondisi atau NULL
  */
 /*
-    Menganalisis data pasien dan mencocokkan dengan kritersia penyakit yang ada di
+    Menganalisis data pasien dan mencocokkan dengan kriteria penyakit yang ada di
     dalam database. Pakai static agar variabel disimpan di static memory dan nilainya
     tetap ada meskipun fungsi sudah selesai.
     Kriteria:
@@ -23,14 +23,6 @@
     { F.S.: Mengembalikan nama penyakit jika ketemu, NULL jika tidak }
 */
 static char *identifikasiPenyakit (Pasien *pasien);
-
-/*
-    Mencetak hasil diagnosis ke layar
-    { I.S.: db terinisialisasi, nama pasien valid }
-    { F.S.: Pesan diagnosis tercetak ke layar }
-*/
-// void printDiagnosis (const char *nama_penyakit, const char *nama_pasien);
-
 
 /**
  * @brief Melakukan proses diagnosis pasien oleh dokter
