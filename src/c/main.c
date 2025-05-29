@@ -9,6 +9,7 @@
 #include "../header/exit.h"
 #include "../header/f10.h"
 #include "../header/lihat_denah.h"
+#include "../header/diagnosis.h"
 
 ListUser users; // Deklarasi variabel global untuk menyimpan daftar pengguna
 ListRuangan ruangan;
@@ -60,6 +61,8 @@ int main(int argc, char *argv[]) {
                 printf("Input tidak valid!\n");
             }
             // while (getchar() != '\n'); // Clear input buffer
+        } else if (strcmp(command, "DIAGNOSIS") == 0) {
+            diagnosisPasien(current_user);
         } else {
             printf("Command tidak dikenali. Ketik HELP untuk bantuan.\n");
         }
