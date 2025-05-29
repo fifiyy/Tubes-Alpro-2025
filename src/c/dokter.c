@@ -28,7 +28,7 @@ Pasien* assignPasienKeDokter(Dokter* dokter, Pasien* pasien) {
         if (dokter->pasienDiRuangan[i] == NULL) {
             dokter->pasienDiRuangan[i] = pasien;
             pasien->posisiAntrian = 0;
-            pasien->id_dokter = dokter->id;
+            pasien->idDokter = dokter->id;
             printf("Pasien berhasil didaftarkan ke ruangan\n");
             return pasien;
         }
@@ -39,7 +39,7 @@ Pasien* assignPasienKeDokter(Dokter* dokter, Pasien* pasien) {
     
     if (banyakAntrian(&dokter->antrian) > jumlahSebelum) {
         pasien->posisiAntrian = dokter->antrian.jumlah;
-        pasien->id_dokter = dokter->id;
+        pasien->idDokter = dokter->id;
         printf("Pasien berhasil didaftarkan ke antrian\n");
         return pasien;
     }
