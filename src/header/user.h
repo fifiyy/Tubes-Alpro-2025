@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "boolean.h"
+#include "pasien.h"
+#include "dokter.h"
 
 #define MAX_USERS 100
 #define USERNAME_LEN 50
@@ -22,6 +24,12 @@ typedef struct {
     char username[USERNAME_LEN];
     char password[PASSWORD_LEN];
     UserRole role;
+
+    union {
+        Pasien *pasien_data;    // Jika role == ROLE_PASIEN
+        Dokter *dokter_data;     // Jika role == ROLE_DOKTER
+        // Manager *manager_data;   // Jika role == ROLE_MANAGER
+    };
 } User;
 
 // Variabel global yang digunakan di seluruh program
