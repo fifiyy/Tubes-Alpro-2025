@@ -21,21 +21,7 @@ static char *identifikasiPenyakit (Pasien *pasien) {
     }
     return NULL;
 } 
-/*
-void updateAntrian (Dokter *dokter) {
-    for (int i = 0; i < MAX_PASIEN_RUANGAN; i++) {
-        if (dokter->pasienDiRuangan[i] == NULL) {
-            User *pasien_baru = dequeue(&dokter->antrian);
-            if (pasien_baru != NULL) {
-                if (pasien_baru->role == ROLE_PASIEN) {
-                    dokter->pasienDiRuangan[i] = pasien_baru;
-                    printf("Pasien");
-                }
-            }
-        }
-    }
-}
-*/
+
 void diagnosisPasien (User *user_dokter) {
     if (user_dokter == NULL) {
         printf("Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.");
