@@ -6,8 +6,6 @@
 #define MAX_PASIEN_RUANGAN 3
 
 typedef struct {
-    int id;
-    char nama[16];
     char ruangan;
     Pasien *pasienDiRuangan[MAX_PASIEN_RUANGAN];
     AntrianDokter antrian;
