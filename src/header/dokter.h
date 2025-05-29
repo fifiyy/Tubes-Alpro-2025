@@ -17,5 +17,6 @@ typedef struct {
     Tapi kalau jumlahPasienDiRuangan = 3, masuk ke antrian
 */
 Pasien *assignPasienKeDokter (Dokter *dokter, Pasien *pasien);
+User* getUserByIDDokter (int idDokter, ListUser *users);
 
 #endif
