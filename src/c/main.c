@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "../header/display.h"
 #include "../header/user.h"
 #include "../header/login.h"
 #include "../header/register.h"
@@ -17,6 +18,7 @@ Set usernames; // Deklarasi variabel global untuk menyimpan daftar username
 Set doctor_usernames;
 
 int main(int argc, char *argv[]) {
+    displayMainMenu(); //display utama sebelum login atau register
     init_data(&users, &usernames); // Panggil fungsi init_data
     init_ruang (&ruangan);
 
