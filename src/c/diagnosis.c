@@ -20,7 +20,7 @@ static char *identifikasiPenyakit (Pasien *pasien) {
             }
     }
     return NULL;
-}
+} 
 /*
 void updateAntrian (Dokter *dokter) {
     for (int i = 0; i < MAX_PASIEN_RUANGAN; i++) {
