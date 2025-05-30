@@ -10,16 +10,16 @@ static char *identifikasi_penyakit (Pasien *pasien) {
     static char namaPenyakit[MAX_PENYAKIT];
     for (int i = 0; i < jumlahPenyakit; i++) {
         Penyakit p = ketPenyakit[i];
-        if (pasien->suhu >= p.suhu_min && pasien->suhu <= p.suhu_max &&
-            pasien->tekananDarah[0] >= p.bp_sis_min && pasien->tekananDarah[0] <= p.bp_sis_max &&
-            pasien->tekananDarah[1] >= p.bp_dias_min && pasien->tekananDarah[1] <= p.bp_dias_max &&
-            pasien->detakJantung >= p.bpm_min && pasien->detakJantung <= p.bpm_max &&
-            pasien->saturasiOksigen >= p.sats_min && pasien->saturasiOksigen <= p.sats_max &&
-            pasien->kadarGulaDarah >= p.bg_min && pasien->kadarGulaDarah <= p.bg_max &&
-            pasien->beratBadan >= p.bb_min && pasien->beratBadan <= p.bb_max &&
-            pasien->tinggiBadan >= p.tb_min && pasien->tinggiBadan <= p.tb_max &&
-            pasien->kadarKolesterol >= p.fat_min && pasien->kadarKolesterol <= p.fat_max &&
-            pasien->trombosit >= p.trom_min && pasien->trombosit <= p.trom_max) 
+        if (pasien->suhu >= p.suhuMin && pasien->suhu <= p.suhuMax &&
+            pasien->tekananDarah[0] >= p.bpSisMin && pasien->tekananDarah[0] <= p.bpSisMax &&
+            pasien->tekananDarah[1] >= p.bpDiasMin && pasien->tekananDarah[1] <= p.bpDiasMax &&
+            pasien->detakJantung >= p.bpmMin && pasien->detakJantung <= p.bpmMax &&
+            pasien->saturasiOksigen >= p.satsMin && pasien->saturasiOksigen <= p.satsMax &&
+            pasien->kadarGulaDarah >= p.bgMin && pasien->kadarGulaDarah <= p.bgMax &&
+            pasien->beratBadan >= p.bbMin && pasien->beratBadan <= p.bbMax &&
+            pasien->tinggiBadan >= p.tbMin && pasien->tinggiBadan <= p.tbMax &&
+            pasien->kadarKolesterol >= p.fatMin && pasien->kadarKolesterol <= p.fatMax &&
+            pasien->trombosit >= p.tromMin && pasien->trombosit <= p.tromMax) 
             {
                 strcpy(pasien->penyakit, p.nama);
                 strncpy(namaPenyakit, p.nama, MAX_PENYAKIT-1);
