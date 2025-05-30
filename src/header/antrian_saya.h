@@ -4,6 +4,5 @@
 #include "../header/user.h"
 #include "../header/dokter.h"
 
-void checkAntrianSaya(User *user, Dokter *dokter, int banyakDokter);
-
+void cek_antrian_saya(User *user, Dokter *dokter, ListRuangan *ruangan, int banyakDokter);
 #endif

@@ -2,18 +2,18 @@
 #include <stdio.h>
 #include <string.h>
 
-void checkAntrianSaya(User *user, Dokter *dokter, int banyakDokter) {
+void cek_antrian_saya (User *user, Dokter *dokter, ListRuangan *ruangan, int banyakDokter) {
     if (user->role != ROLE_PASIEN) {
         printf("ERROR: Hanya pasien yang bisa melihat antrian!\n");
         return;
     }
 
-    Pasien *pasien = user->pasien_data;
+    Pasien *pasien = user->dataPasien;
 
     // Check if patient is already in a room
-    for (int i = 0; i < banyakDokter; i++) {
+    for (int i = 0; i < ruangan->jumlah; i++) {
         for (int j = 0; j < MAX_PASIEN_RUANGAN; j++) {
-            if (dokter[i].pasienDiRuangan[j] == pasien) {
+            if (ruangan->ruang[i].pasienDiRuangan[j].id == pasien->id) {
                 printf("\nAnda sedang berada di dalam ruangan dokter!\n");
                 return;
             }
@@ -30,7 +30,7 @@ void checkAntrianSaya(User *user, Dokter *dokter, int banyakDokter) {
     // Find the doctor the patient is assigned to
     Dokter *dokterPasien = NULL;
     for (int i = 0; i < banyakDokter; i++) {
-        if (dokter[i].id == pasien->id_dokter) {
+        if (dokter[i].id == pasien->idDokter) {
             dokterPasien = &dokter[i];
             break;
         }
@@ -41,10 +41,25 @@ void checkAntrianSaya(User *user, Dokter *dokter, int banyakDokter) {
         return;
     }
 
-    int totalAntrian = banyakAntrian(&dokterPasien->antrian);
-    
+    // Find the room and calculate queue position
+    int idx_ruang = dokterPasien->ruangan - 1;
+    if (idx_ruang < 0 || idx_ruang >= ruangan->jumlah) {
+        printf("\nError: Ruangan dokter tidak valid!\n");
+        return;
+    }
+
+    int total_antrian = queue_size(&ruangan->ruang[idx_ruang].Antrian);
+    int pasien_dalam_ruangan = 0;
+    for (int j = 0; j < MAX_PASIEN_RUANGAN; j++) {
+        if (ruangan->ruang[idx_ruang].pasienDiRuangan[j].id != 0) {
+            pasien_dalam_ruangan++;
+        }
+    }
+
     printf("\nStatus antrian Anda:\n");
-    printf("Dokter: dr. %s\n", dokterPasien->nama);
-    printf("Ruangan: %c\n", dokterPasien->ruangan);
-    printf("Posisi antrian: %d dari %d\n", pasien->posisiAntrian, totalAntrian);
+    printf("Dokter: Dr. %s\n", dokterPasien->username);
+    printf("Ruangan: A%d\n", dokterPasien->ruangan);
+    printf("Posisi antrian: %d dari %d\n", 
+           pasien->posisiAntrian, 
+           total_antrian - pasien_dalam_ruangan);
 }
