@@ -4,8 +4,8 @@
 #include "user.h"
 #include "obat-penyakit.h"
 
-PenyakitObatEntry* cariObat(const char *nama_penyakit);
+PenyakitObatEntry* cari_obat(const char *namaPenyakit);
 
-void ngobatin(User *user_dokter);
+void ngobatin (User *currUser, User *users, int banyakUser, ListRuangan *ruangan);
 
 #endif

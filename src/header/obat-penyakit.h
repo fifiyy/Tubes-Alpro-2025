@@ -10,9 +10,9 @@
 #define MAX_PENYAKIT_MAP 50
 
 typedef struct {
-    char nama_penyakit[50];             // Key: Nama penyakit (string)
+    char namaPenyakit[50];             // Key: Nama penyakit (string)
     Obat obat[MAX_OBAT_PER_PENYAKIT];   // Array obat
-    int jumlah_obat;                    // Jumlah obat untuk penyakit ini
+    int jumlahObat;                    // Jumlah obat untuk penyakit ini
 } PenyakitObatEntry;
 
 PenyakitObatEntry penyakitObatMap[] = {
