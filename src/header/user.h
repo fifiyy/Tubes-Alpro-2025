@@ -28,8 +28,8 @@ typedef struct {
     UserRole role;
 
     union {
-        Pasien *pasien_data;    // Jika role == ROLE_PASIEN
-        Dokter *dokter_data;     // Jika role == ROLE_DOKTER
+        Pasien *dataPasien;    // Jika role == ROLE_PASIEN
+        Dokter *dataDokter;     // Jika role == ROLE_DOKTER
         // Manager *manager_data;   // Jika role == ROLE_MANAGER
     };
 } User;

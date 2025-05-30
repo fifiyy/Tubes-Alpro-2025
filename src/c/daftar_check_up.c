@@ -33,12 +33,12 @@ void display_dokter (User *users, int banyakUser, ListRuangan *ruangan) {
             continue;
         }
         
-        if (users[i].dokter_data == NULL) {
+        if (users[i].dataDokter == NULL) {
             printf("ERROR: Data dokter tidak valid untuk %s!\n", users[i].username);
             continue; // skip invalid entries 
         }
 
-        Dokter *dokter = users[i].dokter_data;
+        Dokter *dokter = users[i].dataDokter;
         banyakDokter++;
         
         if (dokter->ruangan == '\0') {
@@ -75,12 +75,12 @@ void daftar_check_up(User *currUser, User *users, int banyakUser, ListRuangan *r
         return;
     }
 
-    if (currUser->pasien_data == NULL) {
+    if (currUser->dataPasien == NULL) {
         printf("ERROR: Data pasien tidak valid!\n");
         return;
     }
 
-    Pasien *pasien = currUser->pasien_data;
+    Pasien *pasien = currUser->dataPasien;
 
     // Cek apakah pasien sudah dalam antrian
     if (pasien->posisiAntrian >= 0) {
@@ -94,7 +94,7 @@ void daftar_check_up(User *currUser, User *users, int banyakUser, ListRuangan *r
         Ruangan *r = &ruangan->ruang[i];
         address curr = r->Antrian.First;
         while (curr != NULL) {
-            if (curr->pasien->pasien_data == pasien) {
+            if (curr->pasien->dataPasien == pasien) {
                 printf("Anda sudah berada di ruangan %d (atau antrian ruangan %d)\n", r->nomor, r->nomor);
                 return;
             }
@@ -172,7 +172,7 @@ void daftar_check_up(User *currUser, User *users, int banyakUser, ListRuangan *r
             idxDokter++;
             if (idxDokter == pilihan) {
                 userDokter = &users[i];
-                dokterPilihan = users[i].dokter_data;
+                dokterPilihan = users[i].dataDokter;
                 break;
             }
         }
