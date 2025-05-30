@@ -77,12 +77,14 @@ void lihat_semua_antrian(ListRuangan *ruangan, int num, ListUser *users) {
     printf("+-----+-----+-----+-----+-----+-----+-----+-----+\n\n");
     
     // Print details for each room
-    for (int i = 0; i < ruangan->jumlah; i++) {
+    
+    for (int i = 0; i < ruangan->jumlah; i++){
         Ruangan r = ruangan->ruang[i];
         // Skip empty rooms (no doctor assigned)
         if (r.dokter == NULL || strlen(r.dokter->username) == 0) {
             continue;
         }
+        printf("--- Detail Ruangan %d ---\n", ruangan->ruang[i].nomor);
         printf("Kapasitas  : %d\n", r.kapasitas);
         printf("Dokter     : Dr. %s\n", r.dokter->username);
         // Print patients in the room (N terdepan dari queue)

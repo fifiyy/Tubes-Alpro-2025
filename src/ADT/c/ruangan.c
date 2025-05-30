@@ -8,16 +8,14 @@ void init_ruang (ListRuangan *ruang, ListUser *users) {
     Dokter *dokter_terpilih = NULL;
 
     for (int i = 0; i < NbElmt(*users); i++) {
-        printf("[INIT_DATA] User %d: %s (role = %d)\n", i, users->data[i].username, users->data[i].role);
         if (users->data[i].role == ROLE_DOKTER && users->data[i].dokter_data == NULL) {
-            printf("⚠️ WARNING: Dokter %s belum punya dokter_data!\n", users->data[i].username);
+            // skip warning debug
         }
     }
 
     for (int i = 0; i < NbElmt(*users); i++) {
         if (users->data[i].role == ROLE_DOKTER && users->data[i].dokter_data != NULL) {
             dokter_terpilih = users->data[i].dokter_data;
-            printf("Dokter terpilih: %s\n", dokter_terpilih->username);
             break; // Ambil dokter pertama yang ditemukan
         }
     }

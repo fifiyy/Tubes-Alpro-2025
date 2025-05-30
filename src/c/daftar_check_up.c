@@ -83,14 +83,16 @@ void daftar_checkup(User *current_user, User *users, int user_count, ListRuangan
         return;
     }
 
-    //cek apakah pasien sudah berada di ruangan
+    //cek apakah pasien sudah berada di ruangan/antrian (berdasarkan queue, bukan array manual)
     for (int i = 0; i < ruangan->jumlah; i++) {
         Ruangan *r = &ruangan->ruang[i];
-        for (int j = 0; j < MAX_PASIEN_RUANGAN; j++) {
-            if (r->pasienDiRuangan[j].id == pasien->id) {
-                printf("Anda sudah berada di ruangan %d!\n", r->nomor);
+        address curr = r->Antrian.First;
+        while (curr != NULL) {
+            if (curr->pasien->pasien_data == pasien) {
+                printf("Anda sudah berada di ruangan %d (atau antrian ruangan %d)\n", r->nomor, r->nomor);
                 return;
             }
+            curr = curr->next;
         }
     }
 
@@ -102,6 +104,46 @@ void daftar_checkup(User *current_user, User *users, int user_count, ListRuangan
         }
     }
 
+    printf("\n===== INPUT DATA MEDIS =====\n");
+
+    do {
+        printf("Suhu tubuh (Celcius): ");
+        scanf("%f", &pasien->suhu);
+    } while (!validasiFloat(pasien->suhu, "Suhu"));
+    do {
+        printf("Tekanan darah (sistol/diastol, contoh: 120 80): ");
+        scanf("%d %d", &pasien->tekananDarah[0], &pasien->tekananDarah[1]);
+    } while (pasien->tekananDarah[0] <= 0 || pasien->tekananDarah[1] <= 0);
+    do {
+        printf("Detak jantung (bpm): ");
+        scanf("%d", &pasien->detakJantung);
+    } while (!validasiInt(pasien->detakJantung, "Detak jantung"));
+    do {
+        printf("Saturasi oksigen (persentase): ");
+        scanf("%f", &pasien->saturasiOksigen);
+    } while (!validasiFloat(pasien->saturasiOksigen, "Saturasi oksigen"));
+    do {
+        printf("Kadar gula darah (mg/dL): ");
+        scanf("%d", &pasien->kadarGulaDarah);
+    } while (!validasiInt(pasien->kadarGulaDarah, "Kadar gula darah"));
+    do {
+        printf("Berat badan (kg): ");
+        scanf("%f", &pasien->beratBadan);
+    } while (!validasiFloat(pasien->beratBadan, "Berat badan"));
+    do {
+        printf("Tinggi badan (cm): ");
+        scanf("%d", &pasien->tinggiBadan);
+    } while (!validasiInt(pasien->tinggiBadan, "Tinggi badan"));
+    do {
+        printf("Kadar kolestrol (mg/dL): ");
+        scanf("%d", &pasien->kadarKolesterol);
+    } while (!validasiInt(pasien->kadarKolesterol, "Kadar kolestrol"));
+    do {
+        printf("Trombosit (ribu/µL): ");
+        scanf("%d", &pasien->trombosit);
+    } while (!validasiInt(pasien->trombosit, "Trombosit"));
+    
+    
     displayDokter(users, user_count, ruangan);
 
     int pilihan;
