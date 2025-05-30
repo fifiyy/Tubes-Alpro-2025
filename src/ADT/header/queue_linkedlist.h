@@ -21,14 +21,14 @@ typedef struct AntrianNode {
 } AntrianNode;
 
 typedef struct {
-    address First; // Pointer ke elemen pertama
-    address Last;  // Pointer ke elemen terakhir
+    address first; // Pointer ke elemen pertama
+    address last;  // Pointer ke elemen terakhir
     int jumlah; // Jumlah elemen dalam list
 } AntrianDokter;
 
 /* Struktur Queue berbasis Linked List */
 typedef struct {
-    int dokter_id; // ID dokter
+    int idDokter; // ID dokter
     AntrianDokter antrian; // Antrian pasien untuk dokter tersebut
 } MapDokterAntrian;
 

@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../header/map.h"
+#include "../header/Map.h"
 
 /**
  * @brief Membuat dan menginisialisasi Map baru.
@@ -10,20 +10,20 @@
  * atau kapasitas tidak valid.
  */
 Map *create_map(int capacity) {
-    Map *new_map = (Map *) malloc(sizeof(Map));
-    if (new_map == NULL) {
+    Map *newMap = (Map *) malloc(sizeof(Map));
+    if (newMap == NULL) {
         return NULL;
     }
 
-    new_map->entries = (MapEntry *) malloc(sizeof(MapEntry) * capacity);
-    if (new_map->entries == NULL) {
-        free(new_map);
+    newMap->entries = (MapEntry *) malloc(sizeof(MapEntry) * capacity);
+    if (newMap->entries == NULL) {
+        free(newMap);
         return NULL;
     }
 
-    new_map->capacity = capacity;
-    new_map->size = 0;
-    return new_map;
+    newMap->capacity = capacity;
+    newMap->size = 0;
+    return newMap;
 }
 /**
  * @brief Menyisipkan pasangan key-value baru ke dalam Map, atau memperbarui
