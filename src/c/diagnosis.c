@@ -51,22 +51,20 @@ void diagnosis_pasien (User *userDokter) {
         printf("[dr. %s] Kamu lagi nggak ada pasien. Asik, free time!\n", userDokter->username);
         return;
     }
-    User *user_pasien = current->pasien;
-    Pasien *pasien = user_pasien->dataPasien;
+    User *userPasien = current->pasien;
+    Pasien *pasien = userPasien->dataPasien;
     if (pasien->status == butuhDiberiObat) {
-        printf("[dr. %s] Pasien %s udah didiagnosa, tinggal dikasih obat aja\n", userDokter->username, user_pasien->username);
+        printf("[dr. %s] Pasien %s udah didiagnosa, tinggal dikasih obat aja\n", userDokter->username, userPasien->username);
         return;
     }
     char *penyakit = identifikasi_penyakit(pasien);
     if (penyakit != NULL) {
         pasien->status = butuhDiberiObat;
-        printf("[dr. %s] Pasien %s terdiagnosa mengidap penyakit: %s\n", userDokter->username, user_pasien->username, penyakit);
+        printf("[dr. %s] Pasien %s terdiagnosa mengidap penyakit: %s\n", userDokter->username, userPasien->username, penyakit);
         printf("Jangan lupa untuk diobatin ya, dr. %s!\n", userDokter->username);
-        printf("Untuk mengobati pasien %s, ketik NGOBATIN!\n", user_pasien->username);
+        printf("Untuk mengobati pasien %s, ketik NGOBATIN!\n", userPasien->username);
     } else {
         pasien->status = butuhPulang;
-        printf("[dr. %s] Pasien %s sehat banget! Dijamin kuat salto keliling kota!\n", userDokter->username, user_pasien->username);
-        // Keluarkan pasien dari queue (dequeue)
-        queue_dequeue(&r->Antrian);
+        printf("[dr. %s] Pasien %s sehat banget! Dijamin kuat salto keliling kota!\n", userDokter->username, userPasien->username);
     }
 }
