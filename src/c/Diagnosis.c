@@ -57,6 +57,11 @@ void diagnosisPasien (User *user_dokter) {
         printf("[dr. %s] Pasien %s udah didiagnosa, tinggal dikasih obat aja\n", user_dokter->username, user_pasien->username);
         return;
     }
+    if (pasien->status != butuhDiagnosa) {
+        printf("[dr. %s] Pasien %s sudah didiagnosis sebelumnya, tidak perlu didiagnosis lagi.\n", user_dokter->username, user_pasien->username);
+        return;
+    }
+    
     char *penyakit = identifikasiPenyakit(pasien);
     if (penyakit != NULL) {
         pasien->status = butuhDiberiObat;
