@@ -10,8 +10,8 @@ typedef struct
     int bpmMin, bpmMax; // Detak Jantung
     float satsMin, satsMax; // Saturasi Oksigen
     float bgMin, bgMax; // Kadar Gula Darah
-    float bbMin, bbMax; // Tinggi Badan
-    int tbMin, tbMax; // Berat Badan
+    int tbMin, tbMax; // Tinggi Badan
+    float bbMin, bbMax; // Berat Badan
     int fatMin, fatMax; // Kadar Kolestrol
     int tromMin, tromMax; // Trombosit
 } Penyakit;
