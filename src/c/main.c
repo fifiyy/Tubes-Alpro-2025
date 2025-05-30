@@ -10,6 +10,7 @@
 #include "../header/exit.h"
 #include "../header/f10.h"
 #include "../header/lihat_denah.h"
+#include "../header/daftar_check_up.h"
 
 ListUser users; // Deklarasi variabel global untuk menyimpan daftar pengguna
 ListRuangan ruangan;
@@ -19,7 +20,8 @@ Set doctor_usernames;
 int main(int argc, char *argv[]) {
     displayMainMenu(); //display utama sebelum login atau register
     init_data(&users, &usernames); // Panggil fungsi init_data
-    init_ruang (&ruangan);
+    init_ruang (&ruangan, &users); // Inisialisasi ruangan
+    current_user = NULL; // Inisialisasi pointer current_user ke NULL
 
     char command[20];
     int nomor_ruangan;
@@ -50,11 +52,13 @@ int main(int argc, char *argv[]) {
             exit_system(&users);
         } else if (strcmp(command, "LIHAT_DENAH") == 0) {
             lihat_denah(ruangan);
+        } else if (strcmp(command, "LIHAT_SEMUA_ANTRIAN") == 0) {
+                lihat_semua_antrian(&ruangan, ruangan.jumlah, &users);
         } else if (strcmp(command, "LIHAT_RUANGAN") == 0) {
             printf("Masukkan nomor ruangan (1-%d): ", ruangan.jumlah);
             if (scanf("%d", &nomor_ruangan) == 1) {
                 if (nomor_ruangan >= 1 && nomor_ruangan <= nomor_ruangan) {
-                    lihat_ruangan(ruangan, nomor_ruangan);
+                    lihat_ruangan(&ruangan, nomor_ruangan, &users);
                 } else {
                     printf("Nomor ruangan tidak valid! (1-%d)\n", nomor_ruangan);
                 }
@@ -62,6 +66,8 @@ int main(int argc, char *argv[]) {
                 printf("Input tidak valid!\n");
             }
             // while (getchar() != '\n'); // Clear input buffer
+        } else if (strcmp(command, "DAFTAR_CHECKUP") == 0) {
+            daftar_checkup(current_user, users.data, users.length, &ruangan);
         } else {
             printf("Command tidak dikenali. Ketik HELP untuk bantuan.\n");
         }

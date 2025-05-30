@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "../header/f10.h"
+#include "../header/dokter.h"
 
 void tambah_dokter (ListUser *users, Set *usernames){
     if (current_user == NULL) {
@@ -49,6 +50,15 @@ void tambah_dokter (ListUser *users, Set *usernames){
     strcpy(new_user.password, password);
     new_user.role = ROLE_DOKTER;
 
+    new_user.dokter_data = (Dokter*) malloc(sizeof(Dokter));
+    if (new_user.dokter_data == NULL) {
+        printf("Gagal mengalokasikan memori untuk dokter baru.\n");
+        return;
+    }
+    new_user.dokter_data->id = NbElmt(*users) + 1; // ID unik berdasarkan jumlah user
+    strcpy(new_user.dokter_data->username, username);
+    new_user.dokter_data->ruangan = '\0'; // belum ditugaskan
+
     SetEl(users, NbElmt(*users), new_user);
     SetLength(users, NbElmt(*users) + 1);
     set_insert(usernames, username); // Tambahkan username ke dalam Set
@@ -83,16 +93,15 @@ void assign_dokter (ListUser *users, ListRuangan *ruangan){
     }
 
     boolean dokter_found = false;
-    User dokter_baru;
+    User *dokter_baru = NULL;
     for (int i = GetFirstIdx(*users); i <= GetLastIdx(*users); i++) {
-        User user = GetElmt(*users, i);
-        if (strcmp(user.username, username) == 0 && user.role == ROLE_DOKTER) {
+        User *user = &users->data[i];
+        if (strcmp(user->username, username) == 0 && user->role == ROLE_DOKTER) {
             dokter_baru = user;
             dokter_found = true;
             break;
         }
     }
-
 
     if (!dokter_found) {
         printf("Dokter dengan username %s tidak ditemukan!\n", username);
@@ -109,7 +118,7 @@ void assign_dokter (ListUser *users, ListRuangan *ruangan){
     int ruangan_found = false;
     int ruangan_idx = -1;
     for (int i = 0; i < ruangan->jumlah; i++) {
-        if (ruangan->ruang[i].nomor == nomor_ruangan) { 
+        if (ruangan->ruang[i].nomor == nomor_ruangan) {
             ruangan_found = true;
             ruangan_idx = i;
             break;
@@ -121,28 +130,27 @@ void assign_dokter (ListUser *users, ListRuangan *ruangan){
         return;
     }
 
+     // Cek apakah dokter sudah bertugas di ruangan lain
     for (int i = 0; i < ruangan->jumlah; i++) {
-        //sudah menempati ruangan
-        if (strcmp(ruangan->ruang[i].dokter, username) == 0) {
-            printf("Dokter %s sudah diassign ke ruangan %d!\n", username, ruangan->ruang[i].nomor);
+        if (ruangan->ruang[i].dokter != NULL && 
+            ruangan->ruang[i].dokter->id == dokter_baru->dokter_data->id) {
+            printf("Dokter %s sudah menempati ruangan %d!\n", 
+                  username, ruangan->ruang[i].nomor);
+            printf("Silakan cari ruangan lain untuk dokter %s.\n", username);
             return;
         }
     }
 
-    //belum ada dokkter
-    if (strcmp(ruangan->ruang[ruangan_idx].dokter, "") == 0) {
-        strcpy(ruangan->ruang[ruangan_idx].dokter, username);
-        printf("Dokter %s berhasil diassign ke ruangan %d!\n", username, nomor_ruangan);
+    // Cek apakah ruangan sudah ada dokternya
+    if (ruangan->ruang[ruangan_idx].dokter != NULL) {
+        printf("Ruangan %d sudah ditempati oleh dokter %s!\n", 
+              nomor_ruangan, ruangan->ruang[ruangan_idx].dokter->username);
         return;
     }
 
-    else if (strcmp(ruangan->ruang[ruangan_idx].dokter, "-") != 0 && ruangan_idx == -1) {
-        printf("Dokter %s sudah menempati ruangan %d!\n", ruangan->ruang[ruangan_idx].dokter, nomor_ruangan);
-        printf("Silakan cari ruangan lain untuk dokter %s.\n", username);
+    // Assign dokter ke ruangan
+    ruangan->ruang[ruangan_idx].dokter = dokter_baru->dokter_data;
+    dokter_baru->dokter_data->ruangan = nomor_ruangan; // Set ruangan dokter
 
-    // ruangan ditempati dokter lain
-    printf("Dokter %s sudah menempati ruangan %d!\n", ruangan->ruang[ruangan_idx].dokter, ruangan_idx);
-    printf("Ruangan %d juga sudah ditempati dokter %s!\n", nomor_ruangan, ruangan->ruang[ruangan_idx].dokter);
-
-    }
+    printf("Dokter %s berhasil diassign ke ruangan %d!\n", username, nomor_ruangan);
 }

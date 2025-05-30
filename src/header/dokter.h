@@ -15,6 +15,6 @@ typedef struct Dokter {
     // AntrianDokter antrian; // Uncommented this since it's used in dokter.c
 } Dokter;
 
-Pasien *assignPasienKeDokter(User *user, Dokter* dokter, Pasien* pasien, ListRuangan ruangan);
+Pasien *assignPasienKeDokter(User *user, Dokter* dokter, Pasien* pasien, ListRuangan *ruangan);
 
 #endif

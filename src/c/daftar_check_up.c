@@ -83,6 +83,17 @@ void daftar_checkup(User *current_user, User *users, int user_count, ListRuangan
         return;
     }
 
+    //cek apakah pasien sudah berada di ruangan
+    for (int i = 0; i < ruangan->jumlah; i++) {
+        Ruangan *r = &ruangan->ruang[i];
+        for (int j = 0; j < MAX_PASIEN_RUANGAN; j++) {
+            if (r->pasienDiRuangan[j].id == pasien->id) {
+                printf("Anda sudah berada di ruangan %d!\n", r->nomor);
+                return;
+            }
+        }
+    }
+
     // Hitung jumlah dokter yang tersedia
     int banyakDokter = 0;
     for (int i = 0; i < user_count; i++) {
@@ -125,8 +136,22 @@ void daftar_checkup(User *current_user, User *users, int user_count, ListRuangan
     }
 
     // Assign pasien ke dokter
-    Pasien *result = assignPasienKeDokter(current_user, dokterPilihan, pasien, *ruangan);
+    Pasien *result = assignPasienKeDokter(current_user, dokterPilihan, pasien, ruangan);
     if (result != NULL) {
+        // Jika pasien dimasukkan ke ruangan
+        if (dokterPilihan->ruangan == '\0') {
+            printf("Dokter %s belum memiliki ruangan, mendaftarkan ke antrian.\n", user_dokter->username);
+        } else {
+            printf("Pasien berhasil didaftarkan ke ruangan %d.\n", dokterPilihan->ruangan);
+        }
+
+        // jika pasien didaftarkan ke antrian
+        if (result->posisiAntrian == -1) {
+            printf("Pasien berhasil didaftarkan ke antrian dokter %s.\n", user_dokter->username);
+            pasien->posisiAntrian = result->posisiAntrian;
+        } else {
+            pasien->posisiAntrian = result->posisiAntrian;
+        }
         printf("\nPendaftaran berhasil!\n");
         printf("Anda terdaftar pada antrian dr. %s di ruangan %d!\n", 
                user_dokter->username, 

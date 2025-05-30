@@ -1,5 +1,4 @@
 #include "../header/list_user.h"
-#include "../../header/User.h"
 
 void MakeEmpty(ListUser *L) {
     L->length = 0;
@@ -58,4 +57,3 @@ boolean IsEmpty(ListUser L) {
 boolean IsFull(ListUser L) {
     return L.length == MAX_CAPACITY;
 }
-

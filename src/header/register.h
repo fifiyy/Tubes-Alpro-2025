@@ -1,6 +1,8 @@
 #ifndef REGISTER_H
 #define REGISTER_H
 
+#include <stdlib.h>
+#include <stdio.h>
 #include "../ADT/header/list_user.h"
 #include "../ADT/header/set.h"
 

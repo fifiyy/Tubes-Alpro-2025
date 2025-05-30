@@ -50,6 +50,18 @@ void register_pasien(ListUser *users, Set *usernames) {
     strcpy(new_user.password, password);
     new_user.role = ROLE_PASIEN;
 
+    new_user.pasien_data = (Pasien*) malloc(sizeof(Pasien));
+    if (new_user.pasien_data == NULL) {
+        printf("Gagal mengalokasikan memori untuk pasien baru.\n");
+        return;
+    }
+    new_user.pasien_data->id = NbElmt(*users) + 1; // ID unik berdasarkan jumlah user
+    new_user.pasien_data->jumlahObat = 0; // Inisialisasi jumlah obat
+    new_user.pasien_data->id_dokter = -1; // Belum ada dokter yang ditugaskan
+    new_user.pasien_data->posisiAntrian = -1; // Pasien belum dalam antrian
+    new_user.pasien_data->keluhan[0] = '\0'; // Inisialisasi keluhan kosong
+    new_user.pasien_data->status = statusDiagnosa; // Status awal pasien
+    
     SetEl(users, NbElmt(*users), new_user);
     SetLength(users, NbElmt(*users) + 1);
     set_insert(usernames, username); // Tambahkan username ke dalam Set

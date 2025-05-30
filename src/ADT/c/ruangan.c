@@ -41,10 +41,11 @@ void init_ruang (ListRuangan *ruang, ListUser *users) {
         queue_init(&ruang->ruang[i].Antrian);
     }
 
-    int j = 0;
-    for (int i = 0; i < NbElmt(*users); i++) {
-        if (users[i].data->role == ROLE_PASIEN) {
-            ruang->ruang[0].pasienDiRuangan[j] = *users->data[i].pasien_data;
-        }
-    }
+    // Inisialisasi pasien di ruangan (hanya lewat queue, tidak perlu array manual)
+    queue_enqueue(&ruang->ruang[0].Antrian, &users->data[2]); // Misal pasien GRO
+    users->data[2].pasien_data->id_dokter = dokter_terpilih->id;
+    users->data[2].pasien_data->posisiAntrian = 0;
+    queue_enqueue(&ruang->ruang[0].Antrian, &users->data[3]); // Misal pasien nimonsganteng
+    users->data[3].pasien_data->id_dokter = dokter_terpilih->id;
+    users->data[3].pasien_data->posisiAntrian = 0;
 }

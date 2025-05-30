@@ -2,12 +2,14 @@
 #include "../header/set.h"
 
 void set_create_empty (Set *S) {
-    S->Count = Nil;
+    S->Count = 0; // Inisialisasi jumlah elemen Set menjadi 0
+    for (int i = 0; i < MaxEl; i++) {
+        S->Elements[i][0] = '\0'; // Inisialisasi setiap elemen sebagai string kosong
+    }
 }
 
 boolean set_is_empty (Set S) {
-    return S.Count == Nil;
-}
+    return S.Count == 0;}
 
 boolean set_is_full (Set S) {
     return S.Count == MaxEl;

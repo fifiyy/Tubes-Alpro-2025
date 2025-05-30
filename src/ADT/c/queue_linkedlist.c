@@ -3,21 +3,17 @@
 
 /* ===== IMPLEMENTASI FUNGSI LINKED LIST ===== */
 
-boolean linkedlist_is_empty(LinkedList L) {
+boolean linkedlist_is_empty(AntrianDokter L) {
     return L.First == Nil;
 }
 
-void linkedlist_create_empty(LinkedList *L) {
-    L->First = Nil;
-}
-
-address linkedlist_alokasi(infotype X) {
-    address p = (address)malloc(sizeof(ElmtList));
+address linkedlist_alokasi(User *X) {
+    address p = (address)malloc(sizeof(AntrianNode));
     if (p != Nil) {
-        p->info = X;
+        p->pasien = X;
         p->next = Nil;
     }
-    return p;
+    return p; // Mengembalikan alamat node baru
 }
 
 void linkedlist_dealokasi(address *P) {
@@ -25,105 +21,66 @@ void linkedlist_dealokasi(address *P) {
     *P = Nil;
 }
 
-address linkedlist_search(LinkedList L, infotype X) {
-    address p = L.First;
-    while (p != Nil && p->info != X) {
-        p = p->next;
-    }
-    return p;
-}
-
-void linkedlist_insert_first(LinkedList *L, address P) {
-    if (P != Nil) {
-        P->next = L->First;
-        L->First = P;
-    }
-}
-
-void linkedlist_insert_last(LinkedList *L, address P) {
-    if (linkedlist_is_empty(*L)) {
-        linkedlist_insert_first(L, P);
-    } else {
-        address last = L->First;
-        while (last->next != Nil) {
-            last = last->next;
-        }
-        last->next = P;
-    }
-}
-
-void linkedlist_del_first(LinkedList *L, address *P) {
-    *P = L->First;
-    if (*P != Nil) {
-        L->First = (*P)->next;
-        (*P)->next = Nil;
-    }
-}
-
 /* ===== IMPLEMENTASI FUNGSI QUEUE ===== */
 
-void queue_init(QueueLinkedList *q) {
-    linkedlist_create_empty(&q->list);
-    q->rear = Nil;
+void queue_init(AntrianDokter *q) {
+    q->First = Nil;
+    q->Last = Nil;
+    q->jumlah = 0;
 }
 
-boolean queue_is_empty(QueueLinkedList *q) {
-    return linkedlist_is_empty(q->list);
+boolean queue_is_empty(AntrianDokter *q) {
+    return q->First == Nil;
 }
 
-boolean queue_is_full(QueueLinkedList *q) {
+boolean queue_is_full(AntrianDokter *q) {
+    // Karena queue berbasis linked list, selalu mengembalikan false
     return false;
-}
+}   
 
-void queue_enqueue(QueueLinkedList *q, int value) {
-    address P = linkedlist_alokasi(value);
-    if (P != Nil) {
-        if (queue_is_empty(q)) {
-            q->list.First = P;
-            q->rear = P;
+void queue_enqueue(AntrianDokter *q, User *value) {
+    // Buat salinan User di heap
+    User *newUser = malloc(sizeof(User));
+    if (newUser != NULL) {
+        *newUser = *value; // Salin isi user ke memori baru
+        address P = linkedlist_alokasi(newUser);
+        if (P != Nil) {
+            if (queue_is_empty(q)) {
+                q->First = P;
+            } else {
+                q->Last->next = P;
+            }
+            q->Last = P;
+            q->jumlah++;
         } else {
-            q->rear->next = P;
-            q->rear = P;
+            printf("Gagal alokasi node baru!\n");
+            free(newUser);
         }
     } else {
-        printf("Alokasi memori gagal!\n");
+        printf("Gagal alokasi User baru!\n");
     }
 }
 
-int queue_dequeue(QueueLinkedList *q) {
-    if (!queue_is_empty(q)) {
-        address P;
-        int value;
-        linkedlist_del_first(&q->list, &P);
-        value = P->info;
 
-        if (linkedlist_is_empty(q->list)) {
-            q->rear = Nil;
+int queue_dequeue(AntrianDokter *q) {
+    if (!queue_is_empty(q)) {
+        address P = q->First;
+        int id_pasien = P->pasien->pasien_data->id; // Simpan ID pasien yang akan dihapus
+        q->First = P->next; // Pindahkan First ke node berikutnya
+        linkedlist_dealokasi(&P); // Dealokasi node yang dihapus
+        q->jumlah--;
+        
+        if (q->First == Nil) { // Jika antrian menjadi kosong
+            q->Last = Nil;
         }
-
-        linkedlist_dealokasi(&P);
-        return value;
+        
+        return id_pasien; // Kembalikan ID pasien yang dihapus
     } else {
-        printf("Queue kosong!\n");
-        return SENTINEL;
+        printf("Antrian kosong!\n");
+        return SENTINEL; // Kembalikan nilai sentinel jika antrian kosong
     }
 }
 
-int queue_front(QueueLinkedList *q) {
-    if (!queue_is_empty(q)) {
-        return q->list.First->info;
-    } else {
-        printf("Queue kosong!\n");
-        return SENTINEL;
-    }
-}
-
-int queue_size(QueueLinkedList *q) {
-    int count = 0;
-    address P = q->list.First;
-    while (P != Nil) {
-        count++;
-        P = P->next;
-    }
-    return count;
+int queue_size(AntrianDokter *q) {
+    return q->jumlah;
 }

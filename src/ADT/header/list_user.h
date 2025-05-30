@@ -4,7 +4,7 @@
 #include "boolean.h"
 #include <stdio.h>
 #include <string.h>
-#include "../header/user.h"
+#include "../../header/user.h"
 
 #define MAX_CAPACITY 100
 #define IDX_UNDEF -999 /* Tidak terdefinisi */
