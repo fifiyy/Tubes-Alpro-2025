@@ -12,7 +12,7 @@ typedef enum {
     butuhDiagnosa,
     butuhDiberiObat,
     butuhMinumObat,
-    butuhSembuh,
+    butuhPenawar,
     butuhPulang
 } StatusPasien;
 
