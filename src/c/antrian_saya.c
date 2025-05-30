@@ -1,6 +1,8 @@
 #include "../header/antrian_saya.h"
 #include <stdio.h>
 #include <string.h>
+#include "../header/user.h"
+#include "../header/dokter.h"
 
 void cek_antrian_saya (User *user, Dokter *dokter, ListRuangan *ruangan, int banyakDokter) {
     if (user->role != ROLE_PASIEN) {
@@ -56,7 +58,7 @@ void cek_antrian_saya (User *user, Dokter *dokter, ListRuangan *ruangan, int ban
         }
     }
 
-    printf("\nStatus antrian Anda:\n");
+    printf("[%s}Status antrian Anda:\n", user->username);
     printf("Dokter: dr. %s\n", dokterPasien->username);
     printf("Ruangan: %d\n", dokterPasien->ruangan);
     printf("Posisi antrian: %d dari %d\n", 
