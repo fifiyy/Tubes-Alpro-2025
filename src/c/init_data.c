@@ -50,7 +50,7 @@ void init_data(ListUser *users, Set *usernames) {
     User pasien_gro = {"GRO", "NeroifaCantik", ROLE_PASIEN};
     pasien_gro.dataPasien = (Pasien*) malloc(sizeof(Pasien));
     pasien_gro.dataPasien->id = 2;
-    pasien_gro.dataPasien->posisiAntrian = -1;
+    pasien_gro.dataPasien->posisiAntrian = 0;
     pasien_gro.dataPasien->status = butuhDiagnosa;
     pasien_gro.dataPasien->jumlahObat = 0;
     pasien_gro.dataPasien->id_dokter = -1;
@@ -72,7 +72,7 @@ void init_data(ListUser *users, Set *usernames) {
     User pasien_nimons = {"nimonsganteng", "KelompokAmatGacor", ROLE_PASIEN};
     pasien_nimons.dataPasien = (Pasien*) malloc(sizeof(Pasien));
     pasien_nimons.dataPasien->id = 3;
-    pasien_nimons.dataPasien->posisiAntrian = -1;
+    pasien_nimons.dataPasien->posisiAntrian = 0;
     pasien_nimons.dataPasien->status = butuhDiagnosa;
     pasien_nimons.dataPasien->jumlahObat = 0;
     pasien_nimons.dataPasien->id_dokter = -1;
