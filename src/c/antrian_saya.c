@@ -10,24 +10,24 @@ void cek_antrian_saya (User *user, Dokter *dokter, ListRuangan *ruangan, int ban
 
     Pasien *pasien = user->dataPasien;
 
-    // Check if patient is already in a room
+    // Pastiin pasien ga di ruangan
     for (int i = 0; i < ruangan->jumlah; i++) {
         for (int j = 0; j < MAX_PASIEN_RUANGAN; j++) {
             if (ruangan->ruang[i].pasienDiRuangan[j].id == pasien->id) {
-                printf("\nAnda sedang berada di dalam ruangan dokter!\n");
+                printf("[%s] Kamu lagi di ruangan dokter, loh. Dokternya ga lagi tidur kan?\n", user->username);
                 return;
             }
         }
     }
 
-    // Check if patient is in queue
+    // Cek udah daftar cek up belum
     if (pasien->posisiAntrian <= 0) {
-        printf("\nAnda belum terdaftar dalam antrian check-up!\n");
-        printf("Silakan daftar terlebih dahulu dengan command DAFTAR_CHECKUP.\n");
+        printf("[%s] Kamu nih belum terdaftar dalam antrian check-up (berkata dengan nada lemah lembut gemulai).\nDaftar dulu coba :D\n");
+        printf("HELP: Silakan daftar terlebih dahulu dengan command DAFTAR_CHECKUP.\n");
         return;
     }
 
-    // Find the doctor the patient is assigned to
+    // Cari dokter dari pasien
     Dokter *dokterPasien = NULL;
     for (int i = 0; i < banyakDokter; i++) {
         if (dokter[i].id == pasien->idDokter) {
@@ -37,29 +37,29 @@ void cek_antrian_saya (User *user, Dokter *dokter, ListRuangan *ruangan, int ban
     }
 
     if (dokterPasien == NULL) {
-        printf("\nError: Dokter tidak ditemukan!\n");
+        printf("\nERROR: Dokter pasien %s tidak ditemukan!\n", user->username);
         return;
     }
 
-    // Find the room and calculate queue position
-    int idx_ruang = dokterPasien->ruangan - 1;
-    if (idx_ruang < 0 || idx_ruang >= ruangan->jumlah) {
-        printf("\nError: Ruangan dokter tidak valid!\n");
+    // Cari ruangan dokter
+    int idxRuang = dokterPasien->ruangan - 1;
+    if (idxRuang < 0 || idxRuang >= ruangan->jumlah) {
+        printf("\nERROR: Ruangan dokter tidak valid!\n");
         return;
     }
 
-    int total_antrian = queue_size(&ruangan->ruang[idx_ruang].Antrian);
-    int pasien_dalam_ruangan = 0;
+    int totalAntrian = queue_size(&ruangan->ruang[idxRuang].Antrian);
+    int pasienDalamRuang = 0;
     for (int j = 0; j < MAX_PASIEN_RUANGAN; j++) {
-        if (ruangan->ruang[idx_ruang].pasienDiRuangan[j].id != 0) {
-            pasien_dalam_ruangan++;
+        if (ruangan->ruang[idxRuang].pasienDiRuangan[j].id != 0) {
+            pasienDalamRuang++;
         }
     }
 
     printf("\nStatus antrian Anda:\n");
-    printf("Dokter: Dr. %s\n", dokterPasien->username);
-    printf("Ruangan: A%d\n", dokterPasien->ruangan);
+    printf("Dokter: dr. %s\n", dokterPasien->username);
+    printf("Ruangan: %d\n", dokterPasien->ruangan);
     printf("Posisi antrian: %d dari %d\n", 
            pasien->posisiAntrian, 
-           total_antrian - pasien_dalam_ruangan);
+           totalAntrian - pasienDalamRuang);
 }
