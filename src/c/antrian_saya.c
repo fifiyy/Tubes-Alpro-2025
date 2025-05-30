@@ -1,6 +1,8 @@
 #include "../header/antrian_saya.h"
 #include <stdio.h>
 #include <string.h>
+#include "../header/user.h"
+#include "../header/dokter.h"
 
 void cek_antrian_saya (User *user, Dokter *dokter, ListRuangan *ruangan, int banyakDokter) {
     if (user->role != ROLE_PASIEN) {
