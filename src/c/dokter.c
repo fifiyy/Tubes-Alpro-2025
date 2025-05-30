@@ -37,7 +37,7 @@ Pasien* assignPasienKeDokter(User *user, Dokter* dokter, Pasien* pasien, ListRua
         } else {
             pasien->posisiAntrian = jumlah_baru - ruangan->ruang[idx_ruang].kapasitas;
         }
-        pasien->id_dokter = dokter->id;
+        pasien->idDokter = dokter->id;
         printf("Pasien berhasil didaftarkan ke antrian/ruangan\n");
         return pasien;
     }
