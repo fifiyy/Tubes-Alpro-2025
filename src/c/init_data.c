@@ -55,14 +55,14 @@ void init_data(ListUser *users, Set *usernames) {
     pasien_gro.dataPasien->jumlahObat = 0;
     pasien_gro.dataPasien->id_dokter = -1;
     // Data medis saja, biar identifikasi penyakit jalan
-    pasien_gro.dataPasien->suhu = 37.5;
+    pasien_gro.dataPasien->suhu = 37.0;
     pasien_gro.dataPasien->tekananDarah[0] = 110;
     pasien_gro.dataPasien->tekananDarah[1] = 70;
     pasien_gro.dataPasien->detakJantung = 80;
     pasien_gro.dataPasien->saturasiOksigen = 98;
     pasien_gro.dataPasien->kadarGulaDarah = 90;
-    pasien_gro.dataPasien->tinggiBadan = 170;
     pasien_gro.dataPasien->beratBadan = 60;
+    pasien_gro.dataPasien->tinggiBadan = 170;
     pasien_gro.dataPasien->kadarKolesterol = 180;
     pasien_gro.dataPasien->trombosit = 250;
     SetEl(users, 2, pasien_gro);
