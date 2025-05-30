@@ -1,32 +1,32 @@
 #include <stdio.h>
-#include "../header/set.h"
+#include "../header/Set.h"
 
 void set_create_empty (Set *S) {
-    S->Count = Nil;
+    S->count = 0;
 }
 
 boolean set_is_empty (Set S) {
-    return S.Count == Nil;
+    return S.count == 0; // Mengembalikan true jika count adalah 0
 }
 
 boolean set_is_full (Set S) {
-    return S.Count == MaxEl;
+    return S.count == MaxEl;
 }
 
 void set_insert (Set *S, const char *Elmt) {
     if (set_is_full(*S)) return; // Tidak bisa menambahkan jika penuh
     if (set_is_member(*S, Elmt)) return; // Tidak menambahkan elemen duplikat
 
-    strcpy(S->Elements[S->Count], Elmt); // Salin elemen ke dalam Set
-    S->Count++;
+    strcpy(S->elements[S->count], Elmt); // Salin elemen ke dalam Set
+    S->count++;
 }
 
 void set_delete (Set *S, const char *Elmt) {
     if (set_is_empty(*S)) return; // Tidak bisa menghapus jika kosong
 
     int idx = -1;
-    for (int i = 0; i < S->Count; i++) {
-        if (strcmp(S->Elements[i], Elmt) == 0) { // Bandingkan string
+    for (int i = 0; i < S->count; i++) {
+        if (strcmp(S->elements[i], Elmt) == 0) { // Bandingkan string
             idx = i;
             break;
         }
@@ -34,15 +34,15 @@ void set_delete (Set *S, const char *Elmt) {
 
     if (idx == -1) return; // Elemen tidak ditemukan
 
-    for (int i = idx; i < S->Count - 1; i++) {
-        strcpy(S->Elements[i], S->Elements[i + 1]); // Geser elemen
+    for (int i = idx; i < S->count - 1; i++) {
+        strcpy(S->elements[i], S->elements[i + 1]); // Geser elemen
     }
-    S->Count--;
+    S->count--;
 }
 
 boolean set_is_member (Set S, const char *Elmt) {
-    for (int i = 0; i < S.Count; i++) {
-        if (strcmp(S.Elements[i], Elmt) == 0) { // Bandingkan string
+    for (int i = 0; i < S.count; i++) {
+        if (strcmp(S.elements[i], Elmt) == 0) { // Bandingkan string
             return true;
         }
     }

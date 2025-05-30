@@ -1,10 +1,10 @@
 #ifndef F10_H
 #define F10_H
 
-#include "../ADT/header/list_user.h"
-#include "../ADT/header/queue_linkedlist.h"
-#include "../header/register.h"
-#include "../header/init_data.h"
+#include "../ADT/header/List_User.h"
+#include "../ADT/header/Queue_Linkedlist.h"
+#include "../header/Register.h"
+#include "../header/Init_Data.h"
 #include "dokter.h"
 
 void tambah_dokter (ListUser *users, Set *usernames);

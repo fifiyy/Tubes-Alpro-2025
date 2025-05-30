@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "boolean.h"
-#include "../../header/user.h"
+#include "../../header/User.h"
 
 // Forward declaration instead of including user.h
 

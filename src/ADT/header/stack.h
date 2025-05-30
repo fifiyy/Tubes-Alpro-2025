@@ -1,5 +1,5 @@
 #include <string.h>
-#include "boolean.h"
+#include "Boolean.h"
 
 #ifndef STACK_H
 #define STACK_H

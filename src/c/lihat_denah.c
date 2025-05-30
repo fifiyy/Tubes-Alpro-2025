@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../header/lihat_denah.h"
+#include "../header/Lihat_Denah.h"
 
 void lihat_denah (ListRuangan ruangan) {
     printf("\n");

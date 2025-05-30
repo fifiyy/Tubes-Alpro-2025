@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../header/stack.h"
+#include "../header/Stack.h"
 
 /*** Konstruktor/Kreator ***/
 void create_stack(Stack *s) {

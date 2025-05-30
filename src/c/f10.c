@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "../header/f10.h"
-#include "../header/dokter.h"
+#include "../header/F10.h"
+#include "../header/Dokter.h"
 
 void tambah_dokter (ListUser *users, Set *usernames){
     if (currUser == NULL) {
@@ -40,7 +40,7 @@ void tambah_dokter (ListUser *users, Set *usernames){
         return;
     }
     
-    if (is_full(*users)) {
+    if (list_is_full(*users)) {
         printf("Kapasitas user penuh!\n");
         return;
     }
@@ -55,12 +55,12 @@ void tambah_dokter (ListUser *users, Set *usernames){
         printf("Gagal mengalokasikan memori untuk dokter baru.\n");
         return;
     }
-    newUser.dataDokter->id = nb_elmt(*users) + 1; // ID unik berdasarkan jumlah user
+    newUser.dataDokter->id = list_nb_elmt(*users) + 1; // ID unik berdasarkan jumlah user
     strcpy(newUser.dataDokter->username, username);
     newUser.dataDokter->ruangan = '\0'; // belum ditugaskan
 
-    set_el(users, nb_elmt(*users), newUser);
-    set_length(users, nb_elmt(*users) + 1);
+    list_set_el(users, list_nb_elmt(*users), newUser);
+    list_set_length(users, list_nb_elmt(*users) + 1);
     set_insert(usernames, username); // Tambahkan username ke dalam Set
     
     printf("Dokter %s berhasil ditambahkan!\n", username);
@@ -94,7 +94,7 @@ void assign_dokter (ListUser *users, ListRuangan *ruangan){
 
     boolean isDokterFound = false;
     User *newDokter = NULL;
-    for (int i = get_first_idx(*users); i <= get_last_idx(*users); i++) {
+    for (int i = list_get_first_idx(*users); i <= list_get_last_idx(*users); i++) {
         User *user = &users->data[i];
         if (strcmp(user->username, username) == 0 && user->role == ROLE_DOKTER) {
             newDokter = user;

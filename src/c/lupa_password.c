@@ -1,5 +1,5 @@
-#include "../header/lupa_password.h"
-#include "../ADT/header/list_user.h"
+#include "../header/Lupa_Password.h"
+#include "../ADT/header/List_User.h"
 
 void generate_kode_unik(const char* username, char* kodeUnik) {
     int len = strlen(username);
@@ -34,9 +34,10 @@ void lupa_password_system(ListUser *users) {
     }
     
     User* user = NULL;
-    for (int i = get_first_idx(*users); i <= get_last_idx(*users); i++) {
-        if (strcmp(get_elmt(*users, i).username, username) == 0) {
-            user = &users->data[i];
+    for (int i = list_get_first_idx(*users); i <= list_get_last_idx(*users); i++) {
+        User user = list_get_elmt(*users, i);
+        if (strcmp(user.username, username) == 0) {
+            user = users->data[i];
             break;
         }
     }

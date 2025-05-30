@@ -1,5 +1,5 @@
 
-#include "../header/user.h"
+#include "../header/User.h"
 
 int user_count = 0; // Implementasi variabel global
 User* currUser = NULL; // Implementasi variabel global

@@ -1,9 +1,9 @@
-#include "../header/ngobatin.h"
+#include "../header/Ngobatin.h"
 #include <stdio.h>
 #include <string.h>
-#include "../../ADT/header/ruangan.h"
-#include "../header/user.h"
-#include "../header/dokter.h"
+#include "../../ADT/header/Ruangan.h"
+#include "../header/User.h"
+#include "../header/Dokter.h"
 
 PenyakitObatEntry* cari_obat(const char *namaPenyakit) {
     for (int i = 0; i < jumlahPenyakit; i++) {

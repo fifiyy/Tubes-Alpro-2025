@@ -1,10 +1,10 @@
 
 #include "dokter.h"
-#include "../../ADT/header/ruangan.h"
+#include "../ADT/header/Ruangan.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-Pasien* assignPasienKeDokter(User *user, Dokter* dokter, Pasien* pasien, ListRuangan *ruangan) {
+Pasien* assign_pasien_ke_dokter(User *user, Dokter* dokter, Pasien* pasien, ListRuangan *ruangan) {
     if (dokter == NULL || pasien == NULL) {
         printf("Error: Data dokter atau pasien tidak valid\n");
         return NULL;

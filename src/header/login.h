@@ -1,8 +1,8 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
-#include "user.h"
-#include "../ADT/header/list_user.h"
+#include "User.h"
+#include "../ADT/header/List_User.h"
 void login_system(ListUser *users);
 
 #endif

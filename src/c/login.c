@@ -1,5 +1,5 @@
-#include "../header/login.h"
-#include "../header/list_user.h"
+#include "../header/Login.h"
+#include "../header/List_User.h"
 
 void login_system(ListUser *users) {
     // Cek apakah sudah ada user yang login
@@ -26,8 +26,8 @@ void login_system(ListUser *users) {
         return;
     }
     
-    for (int i = get_first_idx(*users); i <= get_last_idx(*users); i++) {
-        User user = get_elmt(*users, i);
+    for (int i = list_get_first_idx(*users); i <= list_get_last_idx(*users); i++) {
+        User user = list_get_elmt(*users, i);
         if (strcmp(user.username, username) == 0) {
             if (strcmp(user.password, password) == 0) {
                 currUser = &users->data[i];

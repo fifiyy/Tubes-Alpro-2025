@@ -1,4 +1,4 @@
-#include "../header/logout.h"
+#include "../header/Logout.h"
 
 void logout_system() {
     if (currUser == NULL) {

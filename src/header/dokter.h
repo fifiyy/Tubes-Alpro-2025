@@ -2,8 +2,8 @@
 #ifndef DOKTER_H
 #define DOKTER_H
 
-#include "../../ADT/header/queue_linkedlist.h"
-#include "../../ADT/header/ruangan.h"
+#include "../../ADT/header/Queue_Linkedlist.h"
+#include "../../ADT/header/Ruangan.h"
 
 #define MAX_PASIEN_RUANGAN 3
 

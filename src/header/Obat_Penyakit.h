@@ -1,9 +1,9 @@
 #ifndef OBAT_PENYAKIT_H
 #define OBAT_PENYAKIT_H
 
-#include "obat.h"
-#include "penyakit.h"
-#include "boolean.h"
+#include "Obat.h"
+#include "Penyakit.h"
+#include "Boolean.h"
 
 #define MAX_STRING_LENGTH 100
 #define MAX_OBAT_PER_PENYAKIT 10

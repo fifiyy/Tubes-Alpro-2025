@@ -2,9 +2,9 @@
 #define SET_H
 
 #include <string.h> // Untuk operasi string
-#include "boolean.h"
+#include "Boolean.h"
 
-#define Nil 0
+#define Nil NULL
 #define MaxEl 100
 #define USERNAME_LEN 50 // Panjang maksimum username
 

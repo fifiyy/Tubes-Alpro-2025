@@ -1,4 +1,4 @@
-#include "../header/antrian_saya.h"
+#include "../header/Antrian_Saya.h"
 #include <stdio.h>
 #include <string.h>
 

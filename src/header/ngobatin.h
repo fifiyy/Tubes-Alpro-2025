@@ -2,8 +2,8 @@
 #define NGOBATIN_H
 
 #include "Obat_Penyakit.h"
-#include "../../ADT/header/ruangan.h"
-#include "user.h"
+#include "../../ADT/header/Ruangan.h"
+#include "User.h"
 
 PenyakitObatEntry* cari_obat (const char *namaPenyakit);
 

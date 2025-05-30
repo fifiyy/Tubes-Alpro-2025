@@ -1,4 +1,4 @@
-#include "init_data.h"
+#include "Init_Data.h"
 
 // Inisialisasi array obat
 Obat ketObat[] = {
@@ -8,7 +8,7 @@ Obat ketObat[] = {
     {4, "Lisinopril"},
     {5, "Metfomin"},
 };
-const int JUMLAH_OBAT = sizeof(ketObat) / sizeof(ketObat[0]);
+const int jumlahObat = sizeof(ketObat) / sizeof(ketObat[0]);
 
 // Inisialisasi array penyakit
 Penyakit ketPenyakit[] = {
@@ -18,7 +18,7 @@ Penyakit ketPenyakit[] = {
     {4, "Diabetes Mellitus", 36, 37.5, 90, 140, 60, 90, 60, 100, 90, 100, 126, 200, 45, 90, 150, 185, 150, 240, 150, 450},
     {5, "Anemia", 36, 37, 90, 120, 60, 80, 60, 100, 95, 100, 70, 140, 45, 90, 150, 185, 150, 240, 150, 450},
 };
-const int JUMLAH_PENYAKIT = sizeof(ketPenyakit) / sizeof(ketPenyakit[0]);
+const int jumlahPenyakit = sizeof(ketPenyakit) / sizeof(ketPenyakit[0]);
 
 PenyakitObatEntry penyakitObatMap[] = {
     {"Influenza", {{1, "Oseltamivir"}, {2, "Vitamin C"}}, 2},
@@ -29,11 +29,11 @@ PenyakitObatEntry penyakitObatMap[] = {
 };
 
 void init_data(ListUser *users, Set *usernames) {
-    MakeEmpty(users); // Inisialisasi list
+    list_make_empty(users);
     set_create_empty(usernames); // Inisialisasi set
 
     // Tambahkan pengguna awal ke ListUser dan Set
-    SetEl(users, 0, (User){"a", "a", ROLE_MANAGER});
+    list_set_el(users, 0, (User){"a", "a", ROLE_MANAGER});
     set_insert(usernames, "nimonsslatte");
     
     // Initialize doctor
@@ -42,7 +42,7 @@ void init_data(ListUser *users, Set *usernames) {
     dokter_user.dataDokter->id = 1;
     strcpy(dokter_user.dataDokter->username, dokter_user.username);
     dokter_user.dataDokter->ruangan = '\0'; // belum ditugaskan
-    SetEl(users, 1, dokter_user);
+    list_set_el(users, 1, dokter_user);
     set_insert(usernames, "Neroifa");
 
     // Initialize patient "GRO"
@@ -64,7 +64,7 @@ void init_data(ListUser *users, Set *usernames) {
     pasien_gro.dataPasien->tinggiBadan = 170;
     pasien_gro.dataPasien->kadarKolesterol = 180;
     pasien_gro.dataPasien->trombosit = 250;
-    SetEl(users, 2, pasien_gro);
+    list_set_el(users, 2, pasien_gro);
     set_insert(usernames, "GRO");
 
     // Initialize patient "nimonsganteng"
@@ -74,7 +74,7 @@ void init_data(ListUser *users, Set *usernames) {
     pasien_nimons.dataPasien->posisiAntrian = -1;
     pasien_nimons.dataPasien->status = butuhDiagnosa;
     pasien_nimons.dataPasien->jumlahObat = 0;
-    pasien_nimons.dataPasien->id_dokter = -1;
+    pasien_nimons.dataPasien->idDokter = -1;
     // Data medis saja, biar identifikasi penyakit jalan
     pasien_nimons.dataPasien->suhu = 36.8;
     pasien_nimons.dataPasien->tekananDarah[0] = 150;
@@ -86,8 +86,8 @@ void init_data(ListUser *users, Set *usernames) {
     pasien_nimons.dataPasien->tinggiBadan = 175;
     pasien_nimons.dataPasien->kadarKolesterol = 200;
     pasien_nimons.dataPasien->trombosit = 300;
-    SetEl(users, 3, pasien_nimons);
+    list_set_el(users, 3, pasien_nimons);
     set_insert(usernames, "nimonsganteng");
 
-    SetLength(users, 4);
+    list_set_length(users, 4);
 }

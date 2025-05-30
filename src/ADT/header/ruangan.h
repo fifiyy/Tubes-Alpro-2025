@@ -1,8 +1,8 @@
 
 #ifndef RUANGAN_H
 #define RUANGAN_H
-#include "../header/list_user.h"
-#include "queue_linkedlist.h"
+#include "../header/List_User.h"
+#include "Queue_Linkedlist.h"
 // #include "../../header/dokter.h"
 
 #define MAX_PASIEN_RUANGAN 3

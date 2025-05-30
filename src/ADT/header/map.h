@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "boolean.h"
+#include "Boolean.h"
 
 // Definisi struktur untuk setiap pasangan key-value dalam Map
 typedef struct {

@@ -1,8 +1,7 @@
-
-#include "../header/register.h"
-#include "../ADT/header/list_user.h"
-#include "../ADT/header/set.h"
-#include "../header/user.h"    
+#include "../header/Register.h"
+#include "../ADT/header/List_User.h"
+#include "../ADT/header/Set.h"
+#include "../header/User.h"    
 
 boolean is_username_unique(const Set *usernames, const char* username) {
     return !set_is_member(*usernames, username); // Gunakan fungsi IsMember dari Set
@@ -41,7 +40,7 @@ void register_pasien(ListUser *users, Set *usernames) {
         return;
     }
     
-    if (IsFull(*users)) {
+    if (list_is_full(*users)) {
         printf("Kapasitas user penuh!\n");
         return;
     }
@@ -56,15 +55,15 @@ void register_pasien(ListUser *users, Set *usernames) {
         printf("Gagal mengalokasikan memori untuk pasien baru.\n");
         return;
     }
-    newUser.dataPasien->id = NbElmt(*users) + 1; // ID unik berdasarkan jumlah user
+    newUser.dataPasien->id = list_nb_elmt(*users) + 1; // ID unik berdasarkan jumlah user
     newUser.dataPasien->jumlahObat = 0; // Inisialisasi jumlah obat
     newUser.dataPasien->idDokter = -1; // Belum ada dokter yang ditugaskan
     newUser.dataPasien->posisiAntrian = -1; // Pasien belum dalam antrian
     newUser.dataPasien->keluhan[0] = '\0'; // Inisialisasi keluhan kosong
     newUser.dataPasien->status = butuhDiagnosa; // Status awal pasien
     
-    set_el(users, nb_elmt(*users), newUser);
-    set_length(users, nb_elmt(*users) + 1);
+    list_set_el(users, list_nb_elmt(*users), newUser);
+    list_set_length(users, list_nb_elmt(*users) + 1);
     set_insert(usernames, username); // Tambahkan username ke dalam Set
     
     printf("Pasien %s berhasil ditambahkan!\n", username);

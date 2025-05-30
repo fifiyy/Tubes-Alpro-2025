@@ -1,11 +1,10 @@
-
-#include "queue_linkedlist.h"
+#include "Queue_Linkedlist.h"
 #include <stdio.h>
 
 /* ===== IMPLEMENTASI FUNGSI LINKED LIST ===== */
 
 boolean linkedlist_is_empty(AntrianDokter L) {
-    return L.First == Nil;
+    return L.first == Nil;
 }
 
 address linkedlist_alokasi(User *X) {
@@ -25,13 +24,13 @@ void linkedlist_dealokasi(address *P) {
 /* ===== IMPLEMENTASI FUNGSI QUEUE ===== */
 
 void queue_init(AntrianDokter *q) {
-    q->First = Nil;
-    q->Last = Nil;
+    q->first = Nil;
+    q->last = Nil;
     q->jumlah = 0;
 }
 
 boolean queue_is_empty(AntrianDokter *q) {
-    return q->First == Nil;
+    return q->first == Nil;
 }
 
 boolean queue_is_full(AntrianDokter *q) {
@@ -47,11 +46,11 @@ void queue_enqueue(AntrianDokter *q, User *value) {
         address P = linkedlist_alokasi(newUser);
         if (P != Nil) {
             if (queue_is_empty(q)) {
-                q->First = P;
+                q->first = P;
             } else {
-                q->Last->next = P;
+                q->last->next = P;
             }
-            q->Last = P;
+            q->last = P;
             q->jumlah++;
         } else {
             printf("Gagal alokasi node baru!\n");
@@ -65,14 +64,14 @@ void queue_enqueue(AntrianDokter *q, User *value) {
 
 int queue_dequeue(AntrianDokter *q) {
     if (!queue_is_empty(q)) {
-        address P = q->First;
-        int id_pasien = P->pasien->pasien_data->id; // Simpan ID pasien yang akan dihapus
-        q->First = P->next; // Pindahkan First ke node berikutnya
+        address P = q->first;
+        int id_pasien = P->pasien->dataPasien->id; // Simpan ID pasien yang akan dihapus
+        q->first = P->next; // Pindahkan first ke node berikutnya
         linkedlist_dealokasi(&P); // Dealokasi node yang dihapus
         q->jumlah--;
         
-        if (q->First == Nil) { // Jika antrian menjadi kosong
-            q->Last = Nil;
+        if (q->first == Nil) { // Jika antrian menjadi kosong
+            q->last = Nil;
         }
         
         return id_pasien; // Kembalikan ID pasien yang dihapus

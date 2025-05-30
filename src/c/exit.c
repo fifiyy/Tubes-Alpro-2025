@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../header/exit.h"
-#include "../header/user.h" // Untuk akses currUser
+#include "../header/Exit.h"
+#include "../header/User.h"
 
 void exit_system(ListUser *users) {
     char input[10];

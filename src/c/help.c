@@ -1,4 +1,4 @@
-#include "../header/help.h"
+#include "../header/Help.h"
 
 void help_system() {
     printf("\n=========== HELP ===========\n\n");

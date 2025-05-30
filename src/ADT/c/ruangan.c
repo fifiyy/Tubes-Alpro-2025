@@ -1,5 +1,5 @@
-#include "../header/ruangan.h"
-#include "../header/dokter.h"
+#include "../header/Ruangan.h"
+#include "../header/Dokter.h"
 
 void init_ruang (ListRuangan *ruang, ListUser *users) {
     ruang->jumlah = 8; // contoh, 8 ruangan
@@ -7,13 +7,13 @@ void init_ruang (ListRuangan *ruang, ListUser *users) {
     // Cari dokter dari daftar user
     Dokter *dokter_terpilih = NULL;
 
-    for (int i = 0; i < NbElmt(*users); i++) {
+    for (int i = 0; i < list_nb_elmt(*users); i++) {
         if (users->data[i].role == ROLE_DOKTER && users->data[i].dataDokter == NULL) {
             // skip warning debug
         }
     }
 
-    for (int i = 0; i < NbElmt(*users); i++) {
+    for (int i = 0; i < list_nb_elmt(*users); i++) {
         if (users->data[i].role == ROLE_DOKTER && users->data[i].dataDokter != NULL) {
             dokter_terpilih = users->data[i].dataDokter;
             break; // Ambil dokter pertama yang ditemukan
@@ -41,9 +41,9 @@ void init_ruang (ListRuangan *ruang, ListUser *users) {
 
     // Inisialisasi pasien di ruangan (hanya lewat queue, tidak perlu array manual)
     queue_enqueue(&ruang->ruang[0].Antrian, &users->data[2]); // Misal pasien GRO
-    users->data[2].dataPasien->id_dokter = dokter_terpilih->id;
+    users->data[2].dataPasien->idDokter = dokter_terpilih->id;
     users->data[2].dataPasien->posisiAntrian = 0;
     queue_enqueue(&ruang->ruang[0].Antrian, &users->data[3]); // Misal pasien nimonsganteng
-    users->data[3].dataPasien->id_dokter = dokter_terpilih->id;
+    users->data[3].dataPasien->idDokter = dokter_terpilih->id;
     users->data[3].dataPasien->posisiAntrian = 0;
 }

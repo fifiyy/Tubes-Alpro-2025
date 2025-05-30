@@ -2,10 +2,10 @@
 #ifndef ListofUser_H
 #define ListofUser_H
 
-#include "boolean.h"
+#include "Boolean.h"
 #include <stdio.h>
 #include <string.h>
-#include "../header/user.h"
+#include "../header/User.h"
 
 #define MAX_CAPACITY 100
 #define IDX_UNDEF -999 /* Tidak terdefinisi */
@@ -41,43 +41,43 @@ typedef struct {
 
 /* ********** KONSTRUKTOR ARRAY ********** */
 /* Konstruktor : create tabel kosong */
-void make_empty (ListUser *L);
+void list_make_empty (ListUser *L);
 /* I.S. sembarang */
 /* F.S. Terbentuk list L kosong dengan kapasitas MAX_CAPACITY */
 // (*L).Neff = 0;
 
 /* ********** SELEKTOR ********** */
 /* *** Banyaknya elemen *** */
-int nb_elmt (ListUser L);
+int list_nb_elmt (ListUser L);
 /* Mengirimkan banyaknya elemen efektif list */
 /* Mengirimkan nol jika list kosong */
 // return L.Neff;
 
 /* *** Daya tampung container *** */
-int max_nb_el(ListUser L);
+int list_max_nb_el(ListUser L);
 /* Mengirimkan maksimum elemen yang dapat ditampung oleh list */
 // return MAX_CAPACITY;
 
 /* *** Selektor INDEKS *** */
-IdxType get_first_idx(ListUser L);
+IdxType list_get_first_idx(ListUser L);
 /* Prekondisi : List L tidak kosong */
 /* Mengirimkan indeks elemen pertama */
 // return 0;
 
-IdxType get_last_idx(ListUser L);
+IdxType list_get_last_idx(ListUser L);
 /* Prekondisi : List L tidak kosong */
 /* Mengirimkan indeks elemen terakhir */
 // return L.Neff-1;
 
 /* *** Menghasilkan sebuah elemen *** */
-User get_elmt(ListUser L, IdxType i);
+User list_get_elmt(ListUser L, IdxType i);
 /* Prekondisi : List tidak kosong, i antara FirstIdx(L)..LastIdx(L) */
 /* Mengirimkan elemen list yang ke-i */
 // return L.daftar[i];
 
 /* *** Selektor SET : Mengubah nilai list dan elemen list *** */
 /* Untuk type private/limited private pada bahasa tertentu */
-void set_tab(ListUser Lin, ListUser *Lout);
+void list_set_tab(ListUser Lin, ListUser *Lout);
 /* I.S. Lin terdefinisi, sembarang */
 /* F.S. Lout berisi salinan Lin */
 /* Assignment Lout = Lin */
@@ -86,7 +86,7 @@ void set_tab(ListUser Lin, ListUser *Lout);
 //     (*Lout).daftar[i] = Lin.daftar[i];
 // }
 
-void set_el(ListUser *L, IdxType i, User v);
+void list_set_el(ListUser *L, IdxType i, User v);
 /* I.S. L terdefinisi, sembarang */
 /* F.S. Elemen L yang ke-i bernilai v */
 /* Mengeset nilai elemen list yang ke-i sehingga bernilai v */
@@ -95,20 +95,20 @@ void set_el(ListUser *L, IdxType i, User v);
 //     (*L).Neff = i+1;
 // }
 
-void set_length(ListUser *L, IdxType N);
+void list_set_length(ListUser *L, IdxType N);
 /* I.S. L terdefinisi, sembarang */
 /* F.S. Nilai indeks efektif L bernilai N */
 /* Mengeset nilai indeks elemen efektif sehingga bernilai N */
 // (*L).Neff = N;
 
 /* ********** Test Indeks yang valid ********** */
-boolean is_idx_valid(ListUser L, IdxType i);
+boolean list_is_idx_valid(ListUser L, IdxType i);
 /* Prekondisi : i sembarang */
 /* Mengirimkan true jika i adalah indeks yang valid utk ukuran list */
 /* yaitu antara indeks yang terdefinisi utk container */
 // return i >= GetFirstIdx(L) && i < MAX_CAPACITY;
 
-boolean is_idx_eff(ListUser L, IdxType i);
+boolean list_is_idx_eff(ListUser L, IdxType i);
 /* Prekondisi : i sembarang*/
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk list */
 /* yaitu antara GetFirstIdx(L)..GetLastIdx(L) */
@@ -116,12 +116,12 @@ boolean is_idx_eff(ListUser L, IdxType i);
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test tabel kosong *** */
-boolean is_empty(ListUser L);
+boolean list_is_empty(ListUser L);
 /* Mengirimkan true jika list L kosong, mengirimkan false jika tidak */
 // return L.Neff == 0;
 
 /* *** Test tabel penuh *** */
-boolean is_full(ListUser L);
+boolean list_is_full(ListUser L);
 /* Mengirimkan true jika tabel T penuh, mengirimkan false jika tidak */
 // return L.Neff == MAX_CAPACITY;
 
