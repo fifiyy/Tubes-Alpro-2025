@@ -19,8 +19,8 @@ PenyakitObatEntry penyakitObatMap[] = {
     {"Influenza", {{1, "Oseltamivir"}, {2, "Vitamin C"}}, 2},
     {"COVID-19", {{3, "Remdesivir"}}, 1},
     {"Hipertensi", {{4, "Lisinopril"}}, 1},
-    {"Diabetes Mellitus", {{5, "Metfomin"}}, 1},
-    {"Anemia", {{2, "Vitamin C"}}, 1},
+    {"Diabetes Mellitus", {{5, "Metfomin"}, {4, "Lisinopril"}, {3, "Remdesivir"}, {2, "Vitamin C"}}, 4},
+    {"Anemia", {{3, "Remdesivir"}, {2, "Vitamin C"}}, 2},
 };
 
 int totalPenyakit = 5;
