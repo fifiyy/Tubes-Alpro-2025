@@ -17,6 +17,6 @@ typedef struct
 } Penyakit;
 
 extern Penyakit ketPenyakit[];
-extern const int JUMLAH_PENYAKIT;
+extern const int jumlahPenyakit;
 
 #endif

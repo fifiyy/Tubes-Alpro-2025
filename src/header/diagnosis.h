@@ -1,9 +1,9 @@
 #ifndef DIAGNOSIS_H_
 #define DIAGNOSIS_H_
 
-#include "penyakit.h"
-#include "user.h"
-#include "antrian.h"
+#include "Penyakit.h"
+#include "User.h"
+#include "../../ADT/header/queue_linkedlist.h"
 #include "../ADT/header/list_user.h"
 
 /**

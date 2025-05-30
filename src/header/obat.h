@@ -8,6 +8,6 @@ typedef struct AtributObat
 } Obat;
 
 extern Obat ketObat[];
-extern const int JUMLAH_OBAT;
+extern const int jumlahObat;
 
 #endif

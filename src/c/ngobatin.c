@@ -6,7 +6,7 @@
 #include "../header/Dokter.h"
 
 PenyakitObatEntry* cari_obat(const char *namaPenyakit) {
-    for (int i = 0; i < totalPenyakit; i++) {
+    for (int i = 0; i < jumlahPenyakit; i++) {
         if (strcmp(penyakitObatMap[i].namaPenyakit, namaPenyakit) == 0) {
             return &penyakitObatMap[i];
         }

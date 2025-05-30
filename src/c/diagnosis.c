@@ -1,8 +1,14 @@
-#include "../header/diagnosis.h"
 #include <stdio.h>
+#include "../header/Diagnosis.h"
+#include "../header/Dokter.h"
+#include "../ADT/header/Ruangan.h"
+#include "../header/Pasien.h"
+
+extern ListRuangan ruangan;
 
 static char *identifikasiPenyakit (Pasien *pasien) {
-    for (int i = 0; i < sizeof(ketPenyakit); i++) {
+    static char nama_penyakit[MAX_PENYAKIT];
+    for (int i = 0; i < jumlahPenyakit; i++) {
         Penyakit p = ketPenyakit[i];
         if (pasien->suhu >= p.suhu_min && pasien->suhu <= p.suhu_max &&
             pasien->tekananDarah[0] >= p.bp_sis_min && pasien->tekananDarah[0] <= p.bp_sis_max &&
@@ -16,7 +22,9 @@ static char *identifikasiPenyakit (Pasien *pasien) {
             pasien->trombosit >= p.trom_min && pasien->trombosit <= p.trom_max) 
             {
                 strcpy(pasien->penyakit, p.nama);
-                return p.nama;
+                strncpy(nama_penyakit, p.nama, MAX_PENYAKIT-1);
+                nama_penyakit[MAX_PENYAKIT-1] = '\0';
+                return nama_penyakit;
             }
     }
     return NULL;
@@ -24,49 +32,41 @@ static char *identifikasiPenyakit (Pasien *pasien) {
 
 void diagnosisPasien (User *user_dokter) {
     if (user_dokter == NULL) {
-        printf("Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.");
+        printf("Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
         return;
     }
-    
     if (user_dokter->role != ROLE_DOKTER) {
         printf("Hanya dokter yang bisa diagnosis!\n");
         return;
     }
-
-    Dokter *dokter = user_dokter->dokter_data;
-
-    int slot_aktif = -1;
-    for (int i = 0; i < MAX_PASIEN_RUANGAN; i++) {
-        if (dokter->pasienDiRuangan[i] != NULL) {
-            slot_aktif = i;
-            break;
-        }
+    Dokter *dokter = user_dokter->dataDokter;
+    int idx_ruang = dokter->ruangan - 1;
+    if (idx_ruang < 0 || idx_ruang >= ruangan.jumlah) {
+        printf("[dr. %s] Anda belum memiliki ruangan.\n", user_dokter->username);
+        return;
     }
-
-    if (slot_aktif == -1) {
+    Ruangan *r = &ruangan.ruang[idx_ruang];
+    address current = r->Antrian.First;
+    if (current == NULL) {
         printf("[dr. %s] Kamu lagi nggak ada pasien. Asik, free time!\n", user_dokter->username);
         return;
     }
-
-    //  PROSES DIAGNOSIS
-    User *user_pasien = dokter->pasienDiRuangan[slot_aktif];
-    Pasien *pasien = user_pasien->pasien_data;
-
+    User *user_pasien = current->pasien;
+    Pasien *pasien = user_pasien->dataPasien;
     if (pasien->status == butuhDiberiObat) {
         printf("[dr. %s] Pasien %s udah didiagnosa, tinggal dikasih obat aja\n", user_dokter->username, user_pasien->username);
         return;
-    } // Validasi sudah diagnosa atau belum
-
+    }
     char *penyakit = identifikasiPenyakit(pasien);
     if (penyakit != NULL) {
         pasien->status = butuhDiberiObat;
         printf("[dr. %s] Pasien %s terdiagnosa mengidap penyakit: %s\n", user_dokter->username, user_pasien->username, penyakit);
         printf("Jangan lupa untuk diobatin ya, dr. %s!\n", user_dokter->username);
-        printf("Untuk mengobati pasien %s, ketik NGOBATIN!\n");
+        printf("Untuk mengobati pasien %s, ketik NGOBATIN!\n", user_pasien->username);
     } else {
         pasien->status = butuhPulang;
-        printf("[dr. %s] Pasien %s sehat banget! Dijamin kuat salto keliling kota!\n");
-        dokter->pasienDiRuangan[slot_aktif] = NULL;
-        dequeue(&dokter->antrian);
+        printf("[dr. %s] Pasien %s sehat banget! Dijamin kuat salto keliling kota!\n", user_dokter->username, user_pasien->username);
+        // Keluarkan pasien dari queue (dequeue)
+        queue_dequeue(&r->Antrian);
     }
 }
