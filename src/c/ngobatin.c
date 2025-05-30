@@ -1,9 +1,9 @@
-#include "../header/Ngobatin.h"
+#include "../header/ngobatin.h"
 #include <stdio.h>
 #include <string.h>
-#include "../header/Ruangan.h"
-#include "../header/User.h"
-#include "../header/Dokter.h"
+#include "../../ADT/header/ruangan.h"
+#include "../header/user.h"
+#include "../header/dokter.h"
 
 PenyakitObatEntry* cari_obat(const char *namaPenyakit) {
     for (int i = 0; i < jumlahPenyakit; i++) {
@@ -16,7 +16,7 @@ PenyakitObatEntry* cari_obat(const char *namaPenyakit) {
 
 void ngobatin (User *currUser, User *users, int banyakUser, ListRuangan *ruangan) {
     if (currUser == NULL) {
-        printf("Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.");
+        printf("Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
         return;
     }
 
@@ -35,10 +35,9 @@ void ngobatin (User *currUser, User *users, int banyakUser, ListRuangan *ruangan
     // Cari ruangan dokter
     Ruangan *ruanganDokter = NULL;
     for (int i = 0; i < ruangan->jumlah; i++) {
-        if (ruangan->ruang[i].dokter != NULL && 
-            ruangan->ruang[i].dokter->id == dokter->id) {
-                ruanganDokter = &ruangan->ruang[i];
-                break;
+        if (ruangan->ruang[i].dokter != NULL && ruangan->ruang[i].dokter->id == dokter->id) {
+            ruanganDokter = &ruangan->ruang[i];
+            break;
         }
     }
 
@@ -47,44 +46,29 @@ void ngobatin (User *currUser, User *users, int banyakUser, ListRuangan *ruangan
         return;
     }
 
-    // Cari pasien yang sedang aktif
-    int slot = -1;
-    for (int i = 0; i < MAX_PASIEN_RUANGAN; i++) {
-        if (ruanganDokter->pasienDiRuangan[i].id != 0) {
-            slot = i;
-            break;
-        }
-    }
-
-    if (slot == -1) {
+    // Cari pasien pertama di antrian
+    address current = ruanganDokter->Antrian.first;
+    if (current == NULL || current->pasien->dataPasien == NULL) {
         printf("[dr. %s] Kamu lagi nggak ada pasien. Ngobatin siapa?\n", currUser->username);
         return;
     }
+    Pasien *pasien = current->pasien->dataPasien;
+    User *userPasien = current->pasien;
 
-    // Ambil data pasien aktif
-    Pasien *pasien = &ruanganDokter->pasienDiRuangan[slot];
-
-    User *userPasien = NULL;
-    for (int i = 0; i < banyakUser; i++) {
-        if (users[i].role == ROLE_PASIEN && 
-            users[i].dataPasien != NULL && 
-            users[i].dataPasien->id == pasien->id) {
-            userPasien = &users[i];
-            break;
-        }
+    if (pasien->status == butuhDiagnosa) {
+        printf("[dr. %s] Pasien %s belum didiagnosis. Diagnosis dulu sebelum mengobati!\n", currUser->username, userPasien->username);
+        return;
     }
-    if (userPasien == NULL) {
-        printf("[dr. %s] Data pasien tidak valid!\n", currUser->username);
+    if (pasien->status == butuhPulang) {
+        printf("[dr. %s] Pasien %s sudah sembuh, tidak perlu diobati lagi.\n", currUser->username, userPasien->username);
+        return;
+    }
+    if (pasien->status == butuhMinumObat) {
+        printf("[dr. %s] Pasien %s sudah diberi obat, tidak perlu diobati lagi.\n", currUser->username, userPasien->username);
         return;
     }
 
-    // Cek status pasien
-    if (pasien->status != butuhDiberiObat) {
-        printf("[dr. %s] Pasien %s belum didiagnosis. Diagnosis dulu!\n", currUser->username, userPasien->username);
-        return;
-    }
-
-    PenyakitObatEntry *entry = cariObat(pasien->penyakit);
+    PenyakitObatEntry *entry = cari_obat(pasien->penyakit);
     if (entry == NULL) {
         printf("[dr. %s] Tidak ada obat untuk penyakit %s!\n", currUser->username, pasien->penyakit);
         return;
