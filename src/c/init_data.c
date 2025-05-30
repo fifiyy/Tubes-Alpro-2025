@@ -8,7 +8,7 @@ Obat ketObat[] = {
     {4, "Lisinopril"},
     {5, "Metfomin"},
 };
-const int JUMLAH_OBAT = sizeof(ketObat) / sizeof(ketObat[0]);
+const int jumlahObat = sizeof(ketObat) / sizeof(ketObat[0]);
 
 // Inisialisasi array penyakit
 Penyakit ketPenyakit[] = {
@@ -18,7 +18,16 @@ Penyakit ketPenyakit[] = {
     {4, "Diabetes Mellitus", 36, 37.5, 90, 140, 60, 90, 60, 100, 90, 100, 126, 200, 45, 90, 150, 185, 150, 240, 150, 450},
     {5, "Anemia", 36, 37, 90, 120, 60, 80, 60, 100, 95, 100, 70, 140, 45, 90, 150, 185, 150, 240, 150, 450},
 };
-const int JUMLAH_PENYAKIT = sizeof(ketPenyakit) / sizeof(ketPenyakit[0]);
+const int jumlahPenyakit = sizeof(ketPenyakit) / sizeof(ketPenyakit[0]);
+
+// Inisialisasi map penyakit-obat
+PenyakitObatEntry penyakitObatMap[] = {
+    {"Influenza", {{1, "Oseltamivir"}, {2, "Vitamin C"}}, 2},
+    {"COVID-19", {{3, "Remdesivir"}}, 1},
+    {"Hipertensi", {{4, "Lisinopril"}}, 1},
+    {"Diabetes Mellitus", {{5, "Metfomin"}}, 1},
+    {"Anemia", {{2, "Vitamin C"}}, 1},
+};
 
 void init_data(ListUser *users, Set *usernames) {
     MakeEmpty(users); // Inisialisasi list
@@ -30,54 +39,54 @@ void init_data(ListUser *users, Set *usernames) {
     
     // Initialize doctor
     User dokter_user = {"Neroifa", "Neroifa123", ROLE_DOKTER};
-    dokter_user.dokter_data = (Dokter*) malloc(sizeof(Dokter));
-    dokter_user.dokter_data->id = 1;
-    strcpy(dokter_user.dokter_data->username, dokter_user.username);
-    dokter_user.dokter_data->ruangan = '\0'; // belum ditugaskan
+    dokter_user.dataDokter = (Dokter*) malloc(sizeof(Dokter));
+    dokter_user.dataDokter->id = 1;
+    strcpy(dokter_user.dataDokter->username, dokter_user.username);
+    dokter_user.dataDokter->ruangan = '\0'; // belum ditugaskan
     SetEl(users, 1, dokter_user);
     set_insert(usernames, "Neroifa");
 
     // Initialize patient "GRO"
     User pasien_gro = {"GRO", "NeroifaCantik", ROLE_PASIEN};
-    pasien_gro.pasien_data = (Pasien*) malloc(sizeof(Pasien));
-    pasien_gro.pasien_data->id = 2;
-    pasien_gro.pasien_data->posisiAntrian = -1;
-    pasien_gro.pasien_data->status = statusDiagnosa;
-    pasien_gro.pasien_data->jumlahObat = 0;
-    pasien_gro.pasien_data->id_dokter = -1;
+    pasien_gro.dataPasien = (Pasien*) malloc(sizeof(Pasien));
+    pasien_gro.dataPasien->id = 2;
+    pasien_gro.dataPasien->posisiAntrian = -1;
+    pasien_gro.dataPasien->status = butuhDiagnosa;
+    pasien_gro.dataPasien->jumlahObat = 0;
+    pasien_gro.dataPasien->id_dokter = -1;
     // Data medis saja, biar identifikasi penyakit jalan
-    pasien_gro.pasien_data->suhu = 37.5;
-    pasien_gro.pasien_data->tekananDarah[0] = 110;
-    pasien_gro.pasien_data->tekananDarah[1] = 70;
-    pasien_gro.pasien_data->detakJantung = 80;
-    pasien_gro.pasien_data->saturasiOksigen = 98;
-    pasien_gro.pasien_data->kadarGulaDarah = 90;
-    pasien_gro.pasien_data->beratBadan = 60;
-    pasien_gro.pasien_data->tinggiBadan = 170;
-    pasien_gro.pasien_data->kadarKolesterol = 180;
-    pasien_gro.pasien_data->trombosit = 250;
+    pasien_gro.dataPasien->suhu = 37.5;
+    pasien_gro.dataPasien->tekananDarah[0] = 110;
+    pasien_gro.dataPasien->tekananDarah[1] = 70;
+    pasien_gro.dataPasien->detakJantung = 80;
+    pasien_gro.dataPasien->saturasiOksigen = 98;
+    pasien_gro.dataPasien->kadarGulaDarah = 90;
+    pasien_gro.dataPasien->tinggiBadan = 170;
+    pasien_gro.dataPasien->beratBadan = 60;
+    pasien_gro.dataPasien->kadarKolesterol = 180;
+    pasien_gro.dataPasien->trombosit = 250;
     SetEl(users, 2, pasien_gro);
     set_insert(usernames, "GRO");
 
     // Initialize patient "nimonsganteng"
     User pasien_nimons = {"nimonsganteng", "KelompokAmatGacor", ROLE_PASIEN};
-    pasien_nimons.pasien_data = (Pasien*) malloc(sizeof(Pasien));
-    pasien_nimons.pasien_data->id = 3;
-    pasien_nimons.pasien_data->posisiAntrian = -1;
-    pasien_nimons.pasien_data->status = statusDiagnosa;
-    pasien_nimons.pasien_data->jumlahObat = 0;
-    pasien_nimons.pasien_data->id_dokter = -1;
+    pasien_nimons.dataPasien = (Pasien*) malloc(sizeof(Pasien));
+    pasien_nimons.dataPasien->id = 3;
+    pasien_nimons.dataPasien->posisiAntrian = -1;
+    pasien_nimons.dataPasien->status = butuhDiagnosa;
+    pasien_nimons.dataPasien->jumlahObat = 0;
+    pasien_nimons.dataPasien->id_dokter = -1;
     // Data medis saja, biar identifikasi penyakit jalan
-    pasien_nimons.pasien_data->suhu = 36.8;
-    pasien_nimons.pasien_data->tekananDarah[0] = 150;
-    pasien_nimons.pasien_data->tekananDarah[1] = 100;
-    pasien_nimons.pasien_data->detakJantung = 85;
-    pasien_nimons.pasien_data->saturasiOksigen = 97;
-    pasien_nimons.pasien_data->kadarGulaDarah = 100;
-    pasien_nimons.pasien_data->beratBadan = 65;
-    pasien_nimons.pasien_data->tinggiBadan = 175;
-    pasien_nimons.pasien_data->kadarKolesterol = 200;
-    pasien_nimons.pasien_data->trombosit = 300;
+    pasien_nimons.dataPasien->suhu = 36.8;
+    pasien_nimons.dataPasien->tekananDarah[0] = 150;
+    pasien_nimons.dataPasien->tekananDarah[1] = 100;
+    pasien_nimons.dataPasien->detakJantung = 85;
+    pasien_nimons.dataPasien->saturasiOksigen = 97;
+    pasien_nimons.dataPasien->kadarGulaDarah = 100;
+    pasien_nimons.dataPasien->tinggiBadan = 175;
+    pasien_nimons.dataPasien->beratBadan = 65;
+    pasien_nimons.dataPasien->kadarKolesterol = 200;
+    pasien_nimons.dataPasien->trombosit = 300;
     SetEl(users, 3, pasien_nimons);
     set_insert(usernames, "nimonsganteng");
 

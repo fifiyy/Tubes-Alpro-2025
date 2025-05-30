@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include "../header/Diagnosis.h"
-#include "../header/dokter.h"
-#include "../ADT/header/ruangan.h"
-#include "../header/pasien.h"
+#include "../header/Dokter.h"
+#include "../ADT/header/Ruangan.h"
+#include "../header/Pasien.h"
 
 extern ListRuangan ruangan;
 
 static char *identifikasiPenyakit (Pasien *pasien) {
     static char nama_penyakit[MAX_PENYAKIT];
-    for (int i = 0; i < JUMLAH_PENYAKIT; i++) {
+    for (int i = 0; i < jumlahPenyakit; i++) {
         Penyakit p = ketPenyakit[i];
         if (pasien->suhu >= p.suhu_min && pasien->suhu <= p.suhu_max &&
             pasien->tekananDarah[0] >= p.bp_sis_min && pasien->tekananDarah[0] <= p.bp_sis_max &&
@@ -39,7 +39,7 @@ void diagnosisPasien (User *user_dokter) {
         printf("Hanya dokter yang bisa diagnosis!\n");
         return;
     }
-    Dokter *dokter = user_dokter->dokter_data;
+    Dokter *dokter = user_dokter->dataDokter;
     int idx_ruang = dokter->ruangan - 1;
     if (idx_ruang < 0 || idx_ruang >= ruangan.jumlah) {
         printf("[dr. %s] Anda belum memiliki ruangan.\n", user_dokter->username);
@@ -52,21 +52,19 @@ void diagnosisPasien (User *user_dokter) {
         return;
     }
     User *user_pasien = current->pasien;
-    Pasien *pasien = user_pasien->pasien_data;
-    if (pasien->status == statusDiberiObat) {
+    Pasien *pasien = user_pasien->dataPasien;
+    if (pasien->status == butuhDiberiObat) {
         printf("[dr. %s] Pasien %s udah didiagnosa, tinggal dikasih obat aja\n", user_dokter->username, user_pasien->username);
         return;
     }
     char *penyakit = identifikasiPenyakit(pasien);
     if (penyakit != NULL) {
-        pasien->status = statusDiberiObat;
+        pasien->status = butuhDiberiObat;
         printf("[dr. %s] Pasien %s terdiagnosa mengidap penyakit: %s\n", user_dokter->username, user_pasien->username, penyakit);
         printf("Jangan lupa untuk diobatin ya, dr. %s!\n", user_dokter->username);
         printf("Untuk mengobati pasien %s, ketik NGOBATIN!\n", user_pasien->username);
     } else {
-        pasien->status = statusPulang;
+        pasien->status = butuhPulang;
         printf("[dr. %s] Pasien %s sehat banget! Dijamin kuat salto keliling kota!\n", user_dokter->username, user_pasien->username);
-        // Keluarkan pasien dari queue (dequeue)
-        queue_dequeue(&r->Antrian);
     }
 }

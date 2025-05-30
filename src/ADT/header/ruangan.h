@@ -10,7 +10,6 @@
 // Forward declaration instead of including dokter.h
 struct Dokter;
 
-
 typedef struct {
     int nomor;                          // Nomor ruangan
     int kapasitas;                      // Kapasitas ruangan

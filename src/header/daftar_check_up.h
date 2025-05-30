@@ -11,7 +11,7 @@
  * @param namaVar Name of the variable for error messages
  * @return true if valid, false otherwise
  */
-boolean validasiFloat(float nilai, const char* namaVar);
+boolean validasi_float(float nilai, const char* namaVar);
 
 /**
  * @brief Validates that an integer value is positive
@@ -19,7 +19,7 @@ boolean validasiFloat(float nilai, const char* namaVar);
  * @param namaVar Name of the variable for error messages
  * @return true if valid, false otherwise
  */
-boolean validasiInt(int nilai, const char* namaVar);
+boolean validasi_integer(int nilai, const char* namaVar);
 
 /**
  * @brief Displays available doctors and their queue status
@@ -27,7 +27,7 @@ boolean validasiInt(int nilai, const char* namaVar);
  * @param user_count Total number of users
  * @param ruangan Pointer to room list structure
  */
-void displayDokter(User *users, int user_count, ListRuangan *ruangan);
+void display_dokter(User *users, int user_count, ListRuangan *ruangan);
 
 /**
  * @brief Handles patient check-up registration process
@@ -36,6 +36,6 @@ void displayDokter(User *users, int user_count, ListRuangan *ruangan);
  * @param user_count Total number of users
  * @param ruangan Pointer to room list structure
  */
-void daftar_checkup(User *current_user, User *users, int user_count, ListRuangan *ruangan);
+void daftar_check_up(User *current_user, User *users, int user_count, ListRuangan *ruangan);
 
 #endif // CHECKUP_H

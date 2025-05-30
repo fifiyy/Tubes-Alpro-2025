@@ -21,7 +21,7 @@ void displayMenuPasien() {
     printf("Ketikkan perintah di dalam kurung untuk menjalankan fungsi.\n");
     printf("1. Daftar Checkup (DAFTAR_CHECKUP)\n");
     printf("2. Lihat Denah Ruangan (LIHAT_DENAH)\n");
-    printf("3. Lihat Ruangan (LIHAT_RUANGAN x {x: nomor ruangan yang ingin dilihat})\n");
+    printf("3. Lihat Ruangan (LIHAT_RUANGAN)\n");
     printf("4. Logout (LOGOUT)\n");
     printf("Pilih menu: ");
 }
@@ -43,7 +43,7 @@ void displayMenuManajer() {
     printf("2. Tambah Dokter (TAMBAH_DOKTER)\n");   
     printf("3. Assign Dokter ke Ruangan (ASSIGN_DOKTER)\n");
     printf("4. Lihat Denah Ruangan (LIHAT_DENAH)\n");
-    printf("5. Lihat Ruangan (LIHAT_RUANGAN x {x: nomor ruangan yang ingin dilihat})\n");
+    printf("5. Lihat Ruangan (LIHAT_RUANGAN)\n");
     printf("6. Logout\n");
     printf("Pilih menu: ");
 }

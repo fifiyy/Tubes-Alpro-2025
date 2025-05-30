@@ -9,11 +9,11 @@
 #define MAX_KELUHAN 51
 
 typedef enum {
-    statusDiagnosa,
-    statusDiberiObat,
-    statusMinumObat,
-    statusSembuh,
-    statusPulang
+    butuhDiagnosa,
+    butuhDiberiObat,
+    butuhMinumObat,
+    butuhSembuh,
+    butuhPulang
 } StatusPasien;
 
 // unsigned int digunakan untuk variabel yang tidak pernah bernilai negatif

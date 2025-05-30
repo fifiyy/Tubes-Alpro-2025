@@ -8,14 +8,14 @@ void init_ruang (ListRuangan *ruang, ListUser *users) {
     Dokter *dokter_terpilih = NULL;
 
     for (int i = 0; i < NbElmt(*users); i++) {
-        if (users->data[i].role == ROLE_DOKTER && users->data[i].dokter_data == NULL) {
+        if (users->data[i].role == ROLE_DOKTER && users->data[i].dataDokter == NULL) {
             // skip warning debug
         }
     }
 
     for (int i = 0; i < NbElmt(*users); i++) {
-        if (users->data[i].role == ROLE_DOKTER && users->data[i].dokter_data != NULL) {
-            dokter_terpilih = users->data[i].dokter_data;
+        if (users->data[i].role == ROLE_DOKTER && users->data[i].dataDokter != NULL) {
+            dokter_terpilih = users->data[i].dataDokter;
             break; // Ambil dokter pertama yang ditemukan
         }
     }
@@ -41,9 +41,9 @@ void init_ruang (ListRuangan *ruang, ListUser *users) {
 
     // Inisialisasi pasien di ruangan (hanya lewat queue, tidak perlu array manual)
     queue_enqueue(&ruang->ruang[0].Antrian, &users->data[2]); // Misal pasien GRO
-    users->data[2].pasien_data->id_dokter = dokter_terpilih->id;
-    users->data[2].pasien_data->posisiAntrian = 0;
+    users->data[2].dataPasien->id_dokter = dokter_terpilih->id;
+    users->data[2].dataPasien->posisiAntrian = 0;
     queue_enqueue(&ruang->ruang[0].Antrian, &users->data[3]); // Misal pasien nimonsganteng
-    users->data[3].pasien_data->id_dokter = dokter_terpilih->id;
-    users->data[3].pasien_data->posisiAntrian = 0;
+    users->data[3].dataPasien->id_dokter = dokter_terpilih->id;
+    users->data[3].dataPasien->posisiAntrian = 0;
 }

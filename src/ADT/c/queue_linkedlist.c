@@ -65,7 +65,7 @@ void queue_enqueue(AntrianDokter *q, User *value) {
 int queue_dequeue(AntrianDokter *q) {
     if (!queue_is_empty(q)) {
         address P = q->First;
-        int id_pasien = P->pasien->pasien_data->id; // Simpan ID pasien yang akan dihapus
+        int id_pasien = P->pasien->dataPasien->id; // Simpan ID pasien yang akan dihapus
         q->First = P->next; // Pindahkan First ke node berikutnya
         linkedlist_dealokasi(&P); // Dealokasi node yang dihapus
         q->jumlah--;

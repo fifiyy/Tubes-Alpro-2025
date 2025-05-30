@@ -12,6 +12,7 @@
 #include "../header/lihat_denah.h"
 #include "../header/daftar_check_up.h"
 #include "../header/Diagnosis.h"
+#include "../header/ngobatin.h"
 
 ListUser users; // Deklarasi variabel global untuk menyimpan daftar pengguna
 ListRuangan ruangan;
@@ -86,14 +87,14 @@ int main(int argc, char *argv[]) {
             }
             // while (getchar() != '\n'); // Clear input buffer
         } else if (strcmp(command, "DAFTAR_CHECKUP") == 0) {
-            daftar_checkup(current_user, users.data, users.length, &ruangan);
+            daftar_check_up(current_user, users.data, users.length, &ruangan);
         } else if (strcmp(command, "LIHAT_RUANGAN_SAYA") == 0) {
             if (current_user && current_user->role == ROLE_DOKTER) {
-                if (current_user->dokter_data->ruangan <= 0) {
+                if (current_user->dataDokter->ruangan <= 0) {
                     printf("Anda belum memiliki ruangan!\n");
                     continue;
                 }
-                lihat_ruangan(&ruangan, current_user->dokter_data->ruangan, &users);
+                lihat_ruangan(&ruangan, current_user->dataDokter->ruangan, &users);
 
             } else {
                 printf("Hanya dokter yang bisa melihat ruangan sendiri!\n");
@@ -101,7 +102,7 @@ int main(int argc, char *argv[]) {
         } else if (strcmp(command, "LIHAT_DAFTAR_PASIEN") == 0) {
             if (current_user && current_user->role == ROLE_DOKTER) {
                 // Tampilkan semua pasien di ruangan dokter (baik di ruangan maupun antrian)
-                int idx_ruang = current_user->dokter_data->ruangan - 1;
+                int idx_ruang = current_user->dataDokter->ruangan - 1;
                 if (idx_ruang < 0 || idx_ruang >= ruangan.jumlah) {
                     printf("Anda belum memiliki ruangan!\n");
                 } else {
@@ -121,6 +122,8 @@ int main(int argc, char *argv[]) {
             }
         } else if (strcmp(command, "DIAGNOSIS") == 0) {
             diagnosisPasien(current_user);
+        } else if (strcmp(command, "NGOBATIN") == 0) {
+            ngobatin(current_user, users.data, users.length, &ruangan);
         } else {
             printf("Command tidak dikenali. Ketik HELP untuk bantuan.\n");
         }
