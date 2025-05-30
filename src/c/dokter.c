@@ -1,59 +1,47 @@
+
 #include "dokter.h"
+#include "../../ADT/header/ruangan.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-Pasien* assignPasienKeDokter(Dokter* dokter, Pasien* pasien) {
+Pasien* assignPasienKeDokter(User *user, Dokter* dokter, Pasien* pasien, ListRuangan *ruangan) {
     if (dokter == NULL || pasien == NULL) {
         printf("Error: Data dokter atau pasien tidak valid\n");
         return NULL;
     }
 
-    for (int i = 0; i < MAX_PASIEN_RUANGAN; i++) {
-        if (dokter->pasienDiRuangan[i] == pasien) {
-            printf("Pasien sudah terdaftar di ruangan dokter ini\n");
-            return NULL;
-        }
+    int idx_ruang = dokter->ruangan - 1; // ruangan biasanya 1-based
+    if (idx_ruang < 0 || idx_ruang >= ruangan->jumlah) {
+        printf("Error: Dokter belum punya ruangan yang valid\n");
+        return NULL;
     }
 
-    AntrianNode* current = dokter->antrian.front;
+    // Cek apakah pasien sudah ada di queue
+    address current = ruangan->ruang[idx_ruang].Antrian.First;
     while (current != NULL) {
-        if (&current->pasien == pasien) {
-            printf("Pasien sudah berada dalam antrian dokter ini\n");
+        if (current->pasien->pasien_data == pasien) {
+            printf("Pasien sudah berada dalam antrian atau ruangan!\n");
             return NULL;
         }
         current = current->next;
     }
 
-    for (int i = 0; i < MAX_PASIEN_RUANGAN; i++) {
-        if (dokter->pasienDiRuangan[i] == NULL) {
-            dokter->pasienDiRuangan[i] = pasien;
-            pasien->posisiAntrian = 0;
-            pasien->idDokter = dokter->id;
-            printf("Pasien berhasil didaftarkan ke ruangan\n");
-            return pasien;
-        }
-    }
+    int jumlah_sekarang = queue_size(&ruangan->ruang[idx_ruang].Antrian);
+    queue_enqueue(&ruangan->ruang[idx_ruang].Antrian, user);
 
-    int jumlahSebelum = banyakAntrian(&dokter->antrian);
-    enqueue(&dokter->antrian, pasien);
-    
-    if (banyakAntrian(&dokter->antrian) > jumlahSebelum) {
-        pasien->posisiAntrian = dokter->antrian.jumlah;
-        pasien->idDokter = dokter->id;
-        printf("Pasien berhasil didaftarkan ke antrian\n");
+    // Hitung posisi antrian setelah enqueue
+    int jumlah_baru = queue_size(&ruangan->ruang[idx_ruang].Antrian);
+    if (jumlah_baru > jumlah_sekarang) {
+        if (jumlah_baru <= ruangan->ruang[idx_ruang].kapasitas) {
+            pasien->posisiAntrian = 0; // langsung masuk ruangan
+        } else {
+            pasien->posisiAntrian = jumlah_baru - ruangan->ruang[idx_ruang].kapasitas;
+        }
+        pasien->id_dokter = dokter->id;
+        printf("Pasien berhasil didaftarkan ke antrian/ruangan\n");
         return pasien;
     }
 
     printf("Gagal mendaftarkan pasien ke antrian\n");
-    return NULL;
-}
-
-User* getUserByIDDokter (int idDokter, ListUser *users) {
-    for (int i = 0; i < users->length; i++) {
-        User *user = &users->data[i];
-        if (user->role == ROLE_DOKTER && user->dokter_data->id == idDokter) {
-            return user;
-        }
-    }
     return NULL;
 }

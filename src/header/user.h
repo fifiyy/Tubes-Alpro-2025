@@ -5,11 +5,13 @@
 #include <string.h>
 #include "boolean.h"
 #include "pasien.h"
-#include "dokter.h"
+// #include "dokter.h"
 
 #define MAX_USERS 100
 #define USERNAME_LEN 50
 #define PASSWORD_LEN 50
+
+typedef struct Dokter Dokter;
 
 // Enum untuk role pengguna
 typedef enum {

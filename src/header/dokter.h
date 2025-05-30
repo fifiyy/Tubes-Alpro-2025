@@ -1,22 +1,20 @@
+
 #ifndef DOKTER_H
 #define DOKTER_H
 
-#include "antrian.h"
+#include "../../ADT/header/queue_linkedlist.h"
+#include "../../ADT/header/ruangan.h"
 
 #define MAX_PASIEN_RUANGAN 3
 
-typedef struct {
+typedef struct Dokter {
     int id;
-    char ruangan;
-    Pasien *pasienDiRuangan[MAX_PASIEN_RUANGAN];
-    AntrianDokter antrian;
+    char username[USERNAME_LEN];
+    int ruangan;
+    // Pasien *pasienDiRuangan[MAX_PASIEN_RUANGAN];
+    // AntrianDokter antrian; // Uncommented this since it's used in dokter.c
 } Dokter;
 
-/*
-    Kalau jumlahPasienDiRuangan < 3, langsung masuk ke ruangan
-    Tapi kalau jumlahPasienDiRuangan = 3, masuk ke antrian
-*/
-Pasien *assignPasienKeDokter (Dokter *dokter, Pasien *pasien);
-User* getUserByIDDokter (int idDokter, ListUser *users);
+Pasien *assignPasienKeDokter(User *user, Dokter* dokter, Pasien* pasien, ListRuangan *ruangan);
 
 #endif
