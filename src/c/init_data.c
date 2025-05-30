@@ -8,7 +8,7 @@ Obat ketObat[] = {
     {4, "Lisinopril"},
     {5, "Metfomin"},
 };
-const int jumlahObat = sizeof(ketObat) / sizeof(ketObat[0]);
+const int JUMLAH_OBAT = sizeof(ketObat) / sizeof(ketObat[0]);
 
 // Inisialisasi array penyakit
 Penyakit ketPenyakit[] = {
@@ -18,7 +18,7 @@ Penyakit ketPenyakit[] = {
     {4, "Diabetes Mellitus", 36, 37.5, 90, 140, 60, 90, 60, 100, 90, 100, 126, 200, 45, 90, 150, 185, 150, 240, 150, 450},
     {5, "Anemia", 36, 37, 90, 120, 60, 80, 60, 100, 95, 100, 70, 140, 45, 90, 150, 185, 150, 240, 150, 450},
 };
-const int jumlahPenyakit = sizeof(ketPenyakit) / sizeof(ketPenyakit[0]);
+const int JUMLAH_PENYAKIT = sizeof(ketPenyakit) / sizeof(ketPenyakit[0]);
 
 PenyakitObatEntry penyakitObatMap[] = {
     {"Influenza", {{1, "Oseltamivir"}, {2, "Vitamin C"}}, 2},
@@ -52,7 +52,7 @@ void init_data(ListUser *users, Set *usernames) {
     pasien_gro.dataPasien->posisiAntrian = -1;
     pasien_gro.dataPasien->status = butuhDiagnosa;
     pasien_gro.dataPasien->jumlahObat = 0;
-    pasien_gro.dataPasien->id_dokter = -1;
+    pasien_gro.dataPasien->idDokter = -1;
     // Data medis saja, biar identifikasi penyakit jalan
     pasien_gro.dataPasien->suhu = 37.5;
     pasien_gro.dataPasien->tekananDarah[0] = 110;
