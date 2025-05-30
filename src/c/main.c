@@ -11,6 +11,7 @@
 #include "../header/f10.h"
 #include "../header/lihat_denah.h"
 #include "../header/daftar_check_up.h"
+#include "../header/Diagnosis.h"
 
 ListUser users; // Deklarasi variabel global untuk menyimpan daftar pengguna
 ListRuangan ruangan;
@@ -18,7 +19,7 @@ Set usernames; // Deklarasi variabel global untuk menyimpan daftar username
 Set doctor_usernames;
 
 int main(int argc, char *argv[]) {
-    displayMainMenu(); //display utama sebelum login atau register
+    // displayMainMenu(); //display utama sebelum login atau register
     init_data(&users, &usernames); // Panggil fungsi init_data
     init_ruang (&ruangan, &users); // Inisialisasi ruangan
     current_user = NULL; // Inisialisasi pointer current_user ke NULL
@@ -27,7 +28,25 @@ int main(int argc, char *argv[]) {
     int nomor_ruangan;
     
     while (1) {
-        printf("\n>>> ");
+        // Tampilkan menu sesuai role
+        if (current_user == NULL) {
+            displayMainMenu();
+            printf("\n>>> ");
+        } else if (current_user->role == ROLE_PASIEN) {
+            displayStatusUser(current_user->username, "Pasien");
+            displayMenuPasien();
+            printf("\n>>> ");
+        } else if (current_user->role == ROLE_DOKTER) {
+            displayStatusUser(current_user->username, "Dokter");
+            displayMenuDokter();
+            printf("\n>>> ");
+        } else if (current_user->role == ROLE_MANAGER) {
+            displayStatusUser(current_user->username, "Manajer");
+            displayMenuManajer();
+            printf("\n>>> ");
+        }
+
+        // printf("\n>>> ");
         if (scanf("%19s", command) != 1) {
             printf("Input tidak valid!\n");
             while (getchar() != '\n');
@@ -68,9 +87,43 @@ int main(int argc, char *argv[]) {
             // while (getchar() != '\n'); // Clear input buffer
         } else if (strcmp(command, "DAFTAR_CHECKUP") == 0) {
             daftar_checkup(current_user, users.data, users.length, &ruangan);
+        } else if (strcmp(command, "LIHAT_RUANGAN_SAYA") == 0) {
+            if (current_user && current_user->role == ROLE_DOKTER) {
+                if (current_user->dokter_data->ruangan <= 0) {
+                    printf("Anda belum memiliki ruangan!\n");
+                    continue;
+                }
+                lihat_ruangan(&ruangan, current_user->dokter_data->ruangan, &users);
+
+            } else {
+                printf("Hanya dokter yang bisa melihat ruangan sendiri!\n");
+            }
+        } else if (strcmp(command, "LIHAT_DAFTAR_PASIEN") == 0) {
+            if (current_user && current_user->role == ROLE_DOKTER) {
+                // Tampilkan semua pasien di ruangan dokter (baik di ruangan maupun antrian)
+                int idx_ruang = current_user->dokter_data->ruangan - 1;
+                if (idx_ruang < 0 || idx_ruang >= ruangan.jumlah) {
+                    printf("Anda belum memiliki ruangan!\n");
+                } else {
+                    Ruangan *r = &ruangan.ruang[idx_ruang];
+                    printf("\n--- Daftar Pasien di Ruangan %d ---\n", r->nomor);
+                    int pasien_count = 0;
+                    address current = r->Antrian.First;
+                    while (current != NULL) {
+                        printf("%d. %s\n", ++pasien_count, current->pasien->username);
+                        current = current->next;
+                    }
+                    if (pasien_count == 0) printf("Belum ada pasien di ruangan/antrian.\n");
+                    printf("------------------------------\n");
+                }
+            } else {
+                printf("Hanya dokter yang bisa melihat daftar pasien!\n");
+            }
+        } else if (strcmp(command, "DIAGNOSIS") == 0) {
+            diagnosisPasien(current_user);
         } else {
             printf("Command tidak dikenali. Ketik HELP untuk bantuan.\n");
         }
     }
-    return 0;
+    return 0; 
 }

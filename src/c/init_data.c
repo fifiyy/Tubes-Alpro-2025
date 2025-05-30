@@ -40,24 +40,44 @@ void init_data(ListUser *users, Set *usernames) {
     // Initialize patient "GRO"
     User pasien_gro = {"GRO", "NeroifaCantik", ROLE_PASIEN};
     pasien_gro.pasien_data = (Pasien*) malloc(sizeof(Pasien));
-    // Initialize all Pasien fields
     pasien_gro.pasien_data->id = 2;
-    pasien_gro.pasien_data->posisiAntrian = -1; // Not in queue
+    pasien_gro.pasien_data->posisiAntrian = -1;
     pasien_gro.pasien_data->status = statusDiagnosa;
     pasien_gro.pasien_data->jumlahObat = 0;
-    pasien_gro.pasien_data->id_dokter = -1; // No doctor assigned
+    pasien_gro.pasien_data->id_dokter = -1;
+    // Data medis saja, biar identifikasi penyakit jalan
+    pasien_gro.pasien_data->suhu = 37.5;
+    pasien_gro.pasien_data->tekananDarah[0] = 110;
+    pasien_gro.pasien_data->tekananDarah[1] = 70;
+    pasien_gro.pasien_data->detakJantung = 80;
+    pasien_gro.pasien_data->saturasiOksigen = 98;
+    pasien_gro.pasien_data->kadarGulaDarah = 90;
+    pasien_gro.pasien_data->beratBadan = 60;
+    pasien_gro.pasien_data->tinggiBadan = 170;
+    pasien_gro.pasien_data->kadarKolesterol = 180;
+    pasien_gro.pasien_data->trombosit = 250;
     SetEl(users, 2, pasien_gro);
     set_insert(usernames, "GRO");
 
     // Initialize patient "nimonsganteng"
     User pasien_nimons = {"nimonsganteng", "KelompokAmatGacor", ROLE_PASIEN};
     pasien_nimons.pasien_data = (Pasien*) malloc(sizeof(Pasien));
-    // Initialize all Pasien fields
     pasien_nimons.pasien_data->id = 3;
-    pasien_nimons.pasien_data->posisiAntrian = -1; // Not in queue
+    pasien_nimons.pasien_data->posisiAntrian = -1;
     pasien_nimons.pasien_data->status = statusDiagnosa;
     pasien_nimons.pasien_data->jumlahObat = 0;
-    pasien_nimons.pasien_data->id_dokter = -1; // No doctor assigned
+    pasien_nimons.pasien_data->id_dokter = -1;
+    // Data medis saja, biar identifikasi penyakit jalan
+    pasien_nimons.pasien_data->suhu = 36.8;
+    pasien_nimons.pasien_data->tekananDarah[0] = 150;
+    pasien_nimons.pasien_data->tekananDarah[1] = 100;
+    pasien_nimons.pasien_data->detakJantung = 85;
+    pasien_nimons.pasien_data->saturasiOksigen = 97;
+    pasien_nimons.pasien_data->kadarGulaDarah = 100;
+    pasien_nimons.pasien_data->beratBadan = 65;
+    pasien_nimons.pasien_data->tinggiBadan = 175;
+    pasien_nimons.pasien_data->kadarKolesterol = 200;
+    pasien_nimons.pasien_data->trombosit = 300;
     SetEl(users, 3, pasien_nimons);
     set_insert(usernames, "nimonsganteng");
 

@@ -5,5 +5,10 @@
 
 void displayMainMenu();
 //void displayTitleOnly(); hanya untuk title
+void displayMenuPasien();
+void displayMenuDokter();
+void displayMenuManajer();
+void displayHelp();
+void displayStatusUser(const char* username, const char* role);
 
 #endif
