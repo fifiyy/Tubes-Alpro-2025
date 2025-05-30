@@ -1,18 +1,19 @@
 #ifndef OBAT_H
 #define OBAT_H
 
+#define MAX_OBAT 10
+
 typedef struct AtributObat
 {
     int id;
     char nama[20];    
 } Obat;
 
-Obat ketObat[] = {
-    {1, "Oseltamivir"},
-    {2, "Vitamin C"},
-    {3, "Remdesivir"},
-    {4, "Lisinopril"},
-    {5, "Metfomin"},
-};
+typedef struct {
+    Obat daftar[MAX_OBAT];
+    int jumlahObat;
+} DatabaseObat;
+
+extern Obat ketObat[];
 
 #endif
