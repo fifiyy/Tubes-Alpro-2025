@@ -1,6 +1,6 @@
 
-#ifndef QUEUE_LINKEDLIST_H
-#define QUEUE_LINKEDLIST_H
+#ifndef QUEUE_LINKED_LIST_H
+#define QUEUE_LINKED_LIST_H
 
 #include <stdio.h>
 #include <stdlib.h>

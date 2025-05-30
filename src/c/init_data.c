@@ -20,6 +20,14 @@ Penyakit ketPenyakit[] = {
 };
 const int JUMLAH_PENYAKIT = sizeof(ketPenyakit) / sizeof(ketPenyakit[0]);
 
+PenyakitObatEntry penyakitObatMap[] = {
+    {"Influenza", {{1, "Oseltamivir"}, {2, "Vitamin C"}}, 2},
+    {"COVID-19", {{3, "Remdesivir"}}, 1},
+    {"Hipertensi", {{4, "Lisinopril"}}, 1},
+    {"Diabetes Mellitus", {{5, "Metfomin"}}, 1},
+    {"Anemia", {{2, "Vitamin C"}}, 1},
+};
+
 void init_data(ListUser *users, Set *usernames) {
     MakeEmpty(users); // Inisialisasi list
     set_create_empty(usernames); // Inisialisasi set
