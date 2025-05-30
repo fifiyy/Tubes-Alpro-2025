@@ -4,7 +4,6 @@
 #include "boolean.h"
 #include "obat.h"
 
-#define MAX_OBAT 10
 #define MAX_PENYAKIT 20
 #define MAX_KELUHAN 51
 
@@ -34,7 +33,7 @@ typedef struct {
     Obat perutPasien[MAX_OBAT];
     int jumlahObat;
     StatusPasien status;
-    int id_dokter;
+    int idDokter;
     int posisiAntrian;
 } Pasien;
 
