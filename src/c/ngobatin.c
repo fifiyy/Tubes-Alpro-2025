@@ -29,6 +29,7 @@ void ngobatin (User *currUser, User *users, int banyakUser, ListRuangan *ruangan
     Dokter *dokter = currUser->dataDokter;
     if (dokter == NULL) {
         printf("Data dokter tidak valid!\n");
+      
         return;
     }
 
