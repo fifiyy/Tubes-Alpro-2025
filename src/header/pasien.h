@@ -34,7 +34,7 @@ typedef struct {
     Obat perutPasien[MAX_OBAT];
     int jumlahObat;
     StatusPasien status;
-    int id_dokter;
+    int idDokter;
     int posisiAntrian;
 } Pasien;
 

@@ -1,3 +1,4 @@
+
 #include "../header/register.h"
 #include "../ADT/header/list_user.h"
 #include "../ADT/header/set.h"
@@ -8,7 +9,7 @@ boolean is_username_unique(const Set *usernames, const char* username) {
 }
 
 void register_pasien(ListUser *users, Set *usernames) {
-    if (current_user != NULL) {
+    if (currUser != NULL) {
         printf("Anda sudah login. Silakan logout terlebih dahulu.\n");
         return;
     }
@@ -45,13 +46,25 @@ void register_pasien(ListUser *users, Set *usernames) {
         return;
     }
     
-    User new_user;
-    strcpy(new_user.username, username);
-    strcpy(new_user.password, password);
-    new_user.role = ROLE_PASIEN;
+    User newUser;
+    strcpy(newUser.username, username);
+    strcpy(newUser.password, password);
+    newUser.role = ROLE_PASIEN;
 
-    SetEl(users, NbElmt(*users), new_user);
-    SetLength(users, NbElmt(*users) + 1);
+    newUser.dataPasien = (Pasien*) malloc(sizeof(Pasien));
+    if (newUser.dataPasien == NULL) {
+        printf("Gagal mengalokasikan memori untuk pasien baru.\n");
+        return;
+    }
+    newUser.dataPasien->id = NbElmt(*users) + 1; // ID unik berdasarkan jumlah user
+    newUser.dataPasien->jumlahObat = 0; // Inisialisasi jumlah obat
+    newUser.dataPasien->idDokter = -1; // Belum ada dokter yang ditugaskan
+    newUser.dataPasien->posisiAntrian = -1; // Pasien belum dalam antrian
+    newUser.dataPasien->keluhan[0] = '\0'; // Inisialisasi keluhan kosong
+    newUser.dataPasien->status = butuhDiagnosa; // Status awal pasien
+    
+    set_el(users, nb_elmt(*users), newUser);
+    set_length(users, nb_elmt(*users) + 1);
     set_insert(usernames, username); // Tambahkan username ke dalam Set
     
     printf("Pasien %s berhasil ditambahkan!\n", username);

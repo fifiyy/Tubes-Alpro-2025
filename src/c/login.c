@@ -3,9 +3,9 @@
 
 void login_system(ListUser *users) {
     // Cek apakah sudah ada user yang login
-    if (current_user != NULL) {
+    if (currUser != NULL) {
         printf("Anda sudah login sebagai %s %s. Silakan logout terlebih dahulu untuk login dengan akun lain.\n",
-               role_to_string(current_user->role), current_user->username);
+               role_to_string(currUser->role), currUser->username);
         return;
     }
 
@@ -26,15 +26,15 @@ void login_system(ListUser *users) {
         return;
     }
     
-    for (int i = GetFirstIdx(*users); i <= GetLastIdx(*users); i++) {
-        User user = GetElmt(*users, i);
+    for (int i = get_first_idx(*users); i <= get_last_idx(*users); i++) {
+        User user = get_elmt(*users, i);
         if (strcmp(user.username, username) == 0) {
             if (strcmp(user.password, password) == 0) {
-                current_user = &users->data[i];
+                currUser = &users->data[i];
                 printf("Selamat pagi %s %s!", 
-                       role_to_string(current_user->role), 
-                       current_user->username);
-                if (current_user->role == ROLE_PASIEN) {
+                       role_to_string(currUser->role), 
+                       currUser->username);
+                if (currUser->role == ROLE_PASIEN) {
                     printf(" Ada keluhan apa ?\n");
                 } else {
                     printf("\n");

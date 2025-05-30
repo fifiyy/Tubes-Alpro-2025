@@ -1,7 +1,8 @@
+
 #include "../header/user.h"
 
 int user_count = 0; // Implementasi variabel global
-User* current_user = NULL; // Implementasi variabel global
+User* currUser = NULL; // Implementasi variabel global
 
 const char* role_to_string(UserRole role) {
     switch(role) {

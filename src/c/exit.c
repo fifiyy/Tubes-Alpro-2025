@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../header/exit.h"
-#include "../header/user.h" // Untuk akses current_user
+#include "../header/user.h" // Untuk akses currUser
 
 void exit_system(ListUser *users) {
     char input[10];
@@ -14,10 +14,10 @@ void exit_system(ListUser *users) {
         scanf("%s", input);
     
         if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-            if (current_user == NULL) {
+            if (currUser == NULL) {
                 printf("\nUser keluar dari Rumah Sakit,\nSampai jumpa!\n");
             } else {
-                printf("\n%s keluar dari Rumah Sakit,\nSampai jumpa!\n", current_user->username);
+                printf("\n%s keluar dari Rumah Sakit,\nSampai jumpa!\n", currUser->username);
             }
             exit(0);
         } else if (strcmp(input, "N") == 0 || strcmp(input, "n") == 0) {

@@ -17,7 +17,7 @@ Pasien* assignPasienKeDokter(User *user, Dokter* dokter, Pasien* pasien, ListRua
     }
 
     // Cek apakah pasien sudah ada di queue
-    address current = ruangan->ruang[idx_ruang].Antrian.First;
+    address current = ruangan->ruang[idx_ruang].Antrian.first;
     while (current != NULL) {
         if (current->pasien->dataPasien == pasien) {
             printf("Pasien sudah berada dalam antrian atau ruangan!\n");

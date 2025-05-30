@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include "../header/lihat_denah.h"
 
-
-
 void lihat_denah (ListRuangan ruangan) {
     printf("\n");
     printf("+-----+-----+-----+-----+-----+-----+-----+-----+\n");
@@ -13,33 +11,101 @@ void lihat_denah (ListRuangan ruangan) {
     printf("+-----+-----+-----+-----+-----+-----+-----+-----+\n");
 }
 
-void lihat_ruangan (ListRuangan ruangan, int num){
-    while (current_user->role != ROLE_MANAGER && current_user->role != ROLE_DOKTER 
-            && current_user->role != ROLE_PASIEN) {
-        printf ("Role tidak ditemukan. Akses ditolak.\n");
-        return;
-    }
-
-    if (num <= 0 || num > ruangan.jumlah) {
+void lihat_ruangan(ListRuangan *ruangan, int num, ListUser *users) {
+    if (num < 1 || num > ruangan->jumlah) {
         printf("Nomor ruangan tidak valid.\n");
         return;
     }
-    
-    Ruangan *r = &ruangan.ruang[num-1];
-    
+
+    Ruangan *r = &ruangan->ruang[num - 1];
+
     printf("\n--- Detail Ruangan %d ---\n", r->nomor);
-    printf("Kapasitas : %d\n", r->kapasitas);
-    printf("Dokter    : %s\n", r->dokter);
-    printf("Pasien di dalam ruangan:\n");
+    printf("Kapasitas  : %d\n", r->kapasitas);
 
-    if (r->pasien.Count == 0) {
-        printf("Tidak ada pasien di dalam ruangan saat ini.\n");
+    // Doctor information
+    if (r->dokter != NULL && strlen(r->dokter->username) > 0) {
+        printf("Dokter     : Dr. %s\n", r->dokter->username);
     } else {
-        for (int i = 0; i < r->pasien.Count; i++) {
-            printf("  %d. %s\n", i + 1, r->pasien.Elements[i]);
-        }
+        printf("Dokter     : -\n");
     }
-    printf("------------------------------\n\n");
 
+    // Patients in room (N terdepan dari queue)
+    printf("Pasien di dalam ruangan:\n");
+    int countPasien = 0;
+    address current = r->Antrian.first;
+    while (current != NULL && countPasien < r->kapasitas) {
+        printf("  %d. %s\n", ++countPasien, current->pasien->username);
+        current = current->next;
+    }
+    if (countPasien == 0) {
+        printf("  Tidak ada pasien di dalam ruangan saat ini.\n");
+    }
+
+    // Pasien di antrian (sisanya dari queue)
+    printf("Pasien di antrian:\n");
+    int counter = 1;
+    while (current != NULL) {
+        printf("  %d. %s\n", counter++, current->pasien->username);
+        current = current->next;
+    }
+    if (counter == 1) {
+        printf("  Tidak ada pasien di antrian saat ini.\n");
+    }
+    printf("------------------------------\n");
 }
 
+
+void lihat_semua_antrian(ListRuangan *ruangan, int num, ListUser *users) {
+    if (currUser == NULL) {
+        printf("Anda belum login.\n");
+        return;
+    }
+
+    if (currUser->role != ROLE_MANAGER) {
+        printf("Anda bukan Manajer, akses ditolak\n");
+        return;
+    }
+    
+    // Print room numbers header
+    printf("+-----+-----+-----+-----+-----+-----+-----+-----+\n");
+    for (int i = 0; i < ruangan->jumlah; i++) {
+        printf("|  %d  ", ruangan->ruang[i].nomor);
+    }
+    printf("|\n");
+    printf("+-----+-----+-----+-----+-----+-----+-----+-----+\n\n");
+    
+    // Print details for each room
+    
+    for (int i = 0; i < ruangan->jumlah; i++){
+        Ruangan r = ruangan->ruang[i];
+        // Skip empty rooms (no doctor assigned)
+        if (r.dokter == NULL || strlen(r.dokter->username) == 0) {
+            continue;
+        }
+        printf("--- Detail Ruangan %d ---\n", ruangan->ruang[i].nomor);
+        printf("Kapasitas  : %d\n", r.kapasitas);
+        printf("Dokter     : Dr. %s\n", r.dokter->username);
+        // Print patients in the room (N terdepan dari queue)
+        printf("Pasien di dalam ruangan:\n");
+        int countPasien = 0;
+        address current = r.Antrian.first;
+        while (current != NULL && countPasien < r.kapasitas) {
+            printf("  %d. %s\n", ++countPasien, current->pasien->username);
+            current = current->next;
+        }
+        if (countPasien == 0) {
+            printf("  Tidak ada pasien di dalam ruangan saat ini.\n");
+        }
+        // Print patients in queue (sisanya dari queue)
+        printf("Pasien di antrian:\n");
+        int counter = 1;
+        while (current != NULL) {
+            printf("  %d. %s\n", counter++, current->pasien->username);
+            current = current->next;
+        }
+        if (counter == 1) {
+            printf("  Tidak ada pasien di antrian saat ini.\n");
+        }
+        printf("\n");
+    }
+}

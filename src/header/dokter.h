@@ -11,10 +11,8 @@ typedef struct Dokter {
     int id;
     char username[USERNAME_LEN];
     int ruangan;
-    // Pasien *pasienDiRuangan[MAX_PASIEN_RUANGAN];
-    // AntrianDokter antrian; // Uncommented this since it's used in dokter.c
 } Dokter;
 
-Pasien *assignPasienKeDokter(User *user, Dokter* dokter, Pasien* pasien, ListRuangan *ruangan);
+Pasien *assign_pasien_ke_dokter (User *user, Dokter* dokter, Pasien* pasien, ListRuangan *ruangan);
 
 #endif

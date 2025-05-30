@@ -3,24 +3,24 @@
 void help_system() {
     printf("\n=========== HELP ===========\n\n");
     
-    if (current_user == NULL) {
+    if (currUser == NULL) {
         printf("Kamu belum login sebagai role apapun. Silahkan login terlebih dahulu.\n\n");
         printf("LOGIN: Masuk ke dalam akun yang sudah terdaftar\n");
         printf("REGISTER: Membuat akun baru\n");
     } else {
-        printf("Halo %s %s. ", role_to_string(current_user->role), current_user->username);
+        printf("Halo %s %s. ", role_to_string(currUser->role), currUser->username);
         
-        if (current_user->role == ROLE_DOKTER) {
+        if (currUser->role == ROLE_DOKTER) {
             printf("Kamu memanggil command HELP. Kamu pasti sedang kebingungan.\n");
             printf("Berikut adalah hal-hal yang dapat kamu lakukan sekarang:\n\n");
             printf("LOGOUT: Keluar dari akun yang sedang digunakan\n");
             printf("DIAGNOSIS: Melakukan diagnosis penyakit pasien berdasarkan kondisi tubuh pasien\n");
-        } else if (current_user->role == ROLE_PASIEN) {
+        } else if (currUser->role == ROLE_PASIEN) {
             printf("Kamu memanggil command HELP. Kamu pasti sedang kebingungan.\n");
             printf("Berikut adalah hal-hal yang dapat kamu lakukan sekarang:\n\n");
             printf("LOGOUT: Keluar dari akun yang sedang digunakan\n");
             printf("DAFTAR_CHECKUP: Mendaftarkan diri untuk pemeriksaan dokter\n");
-        } else if (current_user->role == ROLE_MANAGER) {
+        } else if (currUser->role == ROLE_MANAGER) {
             printf("Kenapa kamu memanggil command HELP? Kan kamu manager, ");
             printf("tapi yasudahlah kamu pasti sedang kebingungan.\n");
             printf("Berikut adalah hal-hal yang dapat kamu lakukan sekarang:\n\n");

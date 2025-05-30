@@ -92,7 +92,7 @@ void daftar_check_up(User *currUser, User *users, int banyakUser, ListRuangan *r
     //cek apakah pasien sudah berada di ruangan/antrian (berdasarkan queue, bukan array manual)
     for (int i = 0; i < ruangan->jumlah; i++) {
         Ruangan *r = &ruangan->ruang[i];
-        address curr = r->Antrian.First;
+        address curr = r->Antrian.first;
         while (curr != NULL) {
             if (curr->pasien->dataPasien == pasien) {
                 printf("Anda sudah berada di ruangan %d (atau antrian ruangan %d)\n", r->nomor, r->nomor);
@@ -115,7 +115,7 @@ void daftar_check_up(User *currUser, User *users, int banyakUser, ListRuangan *r
     do {
         printf("Suhu tubuh (Celcius): ");
         scanf("%f", &pasien->suhu);
-    } while (!validasiFloat(pasien->suhu, "Suhu"));
+    } while (!validasi_float(pasien->suhu, "Suhu"));
     do {
         printf("Tekanan darah (sistol/diastol, contoh: 120 80): ");
         scanf("%d %d", &pasien->tekananDarah[0], &pasien->tekananDarah[1]);
@@ -123,34 +123,34 @@ void daftar_check_up(User *currUser, User *users, int banyakUser, ListRuangan *r
     do {
         printf("Detak jantung (bpm): ");
         scanf("%d", &pasien->detakJantung);
-    } while (!validasiInt(pasien->detakJantung, "Detak jantung"));
+    } while (!validasi_integer(pasien->detakJantung, "Detak jantung"));
     do {
         printf("Saturasi oksigen (persentase): ");
         scanf("%f", &pasien->saturasiOksigen);
-    } while (!validasiFloat(pasien->saturasiOksigen, "Saturasi oksigen"));
+    } while (!validasi_float(pasien->saturasiOksigen, "Saturasi oksigen"));
     do {
         printf("Kadar gula darah (mg/dL): ");
         scanf("%d", &pasien->kadarGulaDarah);
-    } while (!validasiInt(pasien->kadarGulaDarah, "Kadar gula darah"));
+    } while (!validasi_integer(pasien->kadarGulaDarah, "Kadar gula darah"));
     do {
         printf("Berat badan (kg): ");
         scanf("%f", &pasien->beratBadan);
-    } while (!validasiFloat(pasien->beratBadan, "Berat badan"));
+    } while (!validasi_float(pasien->beratBadan, "Berat badan"));
     do {
         printf("Tinggi badan (cm): ");
         scanf("%d", &pasien->tinggiBadan);
-    } while (!validasiInt(pasien->tinggiBadan, "Tinggi badan"));
+    } while (!validasi_integer(pasien->tinggiBadan, "Tinggi badan"));
     do {
         printf("Kadar kolestrol (mg/dL): ");
         scanf("%d", &pasien->kadarKolesterol);
-    } while (!validasiInt(pasien->kadarKolesterol, "Kadar kolestrol"));
+    } while (!validasi_integer(pasien->kadarKolesterol, "Kadar kolestrol"));
     do {
         printf("Trombosit (ribu/µL): ");
         scanf("%d", &pasien->trombosit);
-    } while (!validasiInt(pasien->trombosit, "Trombosit"));
+    } while (!validasi_integer(pasien->trombosit, "Trombosit"));
     
     
-    displayDokter(users, banyakUser, ruangan);
+    display_dokter(users, banyakUser, ruangan);
 
     int pilihan;
     for (;;) {
@@ -184,7 +184,7 @@ void daftar_check_up(User *currUser, User *users, int banyakUser, ListRuangan *r
     }
 
     // Assign pasien ke dokter
-    Pasien *result = assignPasienKeDokter(currUser, dokterPilihan, pasien, ruangan);
+    Pasien *result = assign_pasien_ke_dokter(currUser, dokterPilihan, pasien, ruangan);
     if (result != NULL) {
         // Jika pasien dimasukkan ke ruangan
         if (dokterPilihan->ruangan == '\0') {
