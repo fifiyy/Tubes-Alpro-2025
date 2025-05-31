@@ -35,9 +35,8 @@ void lupa_password_system(ListUser *users) {
     
     User* user = NULL;
     for (int i = list_get_first_idx(*users); i <= list_get_last_idx(*users); i++) {
-        User user = list_get_elmt(*users, i);
-        if (strcmp(user.username, username) == 0) {
-            user = users->data[i];
+        if (strcmp(users->data[i].username, username) == 0) {
+            user = &users->data[i];
             break;
         }
     }
