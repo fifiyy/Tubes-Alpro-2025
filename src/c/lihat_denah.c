@@ -2,6 +2,11 @@
 #include "../header/Lihat_Denah.h"
 
 void lihat_denah (ListRuangan ruangan) {
+    if (currUser == NULL) {
+        printf("Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
+        return;
+    }
+    
     printf("\n");
     printf("+-----+-----+-----+-----+-----+-----+-----+-----+\n");
     for (int i = 0; i < ruangan.jumlah; i++) {
@@ -54,10 +59,61 @@ void lihat_ruangan(ListRuangan *ruangan, int num, ListUser *users) {
     printf("------------------------------\n");
 }
 
+void lihat_ruangan_saya(ListRuangan *ruangan, ListUser *users) {
+    if (currUser == NULL) {
+        printf("Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
+        return;
+    }
+
+    if (currUser->role != ROLE_DOKTER && currUser->role != ROLE_PASIEN) {
+        printf("Hanya dokter atau pasien yang bisa melihat ruangan!\n");
+        return;
+    }
+
+    Dokter *dokter = currUser->dataDokter;
+    if (dokter == NULL || dokter->nomorRuangan <= 0 || dokter->nomorRuangan > ruangan->jumlah) {
+        printf("Anda belum memiliki ruangan!\n");
+        return;
+    }
+
+    lihat_ruangan(ruangan, dokter->nomorRuangan, users);
+}
+
+void lihat_daftar_pasien(ListRuangan *ruangan, ListUser *users) {
+    if (currUser == NULL) {
+        printf("Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
+        return;
+    }
+
+    if (currUser->role != ROLE_DOKTER) {
+        printf("Hanya dokter yang bisa melihat daftar pasien!\n");
+        return;
+    }
+
+    Dokter *dokter = currUser->dataDokter;
+    if (dokter == NULL || dokter->nomorRuangan <= 0 || dokter->nomorRuangan > ruangan->jumlah) {
+        printf("Anda belum memiliki ruangan!\n");
+        return;
+    }
+
+    Ruangan *r = &ruangan->ruang[dokter->nomorRuangan - 1];
+    address current = r->Antrian.first;
+
+    printf("\nDaftar Pasien di Ruangan %d:\n", r->nomor);
+    int count = 0;
+    while (current != NULL) {
+        printf("%d. %s\n", ++count, current->pasien->username);
+        current = current->next;
+    }
+    
+    if (count == 0) {
+        printf("Tidak ada pasien di ruangan ini.\n");
+    }
+}
 
 void lihat_semua_antrian(ListRuangan *ruangan, int num, ListUser *users) {
     if (currUser == NULL) {
-        printf("Anda belum login.\n");
+        printf("Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
         return;
     }
 
