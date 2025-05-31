@@ -51,14 +51,19 @@ void cek_antrian_saya (User *user, User *users, ListRuangan *ruangan, int banyak
     }
 
     // Jika posisi >= MAX_PASIEN_RUANGAN, tampilkan status antrian
-    // Cari dokter dari pasien
-    Dokter *dokterPasien = NULL;
-    for (int i = 0; i < banyakUser; i++) {
-        if (users[i].role == ROLE_DOKTER && users[i].dataDokter != NULL && users[i].dataDokter->id == pasien->idDokter) {
-            dokterPasien = users[i].dataDokter;
-            break;
-        }
+    // Cari dokter dari id ruangan
+    if (idxRuang < 0 || idxRuang >= ruangan->jumlah) {
+        printf("\nERROR: Ruangan tidak ditemukan!\n");
+        return;
     }
+    if (ruangan->ruang[idxRuang].Antrian.first == NULL) {
+        printf("\nERROR: Antrian ruangan %d kosong!\n", ruangan->ruang[idxRuang].nomor);
+        return;
+    }
+    // Cari dokter yang menangani pasien ini
+    Ruangan *ruanganDokter = &ruangan->ruang[idxRuang];
+    Dokter *dokterPasien = ruanganDokter->dokter;
+
     if (dokterPasien == NULL) {
         printf("\nERROR: Dokter pasien %s tidak ditemukan!\n", user->username);
         return;
@@ -66,6 +71,6 @@ void cek_antrian_saya (User *user, User *users, ListRuangan *ruangan, int banyak
     int totalAntrian = queue_size(&ruangan->ruang[idxRuang].Antrian);
     printf("[%s] Status antrian Anda:\n", user->username);
     printf("Dokter: dr. %s\n", dokterPasien->username);
-    printf("Ruangan: %d\n", dokterPasien->ruangan);
+    printf("Ruangan: %d\n", dokterPasien->nomorRuangan);
     printf("Posisi antrian: %d dari %d\n", posisi - MAX_PASIEN_RUANGAN + 1, totalAntrian - MAX_PASIEN_RUANGAN);
 }
