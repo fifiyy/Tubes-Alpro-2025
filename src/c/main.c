@@ -14,6 +14,7 @@
 #include "../header/Diagnosis.h"
 #include "../header/ngobatin.h"
 #include "../header/Antrian_Saya.h"
+#include "../header/Minum_Obat.h"
 
 ListUser users; // Deklarasi variabel global untuk menyimpan daftar pengguna
 ListRuangan ruangan;
@@ -130,6 +131,12 @@ int main(int argc, char *argv[]) {
                 printf("Hanya pasien yang bisa melihat antrian!\n");
             } else {
                 cek_antrian_saya(current_user, users.data, &ruangan, users.length);
+            }
+        } else if (strcmp(command, "MINUM_OBAT") == 0) {
+            if (current_user->role != ROLE_PASIEN) {
+                printf("Hanya pasien yang bisa minum obat!\n");
+            } else {
+                minum_obat(current_user);
             }
         } else {
             printf("Command tidak dikenali. Ketik HELP untuk bantuan.\n");

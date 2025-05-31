@@ -48,6 +48,7 @@ void cek_antrian_saya (User *user, User *users, ListRuangan *ruangan, int banyak
         return;
     }
 
+    //tes
     // Jika posisi >= MAX_PASIEN_RUANGAN, tampilkan status antrian
     // Cari dokter dari pasien
     Dokter *dokterPasien = NULL;
