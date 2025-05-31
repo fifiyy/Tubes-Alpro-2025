@@ -79,5 +79,14 @@ void ngobatin (User *currUser, User *users, int banyakUser, ListRuangan *ruangan
     for (int i = 0; i < entry->jumlahObat; i++) {
         printf("        %d. %s\n", i+1, entry->obat[i].nama);
     }
+
+    // Simpan daftar obat ke pasien
+    pasien->jumlahObat = entry->jumlahObat;
+    pasien->jumlahObatResep = entry->jumlahObat;
+    
+    for (int i = 0; i < entry->jumlahObat; i++) {
+        pasien->daftarObat[i] = entry->obat[i];
+        pasien->daftarObatResep[i] = entry->obat[i];
+    }
     pasien->status = butuhMinumObat;
 }
