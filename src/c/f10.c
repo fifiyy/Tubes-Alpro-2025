@@ -29,7 +29,7 @@ void tambah_dokter (ListUser *users, Set *usernames){
     }
     
     if (!is_username_unique(usernames, username)) {
-        printf("Sudah ada dokter bernama %s!\n", username);
+        printf("Sudah ada user bernama %s!\n", username);
         return;
     }
     
@@ -55,9 +55,10 @@ void tambah_dokter (ListUser *users, Set *usernames){
         printf("Gagal mengalokasikan memori untuk dokter baru.\n");
         return;
     }
+
     newUser.dataDokter->id = list_nb_elmt(*users) + 1; // ID unik berdasarkan jumlah user
     strcpy(newUser.dataDokter->username, username);
-    newUser.dataDokter->ruangan = '\0'; // belum ditugaskan
+    newUser.dataDokter->nomorRuangan = '\0'; // belum ditugaskan
 
     list_set_el(users, list_nb_elmt(*users), newUser);
     list_set_length(users, list_nb_elmt(*users) + 1);
@@ -130,27 +131,54 @@ void assign_dokter (ListUser *users, ListRuangan *ruangan){
         return;
     }
 
-     // Cek apakah dokter sudah bertugas di ruangan lain
-    for (int i = 0; i < ruangan->jumlah; i++) {
-        if (ruangan->ruang[i].dokter != NULL && 
-            ruangan->ruang[i].dokter->id == newDokter->dataDokter->id) {
-            printf("Dokter %s sudah menempati ruangan %d!\n", 
-                  username, ruangan->ruang[i].nomor);
-            printf("Silakan cari ruangan lain untuk dokter %s.\n", username);
-            return;
+    // Cek kondisi assign dokter ke ruangan
+    int dokterSudahPunyaRuangan = (newDokter->dataDokter->nomorRuangan > 0);
+    int ruanganSudahAdaDokter = (ruangan->ruang[idxRuang].dokter != NULL);
+
+    if (!dokterSudahPunyaRuangan && !ruanganSudahAdaDokter) {
+        // 1. Dokter belum punya ruangan, ruangan kosong
+        ruangan->ruang[idxRuang].dokter = newDokter->dataDokter;
+        newDokter->dataDokter->nomorRuangan = nomorRuangan;
+        printf("Dokter %s berhasil diassign ke ruangan %d!\n", username, nomorRuangan);
+    } else if (dokterSudahPunyaRuangan && !ruanganSudahAdaDokter) {
+        // 2. Dokter sudah punya ruangan, ruangan kosong (pindah beserta antrian)
+        int ruanganLama = newDokter->dataDokter->nomorRuangan;
+        // Pindahkan antrian pasien dari ruangan lama ke ruangan baru
+        AntrianDokter *antrianLama = &ruangan->ruang[ruanganLama - 1].Antrian;
+        AntrianDokter *antrianBaru = &ruangan->ruang[idxRuang].Antrian;
+        // Pindahkan semua node antrian
+        if (!queue_is_empty(antrianLama)) {
+            if (queue_is_empty(antrianBaru)) {
+                antrianBaru->first = antrianLama->first;
+                antrianBaru->last = antrianLama->last;
+                antrianBaru->jumlah = antrianLama->jumlah;
+            } else {
+                antrianBaru->last->next = antrianLama->first;
+                antrianBaru->last = antrianLama->last;
+                antrianBaru->jumlah += antrianLama->jumlah;
+            }
+            // Update idRuangan setiap pasien di antrian
+            address curr = antrianBaru->first;
+            while (curr != NULL) {
+                if (curr->pasien->dataPasien != NULL) {
+                    curr->pasien->dataPasien->idRuangan = nomorRuangan;
+                }
+                curr = curr->next;
+            }
+            // Kosongkan antrian lama
+            antrianLama->first = antrianLama->last = NULL;
+            antrianLama->jumlah = 0;
         }
+        ruangan->ruang[idxRuang].dokter = newDokter->dataDokter;
+        newDokter->dataDokter->nomorRuangan = nomorRuangan;
+        ruangan->ruang[ruanganLama-1].dokter = NULL;
+        printf("Dokter %s dipindahkan dari ruangan %d ke ruangan %d!\n", username, ruanganLama, nomorRuangan);
+    } else if (!dokterSudahPunyaRuangan && ruanganSudahAdaDokter) {
+        // 3. Ruangan sudah ada dokternya, dokter belum punya ruangan
+        printf("Silakan cari ruangan lain untuk dokter %s. Ruangan %d sudah ditempati dokter %s!\n", username, nomorRuangan, ruangan->ruang[idxRuang].dokter->username);
+    } else if (dokterSudahPunyaRuangan && ruanganSudahAdaDokter) {
+        // 4. Ruangan sudah ada dokternya, dokter sudah punya ruangan
+        printf("Dokter %s sudah menempati ruangan %d! Ruangan %d juga sudah ditempati dokter %s!\n", username, newDokter->dataDokter->nomorRuangan, nomorRuangan, ruangan->ruang[idxRuang].dokter->username);
     }
-
-    // Cek apakah ruangan sudah ada dokternya
-    if (ruangan->ruang[idxRuang].dokter != NULL) {
-        printf("Ruangan %d sudah ditempati oleh dokter %s!\n", 
-              nomorRuangan, ruangan->ruang[idxRuang].dokter->username);
-        return;
-    }
-
-    // Assign dokter ke ruangan
-    ruangan->ruang[idxRuang].dokter = newDokter->dataDokter;
-    newDokter->dataDokter->ruangan = nomorRuangan; // Set ruangan dokter
-
-    printf("Dokter %s berhasil diassign ke ruangan %d!\n", username, nomorRuangan);
+    return;
 }

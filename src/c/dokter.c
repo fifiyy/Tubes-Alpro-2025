@@ -10,7 +10,7 @@ Pasien* assign_pasien_ke_dokter(User *user, Dokter* dokter, Pasien* pasien, List
         return NULL;
     }
 
-    int idx_ruang = dokter->ruangan - 1; // ruangan biasanya 1-based
+    int idx_ruang = dokter->nomorRuangan - 1; // ruangan biasanya 1-based
     if (idx_ruang < 0 || idx_ruang >= ruangan->jumlah) {
         printf("Error: Dokter belum punya ruangan yang valid\n");
         return NULL;
@@ -37,7 +37,7 @@ Pasien* assign_pasien_ke_dokter(User *user, Dokter* dokter, Pasien* pasien, List
         } else {
             pasien->posisiAntrian = jumlah_baru - ruangan->ruang[idx_ruang].kapasitas;
         }
-        pasien->idDokter = dokter->id;
+        pasien->idRuangan = dokter->nomorRuangan; // set id ruangan pasien
         printf("Pasien berhasil didaftarkan ke antrian/ruangan\n");
         return pasien;
     }

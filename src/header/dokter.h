@@ -10,7 +10,7 @@
 typedef struct Dokter {
     int id;
     char username[USERNAME_LEN];
-    int ruangan;
+    int nomorRuangan;
 } Dokter;
 
 Pasien *assign_pasien_ke_dokter (User *user, Dokter* dokter, Pasien* pasien, ListRuangan *ruangan);

@@ -36,7 +36,7 @@ typedef struct {
 
 // Variabel global yang digunakan di seluruh program
 extern int user_count;         // Jumlah user yang terdaftar
-extern User* currUser;     // Pointer ke user yang sedang login
+extern User *currUser;     // Pointer ke user yang sedang login
 
 // Deklarasi fungsi utility
 // Di user.h

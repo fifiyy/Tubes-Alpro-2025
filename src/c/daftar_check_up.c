@@ -40,7 +40,7 @@ void display_dokter (User *users, int banyakUser, ListRuangan *ruangan) {
         Dokter *dokter = users[i].dataDokter;
         banyakDokter++;
         
-        if (dokter->ruangan == '\0') {
+        if (dokter->nomorRuangan == '\0') {
             printf("%d. dr. %s (Belum memiliki ruangan)\n", banyakDokter, users[i].username);
             continue;
         }
@@ -55,11 +55,11 @@ void display_dokter (User *users, int banyakUser, ListRuangan *ruangan) {
             }
         }
         
-        printf("%d. dr. %s (Ruangan %d) - Antrian: %d\n", 
+        printf("%d. dr. %s (Ruangan %d) - Total Ruangan + Antrian: %d\n", 
                banyakDokter,
                users[i].username,
-               dokter->ruangan,
-               ruanganDokter ? ruanganDokter->Antrian.jumlah : 0);
+               dokter->nomorRuangan,
+               ruanganDokter->Antrian.jumlah);
     }
 }
 
@@ -186,10 +186,10 @@ void daftar_check_up(User *currUser, User *users, int banyakUser, ListRuangan *r
     Pasien *result = assign_pasien_ke_dokter(currUser, dokterPilihan, pasien, ruangan);
     if (result != NULL) {
         // Jika pasien dimasukkan ke ruangan
-        if (dokterPilihan->ruangan == '\0') {
+        if (dokterPilihan->nomorRuangan == '\0') {
             printf("Dokter %s belum memiliki ruangan, mendaftarkan ke antrian.\n", userDokter->username);
         } else {
-            printf("Pasien berhasil didaftarkan ke ruangan %d.\n", dokterPilihan->ruangan);
+            printf("Pasien berhasil didaftarkan ke ruangan %d.\n", dokterPilihan->nomorRuangan);
         }
 
         // jika pasien didaftarkan ke antrian
@@ -202,7 +202,7 @@ void daftar_check_up(User *currUser, User *users, int banyakUser, ListRuangan *r
         printf("\nPendaftaran berhasil!\n");
         printf("Anda terdaftar pada antrian dr. %s di ruangan %d!\n", 
                userDokter->username, 
-               dokterPilihan->ruangan);
+               dokterPilihan->nomorRuangan);
         printf("Posisi antrian Anda: %d\n", result->posisiAntrian);
     } else {
         printf("Gagal mendaftar!\n");

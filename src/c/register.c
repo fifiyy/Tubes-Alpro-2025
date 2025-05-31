@@ -57,14 +57,14 @@ void register_pasien(ListUser *users, Set *usernames) {
     }
     newUser.dataPasien->id = list_nb_elmt(*users) + 1; // ID unik berdasarkan jumlah user
     newUser.dataPasien->jumlahObat = 0; // Inisialisasi jumlah obat
-    newUser.dataPasien->idDokter = -1; // Belum ada dokter yang ditugaskan
+    newUser.dataPasien->idRuangan = -1; // Pasien belum dalam ruangan
     newUser.dataPasien->posisiAntrian = -1; // Pasien belum dalam antrian
-    newUser.dataPasien->keluhan[0] = '\0'; // Inisialisasi keluhan kosong
     newUser.dataPasien->status = butuhDiagnosa; // Status awal pasien
     
     list_set_el(users, list_nb_elmt(*users), newUser);
     list_set_length(users, list_nb_elmt(*users) + 1);
     set_insert(usernames, username); // Tambahkan username ke dalam Set
+    create_stack(&newUser.dataPasien->perutPasien); // Inisialisasi stack perut pasien
     
     printf("Pasien %s berhasil ditambahkan!\n", username);
 }

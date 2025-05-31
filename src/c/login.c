@@ -31,14 +31,6 @@ void login_system(ListUser *users) {
         if (strcmp(user.username, username) == 0) {
             if (strcmp(user.password, password) == 0) {
                 currUser = &users->data[i];
-                printf("Selamat pagi %s %s!", 
-                       role_to_string(currUser->role), 
-                       currUser->username);
-                if (currUser->role == ROLE_PASIEN) {
-                    printf(" Ada keluhan apa ?\n");
-                } else {
-                    printf("\n");
-                }
                 return;
             } else {
                 printf("Password salah untuk pengguna yang bernama %s!\n", username);
