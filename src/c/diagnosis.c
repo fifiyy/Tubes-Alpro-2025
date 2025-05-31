@@ -35,12 +35,21 @@ void diagnosis_pasien (User *userDokter) {
         printf("Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
         return;
     }
+
     if (userDokter->role != ROLE_DOKTER) {
         printf("Hanya dokter yang bisa diagnosis!\n");
         return;
     }
+
     Dokter *dokter = userDokter->dataDokter;
-    int idxRuang = dokter->ruangan - 1;
+    int idxRuang = dokter->nomorRuangan - 1;
+    for (int i = 0; i < ruangan.jumlah; i++) {
+        if (ruangan.ruang[i].dokter != NULL && ruangan.ruang[i].dokter->id == dokter->id) {
+            idxRuang = i;
+            break;
+        }
+    }
+
     if (idxRuang < 0 || idxRuang >= ruangan.jumlah) {
         printf("[dr. %s] Anda belum memiliki ruangan.\n", userDokter->username);
         return;
@@ -51,10 +60,16 @@ void diagnosis_pasien (User *userDokter) {
         printf("[dr. %s] Kamu lagi nggak ada pasien. Asik, free time!\n", userDokter->username);
         return;
     }
+
     User *userPasien = current->pasien;
     Pasien *pasien = userPasien->dataPasien;
     if (pasien->status == butuhDiberiObat) {
         printf("[dr. %s] Pasien %s udah didiagnosa, tinggal dikasih obat aja.\n", userDokter->username, userPasien->username);
+        return;
+    }
+
+    if (pasien->status != butuhDiagnosa) {
+        printf("[dr. %s] Pasien %s tidak perlu didiagnosis lagi.\n", userDokter->username, userPasien->username);
         return;
     }
     char *penyakit = identifikasi_penyakit(pasien);
