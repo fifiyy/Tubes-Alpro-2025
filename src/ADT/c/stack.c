@@ -4,6 +4,7 @@
 /*** Konstruktor/Kreator ***/
 void create_stack(Stack *s) {
     IDX_TOP(*s) = IDX_UNDEF;
+    s->maxSize = CAPACITY;
 }
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah Stack s yang kosong berkapasitas CAPACITY */
@@ -17,7 +18,7 @@ boolean stack_is_empty(Stack s) {
 /* Mengirim true jika Stack kosong: lihat definisi di atas */
 
 boolean stack_is_full(Stack s) {
-    return IDX_TOP(s) == CAPACITY - 1;
+    return IDX_TOP(s) == s.maxSize - 1;
 }
 /* Mengirim true jika Stack penuh */
 

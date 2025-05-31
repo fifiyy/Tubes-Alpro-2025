@@ -39,25 +39,17 @@ boolean queue_is_full(AntrianDokter *q) {
 }   
 
 void queue_enqueue(AntrianDokter *q, User *value) {
-    // Buat salinan User di heap
-    User *newUser = malloc(sizeof(User));
-    if (newUser != NULL) {
-        *newUser = *value; // Salin isi user ke memori baru
-        address P = linkedlist_alokasi(newUser);
-        if (P != Nil) {
-            if (queue_is_empty(q)) {
-                q->first = P;
-            } else {
-                q->last->next = P;
-            }
-            q->last = P;
-            q->jumlah++;
+    address P = linkedlist_alokasi(value); // LANGSUNG pakai value, JANGAN malloc User baru!
+    if (P != Nil) {
+        if (queue_is_empty(q)) {
+            q->first = P;
         } else {
-            printf("Gagal alokasi node baru!\n");
-            free(newUser);
+            q->last->next = P;
         }
+        q->last = P;
+        q->jumlah++;
     } else {
-        printf("Gagal alokasi User baru!\n");
+        printf("Gagal alokasi node baru!\n");
     }
 }
 

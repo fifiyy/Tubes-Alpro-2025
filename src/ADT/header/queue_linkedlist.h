@@ -28,7 +28,7 @@ typedef struct {
 
 /* Struktur Queue berbasis Linked List */
 typedef struct {
-    int idDokter; // ID dokter
+    int idRuangan; // ID dokter
     AntrianDokter antrian; // Antrian pasien untuk dokter tersebut
 } MapDokterAntrian;
 

@@ -3,12 +3,10 @@
 #define RUANGAN_H
 #include "../header/List_User.h"
 #include "Queue_Linkedlist.h"
-// #include "../../header/dokter.h"
 
 #define MAX_PASIEN_RUANGAN 3
 #define MAX_RUANGAN 100
 
-// Forward declaration instead of including dokter.h
 struct Dokter;
 
 typedef struct {

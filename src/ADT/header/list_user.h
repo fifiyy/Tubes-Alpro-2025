@@ -8,21 +8,19 @@
 #include "../header/User.h"
 
 #define MAX_CAPACITY 100
-#define IDX_UNDEF -999 /* Tidak terdefinisi */
+#define IDX_UNDEF -1 /* Tidak terdefinisi */
 
 typedef int IdxType;
 
 typedef struct {
-    User data[MAX_CAPACITY];  // Gunakan forward declaration
+    User data[MAX_CAPACITY];
     IdxType length;
 } ListUser;
 
 typedef struct {
-    User data[MAX_CAPACITY];  // Gunakan forward declaration
+    User data[MAX_CAPACITY];
     IdxType length;
 } ListDokter;
-
-// Deklarasi extern untuk ListUser, ListObat, dan ListPenyakit
 
 /* Indeks yang digunakan [0..MAX_CAPACITY-1]
  * Jika L adalah ListUser, cara deklarasi dan akses:
