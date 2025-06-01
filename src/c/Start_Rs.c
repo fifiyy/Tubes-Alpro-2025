@@ -17,6 +17,8 @@
 #include "../header/Minum_Obat.h"
 #include "../header/Minum_Penawar.h"
 #include "Pulangdok.h"
+#include "Lihat_User.h"
+#include "Cari_User.h"
 
 ListUser users;
 ListRuangan ruangan;
@@ -72,6 +74,19 @@ void run_rs() {
                 tambah_dokter(&users, &usernames);
         } else if (strcmp(command, "ASSIGN_DOKTER") == 0) {
                 assign_dokter(&users, &ruangan);
+        } else if (strcmp(command, "LIHAT_USER") == 0) {
+            lihat_user(users);
+        } else if (strcmp(command, "LIHAT_PASIEN") == 0) {
+            lihat_pasien(users);
+        } else if (strcmp(command, "LIHAT_DOKTER") == 0) {
+            lihat_dokter(users);
+        } else if (strcmp(command, "CARI_USER") == 0) {
+            cari_user(users);
+        } else if (strcmp(command, "CARI_PASIEN") == 0) {
+            cari_pasien(users);
+        } else if (strcmp(command, "CARI_DOKTER") == 0) {
+            cari_dokter(users);
+
         } else if (strcmp(command, "EXIT") == 0) {
             exit_system(&users);
         } else if (strcmp(command, "LIHAT_DENAH") == 0) {
