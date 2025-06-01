@@ -54,6 +54,7 @@ void diagnosis_pasien (User *userDokter) {
         printf("[dr. %s] Anda belum memiliki ruangan.\n", userDokter->username);
         return;
     }
+
     Ruangan *r = &ruangan.ruang[idxRuang];
     address current = r->Antrian.first;
     if (current == NULL) {
@@ -63,6 +64,7 @@ void diagnosis_pasien (User *userDokter) {
 
     User *userPasien = current->pasien;
     Pasien *pasien = userPasien->dataPasien;
+
     if (pasien->status == butuhDiberiObat) {
         printf("[dr. %s] Pasien %s udah didiagnosa, tinggal dikasih obat aja.\n", userDokter->username, userPasien->username);
         return;
@@ -72,6 +74,7 @@ void diagnosis_pasien (User *userDokter) {
         printf("[dr. %s] Pasien %s tidak perlu didiagnosis lagi.\n", userDokter->username, userPasien->username);
         return;
     }
+    
     char *penyakit = identifikasi_penyakit(pasien);
     if (penyakit != NULL) {
         pasien->status = butuhDiberiObat;

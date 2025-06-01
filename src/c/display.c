@@ -32,8 +32,7 @@ void display_menu_manajer() {
 
 void display_status_user(const char* username, UserRole *role) {
     printf("\n");
-    switch (*role)
-    {
+    switch (*role) {
     case ROLE_MANAGER:
         printf("-> Active Manager: %s\n", username);
         break;
@@ -43,10 +42,9 @@ void display_status_user(const char* username, UserRole *role) {
     case ROLE_PASIEN:
         printf("-> Active Pasien: %s\n", username);
         int status = currUser->dataPasien->status;
-        switch (status)
-        {
+        switch (status) {
         case butuhDiagnosa:
-            printf("   Status: Butuh Diagnosa\n");
+            printf("   Status: Butuh Didiagnosa\n");
             break;
         case butuhDiberiObat:
             printf("   Status: Butuh Diberi Obat\n");
