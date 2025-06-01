@@ -32,12 +32,12 @@ static char *identifikasi_penyakit (Pasien *pasien) {
 
 void diagnosis_pasien (User *userDokter) {
     if (userDokter == NULL) {
-        printf("Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
+        printf("ERROR: Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
         return;
     }
 
     if (userDokter->role != ROLE_DOKTER) {
-        printf("Hanya dokter yang bisa diagnosis!\n");
+        printf("ERROR: Hanya dokter yang bisa diagnosis!\n");
         return;
     }
 
@@ -51,7 +51,7 @@ void diagnosis_pasien (User *userDokter) {
     }
 
     if (idxRuang < 0 || idxRuang >= ruangan.jumlah) {
-        printf("[dr. %s] Anda belum memiliki ruangan.\n", userDokter->username);
+        printf("[dr. %s] Kamu belum memiliki ruangan.\n", userDokter->username);
         return;
     }
 
@@ -76,11 +76,14 @@ void diagnosis_pasien (User *userDokter) {
     }
     
     char *penyakit = identifikasi_penyakit(pasien);
+    printf("\n+-----------------------------------------------+\n");
+    printf("|                     DIAGNOSA                  |\n");
+    printf("+-----------------------------------------------+\n");
     if (penyakit != NULL) {
         pasien->status = butuhDiberiObat;
         printf("[dr. %s] Pasien %s terdiagnosa mengidap penyakit: %s\n", userDokter->username, userPasien->username, penyakit);
-        printf("Jangan lupa untuk diobatin ya, dr. %s!\n", userDokter->username);
-        printf("Untuk mengobati pasien %s, ketik NGOBATIN!\n", userPasien->username);
+        printf("[dr. %s] Jangan lupa untuk diobatin ya!\n", userDokter->username);
+        printf("HELP: Untuk mengobati pasien %s, ketik NGOBATIN!\n", userPasien->username);
     } else {
         pasien->status = butuhPulang;
         printf("[dr. %s] Pasien %s sehat banget! Dijamin kuat salto keliling kota!\n", userDokter->username, userPasien->username);

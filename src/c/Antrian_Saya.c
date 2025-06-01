@@ -4,12 +4,12 @@
 
 void cek_antrian_saya (User *user, User *users, ListRuangan *ruangan, int banyakUser) {
     if (currUser == NULL) {
-        printf("ERROR: Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
+        printf("\nERROR: Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
         return;
     }
     
     if (user->role != ROLE_PASIEN) {
-        printf("ERROR: Hanya pasien yang bisa melihat antrian!\n");
+        printf("\nERROR: Hanya pasien yang bisa melihat antrian!\n");
         return;
     }
 
@@ -38,15 +38,15 @@ void cek_antrian_saya (User *user, User *users, ListRuangan *ruangan, int banyak
 
     if (!found) {
         if (pasien->posisiAntrian < 0) {
-            printf("[%s] Kamu nih belum terdaftar dalam antrian check-up (berkata dengan nada lemah lembut gemulai).\nDaftar dulu coba :D\n", user->username);
-            printf("HELP: Silakan daftar terlebih dahulu dengan command DAFTAR_CHECKUP.\n");
+            printf("[@%s] Kamu nih belum terdaftar dalam antrian check-up (berkata dengan nada lemah lembut gemulai). Daftar dulu coba :D\n", user->username);
+            printf("\nHELP: Silakan daftar terlebih dahulu dengan command DAFTAR_CHECKUP.\n");
         }
         return;
     }
 
     // Jika posisi < MAX_PASIEN_RUANGAN, berarti sudah di ruangan
     if (posisi < MAX_PASIEN_RUANGAN) {
-        printf("[%s] Kamu lagi di ruangan dokter, loh. Dokternya ga lagi tidur kan?\n", user->username);
+        printf("[@%s] Kamu lagi di ruangan dokter, loh. Dokternya ga lagi tidur kan?\n", user->username);
         return;
     }
 
@@ -69,8 +69,13 @@ void cek_antrian_saya (User *user, User *users, ListRuangan *ruangan, int banyak
         return;
     }
     int totalAntrian = queue_size(&ruangan->ruang[idxRuang].Antrian);
-    printf("[%s] Status antrian Anda:\n", user->username);
-    printf("Dokter: dr. %s\n", dokterPasien->username);
-    printf("Ruangan: %d\n", dokterPasien->nomorRuangan);
-    printf("Posisi antrian: %d dari %d\n", posisi - MAX_PASIEN_RUANGAN + 1, totalAntrian - MAX_PASIEN_RUANGAN);
+
+    printf("\n+-----------------------------------------------+\n");
+    printf("|                  LIHAT ANTRIAN                |\n");
+    printf("+-----------------------------------------------+\n");
+
+    printf("[@%s] Status antrian Anda:\n", user->username);
+    printf("    Dokter: dr. %s\n", dokterPasien->username);
+    printf("    Ruangan: %d\n", dokterPasien->nomorRuangan);
+    printf("    Posisi antrian: %d dari %d\n", posisi - MAX_PASIEN_RUANGAN + 1, totalAntrian - MAX_PASIEN_RUANGAN);
 }

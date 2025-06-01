@@ -16,19 +16,19 @@ PenyakitObatEntry* cari_obat(const char *namaPenyakit) {
 
 void ngobatin (User *currUser, User *users, int banyakUser, ListRuangan *ruangan) {
     if (currUser == NULL) {
-        printf("Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
+        printf("\nERROR: Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
         return;
     }
 
     if (currUser->role != ROLE_DOKTER) {
-        printf("Hanya dokter yang punya kemampuan mengobati pasien!\n");
+        printf("\nERROR: Hanya dokter yang punya kemampuan mengobati pasien!\n");
         return;
     }
 
     // Cari data dokter
     Dokter *dokter = currUser->dataDokter;
     if (dokter == NULL) {
-        printf("Data dokter tidak valid!\n");
+        printf("\nERROR: Data dokter tidak valid!\n");
       
         return;
     }
@@ -41,6 +41,10 @@ void ngobatin (User *currUser, User *users, int banyakUser, ListRuangan *ruangan
             break;
         }
     }
+
+    printf("\n+-----------------------------------------------+\n");
+    printf("|                    NGOBATIN                   |\n");
+    printf("+-----------------------------------------------+\n");
 
     if (ruanganDokter == NULL) {
         printf("[dr. %s] Kamu belum memiliki ruangan!\n", currUser->username);

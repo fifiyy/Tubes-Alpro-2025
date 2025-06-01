@@ -6,13 +6,13 @@
 
 Pasien* assign_pasien_ke_dokter(User *user, Dokter* dokter, Pasien* pasien, ListRuangan *ruangan) {
     if (dokter == NULL || pasien == NULL) {
-        printf("Error: Data dokter atau pasien tidak valid\n");
+        printf("ERROR: Data dokter atau pasien tidak valid\n");
         return NULL;
     }
 
     int idx_ruang = dokter->nomorRuangan - 1; // ruangan biasanya 1-based
     if (idx_ruang < 0 || idx_ruang >= ruangan->jumlah) {
-        printf("Error: Dokter belum punya ruangan yang valid\n");
+        printf("ERROR: Dokter belum punya ruangan yang valid\n");
         return NULL;
     }
 
@@ -20,7 +20,7 @@ Pasien* assign_pasien_ke_dokter(User *user, Dokter* dokter, Pasien* pasien, List
     address current = ruangan->ruang[idx_ruang].Antrian.first;
     while (current != NULL) {
         if (current->pasien->dataPasien == pasien) {
-            printf("Pasien sudah berada dalam antrian atau ruangan!\n");
+            printf("ERROR: Pasien sudah berada dalam antrian atau ruangan!\n");
             return NULL;
         }
         current = current->next;
@@ -38,10 +38,10 @@ Pasien* assign_pasien_ke_dokter(User *user, Dokter* dokter, Pasien* pasien, List
             pasien->posisiAntrian = jumlah_baru - ruangan->ruang[idx_ruang].kapasitas;
         }
         pasien->idRuangan = dokter->nomorRuangan; // set id ruangan pasien
-        printf("Pasien berhasil didaftarkan ke antrian/ruangan\n");
+        printf(">> Pasien berhasil didaftarkan ke antrian/ruangan\n");
         return pasien;
     }
 
-    printf("Gagal mendaftarkan pasien ke antrian\n");
+    printf("ERROR: Gagal mendaftarkan pasien ke antrian\n");
     return NULL;
 }
