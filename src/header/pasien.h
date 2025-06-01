@@ -5,7 +5,6 @@
 #include "obat.h"
 #include "../ADT/header/Stack.h"
 
-#define MAX_OBAT 10
 #define MAX_PENYAKIT 20
 // #define MAX_KELUHAN 51
 
