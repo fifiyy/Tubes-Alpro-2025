@@ -4,11 +4,11 @@
 
 void minum_obat(User *user_pasien) {
     if (currUser == NULL) {
-        printf("Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
+        printf("\nERROR: Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
         return;
     }
     else if (currUser->role != ROLE_PASIEN) {
-        printf("Eits...pasien doang yang bisa minum obat!\n");
+        printf("\nERROR: Eits...pasien doang yang bisa minum obat!\n");
         return;
     }
 
@@ -16,11 +16,11 @@ void minum_obat(User *user_pasien) {
     Stack *perutPasien = &(pasien->perutPasien);
 
     if (pasien->status == butuhMinumObat || pasien->status == butuhPenawar) {
-        printf("Yuk minum obatmu dulu..\n");
-        printf("Kamu punya %d obat yang harus diminum.\n", pasien->jumlahObat);
+        printf(">> Yuk minum obatmu dulu..\n");
+        printf("[@%s] Kamu punya %d obat yang harus diminum.\n", user_pasien->username, pasien->jumlahObat);
     }
     else {
-        printf("Kamu lagi ga perlu minum obat kok.\n");
+        printf("[@%s] Kamu lagi ga perlu minum obat kok :D\n", user_pasien->username);
         return;
     }
 
@@ -29,17 +29,17 @@ void minum_obat(User *user_pasien) {
             char konfirmasi;
             int valid = 0;
             while (!valid) {
-                printf("Kamu lagi keracunan gara-gara urutan minumnya salah.. Mau minum penawarnya dulu gak? (y/n): ");
+                printf("[@%s] Kamu lagi keracunan gara-gara urutan minumnya salah.. Mau minum penawarnya dulu gak? (y/n): ", user_pasien->username);
                 scanf(" %c", &konfirmasi);
                 if (konfirmasi == 'n' || konfirmasi == 'N') {
                     valid = 1; // lanjut ke proses minum obat
                 }
                 else if (konfirmasi == 'y' || konfirmasi == 'Y') {
-                    printf("Oke, minum penawarnya dulu ya!.\n");
+                    printf(">> Oke, minum penawarnya dulu ya!.\n");
                     return;
                 }
                 else {
-                    printf("Input tidak valid. Silakan coba lagi.\n");
+                    printf("\nERROR: Input tidak valid. Silakan coba lagi.\n");
                 }
             }
         }
@@ -80,7 +80,7 @@ void minum_obat(User *user_pasien) {
         scanf("%d", &pilihanObat);
     
         if (pilihanObat < 1 || pilihanObat > pasien->jumlahObat) {
-            printf("\nObatnya gak diresepkan buat kamu!\n");
+            printf("\nERROR: Obatnya gak diresepkan buat kamu!\n");
             continue;
         }
     
@@ -105,8 +105,8 @@ void minum_obat(User *user_pasien) {
         for (int i = 0; i <= perutPasien->idxTop; i++) {
             if (strcmp(perutPasien->buffer[i].nama, pasien->daftarObatResep[i].nama) != 0) {
                 pasien->status = butuhPenawar;
-                printf("Kamu merasa makin gak enak badan...kayaknya kamu salah minum urutan obat deh..\n");
-                printf("Dok! Butuh obat penawar!!");
+                printf("Kamu merasa makin gak enak badan... kayaknya kamu salah minum obat deh..\n");
+                printf("Dok! Butuh obat penawar!! X o X\n");
             return;
             }
         }
