@@ -8,7 +8,7 @@
 // Validasi input angka positif
 boolean validasi_float (float nilai, const char* namaVar) {
     if (nilai <= 0) {
-        printf("%s harus positif!\n", namaVar);
+        printf("\n ERROR: %s harus positif!\n", namaVar);
         return false;
     }
     return true;
@@ -16,7 +16,7 @@ boolean validasi_float (float nilai, const char* namaVar) {
 
 boolean validasi_integer (int nilai, const char* namaVar) {
     if (nilai <= 0) {
-        printf("%s harus positif!\n", namaVar);
+        printf("\nERROR: %s harus positif!\n", namaVar);
         return false;
     }
     return true;
@@ -33,7 +33,7 @@ void display_dokter (User *users, int banyakUser, ListRuangan *ruangan) {
         }
         
         if (users[i].dataDokter == NULL) {
-            printf("ERROR: Data dokter tidak valid untuk %s!\n", users[i].username);
+            printf("ERROR: Data dokter tidak valid untuk dr. %s!\n", users[i].username);
             continue; // skip invalid entries 
         }
 
@@ -94,7 +94,8 @@ void daftar_check_up(User *currUser, User *users, int banyakUser, ListRuangan *r
         address curr = r->Antrian.first;
         while (curr != NULL) {
             if (curr->pasien->dataPasien == pasien) {
-                printf("[@%s] Kamu sudah berada di ruangan %d (atau antrian ruangan %d)\n", currUser->username, r->nomor, r->nomor);
+                printf("[@%s] Kamu sudah berada di ruangan %d (atau antrian ruangan %d)\n", 
+                    currUser->username, r->nomor, r->nomor);
                 return;
             }
             curr = curr->next;
@@ -190,14 +191,17 @@ void daftar_check_up(User *currUser, User *users, int banyakUser, ListRuangan *r
     if (result != NULL) {
         // Jika pasien dimasukkan ke ruangan
         if (dokterPilihan->nomorRuangan == '\0') {
-            printf("ERROR: Dokter %s belum memiliki ruangan. Mendaftarkan ke antrian...\n", userDokter->username);
+            printf("ERROR: Dokter %s belum memiliki ruangan. Mendaftarkan ke antrian...\n", 
+                userDokter->username);
         } else {
-            printf(">> Pasien berhasil didaftarkan ke ruangan %d.\n", dokterPilihan->nomorRuangan);
+            printf(">> Pasien berhasil didaftarkan ke ruangan %d.\n", 
+                dokterPilihan->nomorRuangan);
         }
 
         // jika pasien didaftarkan ke antrian
         if (result->posisiAntrian == -1) {
-            printf(">> Pasien berhasil didaftarkan ke antrian dokter %s.\n", userDokter->username);
+            printf(">> Pasien berhasil didaftarkan ke antrian dokter %s.\n", 
+                userDokter->username);
             pasien->posisiAntrian = result->posisiAntrian;
         } else {
             pasien->posisiAntrian = result->posisiAntrian;
@@ -207,7 +211,8 @@ void daftar_check_up(User *currUser, User *users, int banyakUser, ListRuangan *r
                currUser->username,
                userDokter->username, 
                dokterPilihan->nomorRuangan);
-        printf("[@%s] Posisi antrian Kamu: %d\n", currUser->username, result->posisiAntrian);
+        printf("[@%s] Posisi antrian Kamu: %d\n", 
+            currUser->username, result->posisiAntrian);
     } else {
         printf("ERROR: Gagal mendaftar!\n");
     }

@@ -22,30 +22,30 @@ void register_pasien(ListUser *users, Set *usernames) {
 
     printf("Username: ");
     if (scanf("%49s", username) != 1) {
-        printf("Input tidak valid!\n");
+        printf("\nERROR: Input tidak valid!\n");
         while (getchar() != '\n');
         return;
     }
     
     if (!is_alpha_string(username)) {
-        printf("Username hanya boleh berisi huruf!\n");
+        printf("\nERROR: Username hanya boleh berisi huruf!\n");
         return;
     }
     
     if (!is_username_unique(usernames, username)) {
-        printf("Registrasi gagal! Pasien dengan nama %s sudah terdaftar.\n", username);
+        printf("\nERROR: Registrasi gagal! Pasien dengan nama %s sudah terdaftar.\n", username);
         return;
     }
     
     printf("Password: ");
     if (scanf("%49s", password) != 1) {
-        printf("Input tidak valid!\n");
+        printf("\nERROR: Input tidak valid!\n");
         while (getchar() != '\n');
         return;
     }
     
     if (list_is_full(*users)) {
-        printf("Kapasitas user penuh!\n");
+        printf("\nERROR: Kapasitas user penuh!\n");
         return;
     }
     
@@ -56,7 +56,7 @@ void register_pasien(ListUser *users, Set *usernames) {
 
     newUser.dataPasien = (Pasien*) malloc(sizeof(Pasien));
     if (newUser.dataPasien == NULL) {
-        printf("Gagal mengalokasikan memori untuk pasien baru.\n");
+        printf("\nERROR: Gagal mengalokasikan memori untuk pasien baru.\n");
         return;
     }
 
@@ -72,5 +72,5 @@ void register_pasien(ListUser *users, Set *usernames) {
     set_insert(usernames, username); // Tambahkan username ke dalam Set
     create_stack(&newUser.dataPasien->perutPasien); // Inisialisasi stack perut pasien
     
-    printf("Pasien %s berhasil ditambahkan!\n", username);
+    printf(">> Pasien %s berhasil ditambahkan!\n", username);
 }

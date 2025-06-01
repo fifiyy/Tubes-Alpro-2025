@@ -76,7 +76,7 @@ void pulangdok(User *user_pasien, ListRuangan *listRuangan) {
          return;
         }
         else if (pasien->status == butuhPenawar) {
-            printf("Dokter sedang memeriksa...\n");
+            printf(">> Dokter sedang memeriksa...\n");
             printf("\nMaaf, kamu kayaknya masih belum bisa pulang, masih sakit ya?\n");
             printf("Urutan obat yang diharapkan: \n");
             printf("        ");
@@ -102,8 +102,8 @@ void pulangdok(User *user_pasien, ListRuangan *listRuangan) {
             return;
         }
         else {
-            printf("Dokter sedang memeriksamu...\n");
-            printf("Yayy Selamat! Kamu sudah dinyatakan sembuh oleh dokter. Silahkan pulang dan semoga sehat selalu\n");
+            printf(">> Dokter sedang periksa kamu...\n");
+            printf("[@%s] Yayy Selamat! Kamu sudah dinyatakan sembuh oleh dokter. Silahkan pulang dan semoga sehat selalu\n", user_pasien->username);
     
             // reset data pasien seperti pas register
             make_default_pasien(pasien);

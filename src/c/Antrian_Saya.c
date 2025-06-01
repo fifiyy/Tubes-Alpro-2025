@@ -76,5 +76,6 @@ void cek_antrian_saya (User *user, User *users, ListRuangan *ruangan, int banyak
     printf("[@%s] Status antrian Anda:\n", user->username);
     printf("    Dokter: dr. %s\n", dokterPasien->username);
     printf("    Ruangan: %d\n", dokterPasien->nomorRuangan);
-    printf("    Posisi antrian: %d dari %d\n", posisi - MAX_PASIEN_RUANGAN + 1, totalAntrian - MAX_PASIEN_RUANGAN);
+    printf("    Posisi antrian: %d dari %d\n", posisi - MAX_PASIEN_RUANGAN + 1, 
+        totalAntrian - MAX_PASIEN_RUANGAN);
 }

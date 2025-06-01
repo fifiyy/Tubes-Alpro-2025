@@ -66,12 +66,12 @@ void diagnosis_pasien (User *userDokter) {
     Pasien *pasien = userPasien->dataPasien;
 
     if (pasien->status == butuhDiberiObat) {
-        printf("[dr. %s] Pasien %s udah didiagnosa, tinggal dikasih obat aja.\n", userDokter->username, userPasien->username);
+        printf("[dr. %s] Pasien @%s udah didiagnosa, tinggal dikasih obat aja.\n", userDokter->username, userPasien->username);
         return;
     }
 
     if (pasien->status != butuhDiagnosa) {
-        printf("[dr. %s] Pasien %s tidak perlu didiagnosis lagi.\n", userDokter->username, userPasien->username);
+        printf("[dr. %s] Pasien @%s tidak perlu didiagnosis lagi.\n", userDokter->username, userPasien->username);
         return;
     }
     
@@ -81,11 +81,11 @@ void diagnosis_pasien (User *userDokter) {
     printf("+-----------------------------------------------+\n");
     if (penyakit != NULL) {
         pasien->status = butuhDiberiObat;
-        printf("[dr. %s] Pasien %s terdiagnosa mengidap penyakit: %s\n", userDokter->username, userPasien->username, penyakit);
+        printf("[dr. %s] Pasien @%s terdiagnosa mengidap penyakit: %s\n", userDokter->username, userPasien->username, penyakit);
         printf("[dr. %s] Jangan lupa untuk diobatin ya!\n", userDokter->username);
-        printf("HELP: Untuk mengobati pasien %s, ketik NGOBATIN!\n", userPasien->username);
+        printf("HELP: Untuk mengobati pasien @%s, ketik NGOBATIN!\n", userPasien->username);
     } else {
         pasien->status = butuhPulang;
-        printf("[dr. %s] Pasien %s sehat banget! Dijamin kuat salto keliling kota!\n", userDokter->username, userPasien->username);
+        printf("[dr. %s] Pasien @%s sehat banget! Dijamin kuat salto keliling kota!\n", userDokter->username, userPasien->username);
     }
 }
