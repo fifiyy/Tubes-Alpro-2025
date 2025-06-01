@@ -2,11 +2,13 @@
 
 void logout_system() {
     if (currUser == NULL) {
-        printf("Logout gagal!\n");
-        printf("Anda belum login, silahkan login terlebih dahulu sebelum melakukan logout\n");
+        printf("ERROR: Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
         return;
     }
-    
-    printf("Sampai jumpa %s!\n", currUser->username);
+    printf("\n+-----------------------------------------------+\n");
+    printf("|                     LOG OUT                   |\n");
+    printf("+-----------------------------------------------+\n");
+
+    printf("\n>> Sampai jumpa @%s!\n", currUser->username);
     currUser = NULL;
 }

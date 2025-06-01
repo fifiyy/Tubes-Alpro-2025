@@ -4,24 +4,28 @@
 void login_system(ListUser *users) {
     // Cek apakah sudah ada user yang login
     if (currUser != NULL) {
-        printf("Anda sudah login sebagai %s %s. Silakan logout terlebih dahulu untuk login dengan akun lain.\n",
+        printf("\nERROR: Anda sudah login sebagai %s %s. Silakan logout terlebih dahulu untuk login dengan akun lain.\n",
                role_to_string(currUser->role), currUser->username);
         return;
     }
 
     char username[USERNAME_LEN];
     char password[PASSWORD_LEN];
-    
+
+    printf("\n+-----------------------------------------------+\n");
+    printf("|                     LOG IN                    |\n");
+    printf("+-----------------------------------------------+\n");
+
     printf("Masukan username: ");
     if (scanf("%49s", username) != 1) {
-        printf("Input tidak valid!\n");
+        printf("\nERROR: Input tidak valid!\n");
         while (getchar() != '\n');
         return;
     }
     
     printf("Masukan password: ");
     if (scanf("%49s", password) != 1) {
-        printf("Input tidak valid!\n");
+        printf("\nERROR: Input tidak valid!\n");
         while (getchar() != '\n');
         return;
     }
@@ -33,11 +37,11 @@ void login_system(ListUser *users) {
                 currUser = &users->data[i];
                 return;
             } else {
-                printf("Password salah untuk pengguna yang bernama %s!\n", username);
+                printf("\nERROR: Password salah untuk pengguna yang bernama %s!\n", username);
                 return;
             }
         }
     }
     
-    printf("Tidak ada Manager, Dokter, atau pun Pasien yang bernama %s!\n", username);
+    printf("\nERROR: Tidak ada Manager, Dokter, atau pun Pasien yang bernama %s!\n", username);
 }
