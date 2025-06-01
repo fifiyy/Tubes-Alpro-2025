@@ -26,11 +26,11 @@ void make_default_pasien(Pasien *pasien) {
 
 void pulangdok(User *user_pasien, ListRuangan *listRuangan) {
     if (currUser == NULL) {
-        printf("Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
+        printf("\nERROR: Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
         return;
     }
     else if (currUser->role != ROLE_PASIEN) {
-        printf("Hanya pasien yang bisa konsultasi pada dokter lagi!\n");
+        printf("\nERROR: Hanya pasien yang bisa konsultasi pada dokter lagi!\n");
         return;
     }
 
@@ -47,7 +47,7 @@ void pulangdok(User *user_pasien, ListRuangan *listRuangan) {
     }
 
     if (ruanganDokter == NULL) {
-        printf("Ruangan pasien tidak ditemukan!\n");
+        printf("\nERROR: Ruangan pasien tidak ditemukan!\n");
         return;
     }
 
@@ -55,19 +55,17 @@ void pulangdok(User *user_pasien, ListRuangan *listRuangan) {
 
     // cek paling depan
     if (antrianDokterRuangan->first == NULL || antrianDokterRuangan->first->pasien != user_pasien) {
-        printf("Maaf, kamu bukan pasien paling depan di antrian. Tunggu giliranmu ya.\n");
+        printf(">> Maaf, kamu bukan pasien paling depan di antrian. Tunggu giliranmu ya.\n");
         return;
-    }
-
-    else{
+    } else {
         Pasien *pasien = user_pasien->dataPasien;
         Obat *daftarObat = pasien->daftarObat;
         int jumlahObat = pasien->jumlahObat;
         Stack *perutPasien = &(pasien->perutPasien);
 
         if (pasien->status == butuhDiagnosa) {
-            printf("Loh...kamu belum didiagnosa dokter sama sekali, jangan buru-buru pulang!\n");
-            printf("Untuk daftar gunakan DAFTAR_CHECKUP dan untuk cek antrianmu gunakan LIHAT_ANTRIAN!\n");
+            printf("[@%s] Loh... kamu belum didiagnosa dokter sama sekali, jangan buru-buru pulang!\n", user_pasien->username);
+            printf("HELP: Untuk daftar gunakan DAFTAR_CHECKUP dan untuk cek antrianmu gunakan LIHAT_ANTRIAN!\n");
             return;
         }
         else if (pasien->status == butuhMinumObat && pasien->jumlahObat > 0) {
@@ -75,7 +73,7 @@ void pulangdok(User *user_pasien, ListRuangan *listRuangan) {
          return;
         }
         else if (pasien->status == butuhPenawar) {
-            printf("Dokter sedang memeriksamu...\n");
+            printf("Dokter sedang memeriksa...\n");
             printf("\nMaaf, kamu kayaknya masih belum bisa pulang, masih sakit ya?\n");
             printf("Urutan obat yang diharapkan: \n");
             printf("        ");
