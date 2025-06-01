@@ -61,15 +61,15 @@ void ngobatin (User *currUser, User *users, int banyakUser, ListRuangan *ruangan
     User *userPasien = current->pasien;
 
     if (pasien->status == butuhDiagnosa) {
-        printf("[dr. %s] Pasien %s belum didiagnosis. Diagnosis dulu sebelum mengobati!\n", currUser->username, userPasien->username);
+        printf("[dr. %s] Pasien @%s belum didiagnosis. Diagnosis dulu sebelum mengobati!\n", currUser->username, userPasien->username);
         return;
     }
     if (pasien->status == butuhPulang) {
-        printf("[dr. %s] Pasien %s sudah sembuh, tidak perlu diobati lagi.\n", currUser->username, userPasien->username);
+        printf("[dr. %s] Pasien @%s sudah sembuh, tidak perlu diobati lagi.\n", currUser->username, userPasien->username);
         return;
     }
     if (pasien->status == butuhMinumObat) {
-        printf("[dr. %s] Pasien %s sudah diberi obat, tidak perlu diobati lagi.\n", currUser->username, userPasien->username);
+        printf("[dr. %s] Pasien @%s sudah diberi obat, tidak perlu diobati lagi.\n", currUser->username, userPasien->username);
         return;
     }
 
@@ -79,7 +79,7 @@ void ngobatin (User *currUser, User *users, int banyakUser, ListRuangan *ruangan
         return;
     }
 
-    printf("[dr. %s] Resep untuk %s (Penyakit: %s):\n", currUser->username, userPasien->username, pasien->penyakit);
+    printf("[dr. %s] Resep untuk @%s (Penyakit: %s):\n", currUser->username, userPasien->username, pasien->penyakit);
     for (int i = 0; i < entry->jumlahObat; i++) {
         printf("        %d. %s\n", i+1, entry->obat[i].nama);
     }
