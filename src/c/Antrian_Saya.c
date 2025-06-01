@@ -14,6 +14,9 @@ void cek_antrian_saya (User *user, User *users, ListRuangan *ruangan, int banyak
     }
 
     Pasien *pasien = user->dataPasien;
+    printf("\n+-----------------------------------------------+\n");
+    printf("|                 STATUS ANTRIAN                |\n");
+    printf("+-----------------------------------------------+\n");
     
     // Cek apakah pasien ada di antrian/ruangan manapun (berdasarkan queue)
     int found = 0;
@@ -69,10 +72,6 @@ void cek_antrian_saya (User *user, User *users, ListRuangan *ruangan, int banyak
         return;
     }
     int totalAntrian = queue_size(&ruangan->ruang[idxRuang].Antrian);
-
-    printf("\n+-----------------------------------------------+\n");
-    printf("|                  LIHAT ANTRIAN                |\n");
-    printf("+-----------------------------------------------+\n");
 
     printf("[@%s] Status antrian Anda:\n", user->username);
     printf("    Dokter: dr. %s\n", dokterPasien->username);

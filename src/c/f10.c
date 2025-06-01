@@ -13,6 +13,10 @@ void tambah_dokter (ListUser *users, Set *usernames){
         return;
     }
 
+    printf("\n+-----------------------------------------------+\n");
+    printf("|                 TAMBAH DOKTER                 |\n");
+    printf("+-----------------------------------------------+\n");
+
     char username[USERNAME_LEN];
     char password[PASSWORD_LEN];
     
@@ -56,12 +60,13 @@ void tambah_dokter (ListUser *users, Set *usernames){
         return;
     }
 
-    newUser.dataDokter->id = list_nb_elmt(*users) + 1; // ID unik berdasarkan jumlah user
+    newUser.idUser = list_nb_elmt(*users); // ID unik berdasarkan jumlah user
+    newUser.dataDokter->id = list_nb_elmt(*users); // ID unik berdasarkan jumlah user
     strcpy(newUser.dataDokter->username, username);
     newUser.dataDokter->nomorRuangan = '\0'; // belum ditugaskan
 
     list_set_el(users, list_nb_elmt(*users), newUser);
-    list_set_length(users, list_nb_elmt(*users) + 1);
+    // list_set_length(users, list_nb_elmt(*users) + 1);
     set_insert(usernames, username); // Tambahkan username ke dalam Set
     
     printf(">> Dokter %s berhasil ditambahkan!\n", username);
@@ -80,6 +85,10 @@ void assign_dokter (ListUser *users, ListRuangan *ruangan){
 
     char username[USERNAME_LEN];
     int nomorRuangan;
+
+    printf("\n+-----------------------------------------------+\n");
+    printf("|                 ASSIGN DOKTER                 |\n");
+    printf("+-----------------------------------------------+\n");
 
     printf("Username: ");
     if (scanf("%49s", username) != 1) {

@@ -33,7 +33,10 @@ void pulangdok(User *user_pasien, ListRuangan *listRuangan) {
         printf("\nERROR: Hanya pasien yang bisa konsultasi pada dokter lagi!\n");
         return;
     }
-
+    printf("\n+-----------------------------------------------+\n");
+    printf("|                    PULANG                     |\n");
+    printf("+-----------------------------------------------+\n");
+    
     Pasien *pasien = user_pasien->dataPasien;
     int idRuangan = pasien->idRuangan; 
     

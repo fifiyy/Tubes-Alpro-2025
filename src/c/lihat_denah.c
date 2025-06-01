@@ -6,7 +6,9 @@ void lihat_denah (ListRuangan ruangan) {
         printf("Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
         return;
     }
-    
+    printf("\n+-----------------------------------------------+\n");
+    printf("|                 DENAH RUMAH SAKIT             |\n");
+    printf("+-----------------------------------------------+\n\n");
     printf("\n");
     printf("+-----+-----+-----+-----+-----+-----+-----+-----+\n");
     for (int i = 0; i < ruangan.jumlah; i++) {
@@ -76,6 +78,10 @@ void lihat_ruangan_saya(ListRuangan *ruangan, ListUser *users) {
         return;
     }
 
+    printf("\n+-----------------------------------------------+\n");
+    printf("|               RUANGAN SAYA                    |\n");
+    printf("+-----------------------------------------------+\n");
+
     lihat_ruangan(ruangan, dokter->nomorRuangan, users);
 }
 
@@ -89,6 +95,9 @@ void lihat_daftar_pasien(ListRuangan *ruangan, ListUser *users) {
         printf("Hanya dokter yang bisa melihat daftar pasien!\n");
         return;
     }
+    printf("\n+-----------------------------------------------+\n");
+    printf("|               DAFTAR PASIEN SAYA              |\n");
+    printf("+-----------------------------------------------+\n");
 
     Dokter *dokter = currUser->dataDokter;
     if (dokter == NULL || dokter->nomorRuangan <= 0 || dokter->nomorRuangan > ruangan->jumlah) {
@@ -121,6 +130,9 @@ void lihat_semua_antrian(ListRuangan *ruangan, int num, ListUser *users) {
         printf("Anda bukan Manajer, akses ditolak\n");
         return;
     }
+    printf("\n+-----------------------------------------------+\n");
+    printf("|                 SEMUA ANTRIAN                 |\n");
+    printf("+-----------------------------------------------+\n");
     
     // Print room numbers header
     printf("+-----+-----+-----+-----+-----+-----+-----+-----+\n");

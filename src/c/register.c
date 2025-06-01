@@ -16,6 +16,10 @@ void register_pasien(ListUser *users, Set *usernames) {
     char username[USERNAME_LEN];
     char password[PASSWORD_LEN];
     
+    printf("\n+-----------------------------------------------+\n");
+    printf("|                   REGISTRASI                  |\n");
+    printf("+-----------------------------------------------+\n");
+
     printf("Username: ");
     if (scanf("%49s", username) != 1) {
         printf("Input tidak valid!\n");
@@ -55,14 +59,16 @@ void register_pasien(ListUser *users, Set *usernames) {
         printf("Gagal mengalokasikan memori untuk pasien baru.\n");
         return;
     }
-    newUser.dataPasien->id = list_nb_elmt(*users) + 1; // ID unik berdasarkan jumlah user
+
+    newUser.idUser = list_nb_elmt(*users); // ID unik berdasarkan jumlah user
+    newUser.dataPasien->id = list_nb_elmt(*users); // ID unik berdasarkan jumlah user
     newUser.dataPasien->jumlahObat = 0; // Inisialisasi jumlah obat
     newUser.dataPasien->idRuangan = -1; // Pasien belum dalam ruangan
     newUser.dataPasien->posisiAntrian = -1; // Pasien belum dalam antrian
     newUser.dataPasien->status = butuhDiagnosa; // Status awal pasien
     
     list_set_el(users, list_nb_elmt(*users), newUser);
-    list_set_length(users, list_nb_elmt(*users) + 1);
+    // list_set_length(users, list_nb_elmt(*users) + 1);
     set_insert(usernames, username); // Tambahkan username ke dalam Set
     create_stack(&newUser.dataPasien->perutPasien); // Inisialisasi stack perut pasien
     

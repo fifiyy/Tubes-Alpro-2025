@@ -11,6 +11,9 @@ void minum_penawar(User *user_pasien) {
         printf("Eits...pasien doang yang bisa minum penawar!\n");
         return;
     }
+    printf("\n+-----------------------------------------------+\n");
+    printf("|                 MINUM PENAWAR                 |\n");
+    printf("+-----------------------------------------------+\n");
     Pasien *pasien = user_pasien->dataPasien;
     Stack *perutPasien = &pasien->perutPasien;
 

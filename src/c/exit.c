@@ -8,8 +8,9 @@ void exit_system(ListUser *users) {
     char input[10];
 
     printf("\n+-----------------------------------------------+\n");
-    printf("|                   EXIT SYSTEM                 |\n");
+    printf("|                     EXIT                      |\n");
     printf("+-----------------------------------------------+\n");
+    printf("Terima kasih telah menggunakan layanan RS!\n");
 
     printf("\nApakah Anda mau keluar dari rumah sakit? (y/n)\n");
 

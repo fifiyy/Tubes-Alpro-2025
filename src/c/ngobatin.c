@@ -43,7 +43,7 @@ void ngobatin (User *currUser, User *users, int banyakUser, ListRuangan *ruangan
     }
 
     printf("\n+-----------------------------------------------+\n");
-    printf("|                    NGOBATIN                   |\n");
+    printf("|                   PENGOBATAN                  |\n");
     printf("+-----------------------------------------------+\n");
 
     if (ruanganDokter == NULL) {

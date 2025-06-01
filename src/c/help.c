@@ -1,10 +1,12 @@
 #include "../header/Help.h"
 
 void help_system() {
-    printf("\n=========== HELP ===========\n\n");
+    printf("\n+-----------------------------------------------+\n");
+    printf("|                     HELP                      |\n");
+    printf("+-----------------------------------------------+\n\n");
     
     if (currUser == NULL) {
-        printf("Kamu belum login sebagai role apapun. Silahkan login terlebih dahulu.\n\n");
+        printf("Kamu belum login sebagai role apapun. Silahkan login terlebih dahulu.\n");
         printf("LOGIN: Masuk ke dalam akun yang sudah terdaftar\n");
         printf("REGISTER: Membuat akun baru\n");
         printf("LUPA_PASSWORD: Mengatur ulang password akun\n");
@@ -50,6 +52,8 @@ void help_system() {
             printf("LIHAT_RUANGAN: Melihat ruangan sesuai nomor ruangan yang dipilih\n");
             printf("TAMBAH_DOKTER: Mendaftarkan dokter baru ke sistem\n");
             printf("ASSIGN_DOKTER: Menugaskan dokter ke ruangan tertentu\n");
+            printf("LIHAT_USER: Melihat daftar semua pengguna\n");
+            printf("CARI_USER: Mencari pengguna berdasarkan ID atau nama\n");
         }
     }
     

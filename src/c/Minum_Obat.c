@@ -12,6 +12,10 @@ void minum_obat(User *user_pasien) {
         return;
     }
 
+    printf("\n+-----------------------------------------------+\n");
+    printf("|                   MINUM OBAT                  |\n");
+    printf("+-----------------------------------------------+\n");
+    
     Pasien *pasien = user_pasien->dataPasien;
     Stack *perutPasien = &(pasien->perutPasien);
 

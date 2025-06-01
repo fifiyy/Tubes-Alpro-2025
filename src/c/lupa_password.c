@@ -26,6 +26,9 @@ void lupa_password_system(ListUser *users) {
     char kodeUnikAsli[100];
     char newPassword[PASSWORD_LEN];
     
+    printf("\n+-------------------------------------------------+\n");
+    printf("|                  LUPA PASSWORD                  |\n");
+    printf("+-------------------------------------------------+\n");
     printf("Username: ");
     if (scanf("%49s", username) != 1) {
         printf("Input tidak valid!\n");
