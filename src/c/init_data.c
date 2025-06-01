@@ -52,7 +52,7 @@ void init_data(ListUser *users, Set *usernames) {
     set_insert(usernames, "a");
     
     // Initialize doctor
-    User dokter_user = {"NEROIFA", "NEROIFA123", ROLE_DOKTER};
+    User dokter_user = {"NEROIFA", "NEROIFA123", ROLE_DOKTER,1};
     dokter_user.dataDokter = (Dokter*) malloc(sizeof(Dokter));
     dokter_user.dataDokter->id = 1;
     strcpy(dokter_user.dataDokter->username, dokter_user.username); // Pastikan username dokter terisi
@@ -61,7 +61,7 @@ void init_data(ListUser *users, Set *usernames) {
     set_insert(usernames, "NEROIFA");
 
     // Inisialisasi pasien "GRO"
-    User pasien_gro = {"GRO", "NEROIFACANTIK", ROLE_PASIEN};
+    User pasien_gro = {"GRO", "NEROIFACANTIK", ROLE_PASIEN,2};
     pasien_gro.dataPasien = (Pasien*) malloc(sizeof(Pasien));
     pasien_gro.dataPasien->id = 2;
     pasien_gro.dataPasien->posisiAntrian = -1;
@@ -84,7 +84,7 @@ void init_data(ListUser *users, Set *usernames) {
     create_stack(&pasien_gro.dataPasien->perutPasien);
 
     // Inisialisasi pasien "nimonsganteng"
-    User pasien_nimons = {"nimonsganteng", "KelompokAmatGacor", ROLE_PASIEN};
+    User pasien_nimons = {"nimonsganteng", "KelompokAmatGacor", ROLE_PASIEN,3};
     pasien_nimons.dataPasien = (Pasien*) malloc(sizeof(Pasien));
     pasien_nimons.dataPasien->id = 3;
     pasien_nimons.dataPasien->posisiAntrian = -1;

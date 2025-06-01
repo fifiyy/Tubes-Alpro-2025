@@ -26,6 +26,7 @@ typedef struct {
     char username[USERNAME_LEN];
     char password[PASSWORD_LEN];
     UserRole role;
+    int idUser;  // ID unik untuk setiap user
 
     union {
         Pasien *dataPasien;    // Jika role == ROLE_PASIEN
