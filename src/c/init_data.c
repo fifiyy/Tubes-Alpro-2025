@@ -85,7 +85,7 @@ void init_data(ListUser *users, Set *usernames) {
     create_stack(&pasien_gro.dataPasien->perutPasien);
 
     // Inisialisasi pasien "nimonsganteng"
-    User pasien_nimons = {"nimonsganteng", "KelompokAmatGacor", ROLE_PASIEN,3};
+    User pasien_nimons = {"nimonssganteng", "KelompokAmatGacor", ROLE_PASIEN,3};
     pasien_nimons.dataPasien = (Pasien*) malloc(sizeof(Pasien));
     pasien_nimons.dataPasien->id = 3;
     pasien_nimons.dataPasien->posisiAntrian = -1;

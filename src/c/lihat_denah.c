@@ -67,14 +67,15 @@ void lihat_ruangan_saya(ListRuangan *ruangan, ListUser *users) {
         return;
     }
 
-    if (currUser->role != ROLE_DOKTER && currUser->role != ROLE_PASIEN) {
-        printf("Hanya dokter atau pasien yang bisa melihat ruangan!\n");
+    if (currUser->role != ROLE_DOKTER) {
+        printf("ERROR: Hanya dokter atau pasien yang bisa melihat ruangan!\n");
         return;
     }
 
     Dokter *dokter = currUser->dataDokter;
-    if (dokter == NULL || dokter->nomorRuangan <= 0 || dokter->nomorRuangan > ruangan->jumlah) {
-        printf("Anda belum memiliki ruangan!\n");
+    Pasien *pasien = currUser->dataPasien;
+    if (dokter == NULL || dokter->nomorRuangan < 0 || dokter->nomorRuangan > ruangan->jumlah || pasien == NULL || pasien->idRuangan < 0 || pasien->idRuangan > ruangan->jumlah) {
+        printf("[@%s] Anda belum memiliki ruangan!\n", currUser->username);
         return;
     }
 
@@ -92,7 +93,7 @@ void lihat_daftar_pasien(ListRuangan *ruangan, ListUser *users) {
     }
 
     if (currUser->role != ROLE_DOKTER) {
-        printf("Hanya dokter yang bisa melihat daftar pasien!\n");
+        printf("ERROR: Hanya dokter yang bisa melihat daftar pasien!\n");
         return;
     }
     printf("\n+-----------------------------------------------+\n");
@@ -127,7 +128,7 @@ void lihat_semua_antrian(ListRuangan *ruangan, int num, ListUser *users) {
     }
 
     if (currUser->role != ROLE_MANAGER) {
-        printf("Anda bukan Manajer, akses ditolak\n");
+        printf("ERROR: Hanya manajer yang bisa melihat semua antrian\n");
         return;
     }
     printf("\n+-----------------------------------------------+\n");

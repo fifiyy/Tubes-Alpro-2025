@@ -33,7 +33,6 @@ void help_system() {
             printf("LUPA_PASSWORD: Mengatur ulang password akun\n");
             printf("LIHAT_DENAH: Melihat denah ruangan rumah sakit\n");
             printf("LIHAT_RUANGAN: Melihat ruangan sesuai nomor ruangan yang dipilih\n");
-            printf("LIHAT_RUANGAN_SAYA: Melihat ruangan tempatmu akan diobati\n");
             printf("DAFTAR_CHECKUP: Mendaftarkan diri untuk pemeriksaan dokter\n");
             printf("ANTRIAN_SAYA: Melihat posisi antrian check-up\n");
             printf("MINUM_OBAT: Minum obat sesuai resep dokter\n");

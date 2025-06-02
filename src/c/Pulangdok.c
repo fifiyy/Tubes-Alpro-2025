@@ -19,7 +19,7 @@ void make_default_pasien(Pasien *pasien) {
     pasien->trombosit = 0;
     pasien->jumlahObat = 0;
     pasien->jumlahObatResep = 0;
-    pasien->status = butuhDiagnosa;
+    pasien->status = butuhCheckup;
     pasien->idRuangan = -1; // belum ada ruangan
     pasien->posisiAntrian = -1; // belum terdaftar di antrian
 }
