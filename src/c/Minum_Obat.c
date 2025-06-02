@@ -51,6 +51,13 @@ void minum_obat(User *user_pasien) {
     
         // print daftar obat
         printf("\n============ DAFTAR OBAT ============\n");
+        if (pasien->sisaNyawa < 3) {
+            printf("Hati-hati! Sisa nyawamu tinggal %d lagi\n",pasien->sisaNyawa);
+        }
+        else {
+            printf("Sisa nyawamu: %d\n",pasien->sisaNyawa);
+        }
+
         printf("Urutan minum obat sesuai resep dokter:\n");
         for (int i = 0; i < pasien->jumlahObatResep; i++) {
                 printf("%s", pasien->daftarObatResep[i].nama);
@@ -111,13 +118,14 @@ void minum_obat(User *user_pasien) {
                 pasien->status = butuhPenawar;
                 printf("Kamu merasa makin gak enak badan... kayaknya kamu salah minum obat deh..\n");
                 printf("Dok! Butuh obat penawar!! X o X\n");
+                pasien->sisaNyawa -= 1;
             return;
             }
         }
 
         if (pasien->jumlahObat == 0) {
             if (pasien->status == butuhPenawar) {
-                printf("Kamu sudah minum semua obat, tapi masih butuh penawar.\n");
+                printf("Kamu sudah minum semua obat, tapi masih keracunan! Untung ga game over T-T.\n");
                 pasien->status = butuhPenawar;
                 return;
             }

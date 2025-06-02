@@ -41,7 +41,16 @@ void run_rs() {
             printf("\n>>> ");
         } else if (currUser->role == ROLE_PASIEN) {
             display_status_user(currUser->username, &(currUser->role));
-            // display_menu_pasien();
+            if (currUser != NULL && currUser->role == ROLE_PASIEN && currUser->dataPasien->sisaNyawa <= 0) {
+            printf("Game over.. Pasien dinyatakan Ded dan dikeluarkan dari rumah sakit. RIP o7\n");
+            int idRuangan = currUser->dataPasien->idRuangan;
+            if (idRuangan > 0) {
+                queue_dequeue(&ruangan.ruang[idRuangan - 1].Antrian);
+                currUser->dataPasien->status = meninggalDunia;
+                currUser = NULL; // Set dataPasien ke NULL agar tidak ada akses ke data yang sudah dihapus
+                display_main_menu();
+            }
+        }
             printf("\n>>> ");
         } else if (currUser->role == ROLE_DOKTER) {
             display_status_user(currUser->username, &(currUser->role));
@@ -59,7 +68,7 @@ void run_rs() {
             while (getchar() != '\n');
             continue;
         }
-        
+
         if (strcmp(command, "LOGIN") == 0) {
             login_system(&users);
         } else if (strcmp(command, "REGISTER") == 0) {

@@ -17,6 +17,8 @@ void minum_penawar(User *user_pasien) {
     Pasien *pasien = user_pasien->dataPasien;
     Stack *perutPasien = &pasien->perutPasien;
 
+    printf("Sisa nyawamu: %d\n", pasien->sisaNyawa);
+
     if (stack_is_empty(*perutPasien)) {
         printf("\nERROR: Perut kosong!! Belum ada obat yang dimakan.\n");
         return;
@@ -51,5 +53,6 @@ void minum_penawar(User *user_pasien) {
     if (urutanBenar) {
         printf(">> Berhasil! Urutan obat terdepan sudah sesuai resep dokter!\n");
         pasien->status = butuhMinumObat;
+        pasien->sisaNyawa = 3;
     }
 }

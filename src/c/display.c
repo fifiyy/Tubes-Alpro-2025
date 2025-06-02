@@ -42,16 +42,22 @@ void display_status_user(const char* username, UserRole *role) {
             printf("   Status: Butuh Minum Obat\n");
             break;
         case butuhPenawar:
-            printf("   Status: Butuh Minum Penawar\n");
-            break;
+            if (currUser->dataPasien->sisaNyawa <= 0) {
+                printf("   Status: Pasien Sudah Meninggal\n");
+                break;
+            }
+            else {
+                printf("   Status: Butuh Minum Penawar\n");
+                break;
+            }
+        
         case butuhPulang:
             printf("   Status: Sudah Boleh Pulang!\n");
             break;
         default:
             break;
         }
-        break;
-    default:
+        printf("   Sisa Nyawa:\033[1;31m%d\033[0m\n", currUser->dataPasien->sisaNyawa);
         break;
     }
 }

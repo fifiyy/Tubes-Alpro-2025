@@ -13,7 +13,8 @@ typedef enum {
     butuhDiberiObat,
     butuhMinumObat,
     butuhPenawar,
-    butuhPulang
+    butuhPulang,
+    meninggalDunia
 } StatusPasien;
 
 // unsigned int digunakan untuk variabel yang tidak pernah bernilai negatif
@@ -38,6 +39,7 @@ typedef struct {
     StatusPasien status;
     int idRuangan;
     int posisiAntrian;
+    int sisaNyawa;
 } Pasien;
 
 #endif

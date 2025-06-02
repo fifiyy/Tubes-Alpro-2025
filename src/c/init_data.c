@@ -68,6 +68,7 @@ void init_data(ListUser *users, Set *usernames) {
     pasien_gro.dataPasien->status = butuhDiagnosa; // Sudah didiagnosa
     pasien_gro.dataPasien->jumlahObat = 0;
     pasien_gro.dataPasien->idRuangan = -1;
+    pasien_gro.dataPasien->sisaNyawa = 3;
     // Data Medis
     pasien_gro.dataPasien->suhu = 39.5;
     pasien_gro.dataPasien->tekananDarah[0] = 135;
@@ -91,6 +92,7 @@ void init_data(ListUser *users, Set *usernames) {
     pasien_nimons.dataPasien->status = butuhDiagnosa;
     pasien_nimons.dataPasien->jumlahObat = 0;
     pasien_nimons.dataPasien->idRuangan = -1;
+    pasien_nimons.dataPasien->sisaNyawa = 3;
     // Data Medis
     pasien_nimons.dataPasien->suhu = 36.8;
     pasien_nimons.dataPasien->tekananDarah[0] = 150;

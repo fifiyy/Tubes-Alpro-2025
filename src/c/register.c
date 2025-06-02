@@ -64,7 +64,9 @@ void register_pasien(ListUser *users, Set *usernames) {
     newUser.dataPasien->id = list_nb_elmt(*users); // ID unik berdasarkan jumlah user
     newUser.dataPasien->jumlahObat = 0; // Inisialisasi jumlah obat
     newUser.dataPasien->idRuangan = -1; // Pasien belum dalam ruangan
-    newUser.dataPasien->posisiAntrian = -1; // Pasien belum dalam antrian
+    newUser.dataPasien->posisiAntrian = -1; // Pasien belum dalam antrian   
+    newUser.dataPasien->jumlahObatResep = 0; // Inisialisasi jumlah obat resep
+    newUser.dataPasien->sisaNyawa = 3;
     newUser.dataPasien->status = butuhDiagnosa; // Status awal pasien
     
     list_set_el(users, list_nb_elmt(*users), newUser);
