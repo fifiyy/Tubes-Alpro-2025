@@ -1,7 +1,7 @@
 #ifndef LOGOUT_H
 #define LOGOUT_H
 
-#include "user.h"
+#include "User.h"
 
 void logout_system();
 

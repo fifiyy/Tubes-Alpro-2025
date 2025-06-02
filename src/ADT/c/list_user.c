@@ -1,59 +1,60 @@
-#include "../header/list_user.h"
+#include "../header/List_User.h"
+#include "../../header/User.h"
 
-void MakeEmpty(ListUser *L) {
+void list_make_empty(ListUser *L) {
     L->length = 0;
 }
 
-int NbElmt(ListUser L) {
+int list_nb_elmt(ListUser L) {
     return L.length;
 }
 
-int MaxNbEl(ListUser L) {
+int list_max_nb_el(ListUser L) {
     return MAX_CAPACITY;
 }
 
-IdxType GetFirstIdx(ListUser L) {
+IdxType list_get_first_idx(ListUser L) {
     return 0;
 }
 
-IdxType GetLastIdx(ListUser L) {
+IdxType list_get_last_idx(ListUser L) {
     return L.length - 1;
 }
 
-User GetElmt(ListUser L, IdxType i) {
+User list_get_elmt(ListUser L, IdxType i) {
     return L.data[i];
 }
 
-void SetTab(ListUser Lin, ListUser *Lout) {
+void list_set_tab(ListUser Lin, ListUser *Lout) {
     Lout->length = Lin.length;
     for (int i = 0; i < Lin.length; i++) {
         Lout->data[i] = Lin.data[i];
     }
 }
 
-void SetEl(ListUser *L, IdxType i, User v) {
+void list_set_el(ListUser *L, IdxType i, User v) {
     L->data[i] = v;
     if (L->length < i + 1) {
         L->length = i + 1;
     }
 }
 
-void SetLength(ListUser *L, IdxType N) {
+void list_set_length(ListUser *L, IdxType N) {
     L->length = N;
 }
 
-boolean IsIdxValid(ListUser L, IdxType i) {
-    return i >= GetFirstIdx(L) && i < MAX_CAPACITY;
+boolean list_is_idx_valid(ListUser L, IdxType i) {
+    return i >= list_get_first_idx(L) && i < MAX_CAPACITY;
 }
 
-boolean IsIdxEff(ListUser L, IdxType i) {
-    return i >= GetFirstIdx(L) && i <= GetLastIdx(L);
+boolean list_is_idx_eff(ListUser L, IdxType i) {
+    return i >= list_get_first_idx(L) && i <= list_get_last_idx(L);
 }
 
-boolean IsEmpty(ListUser L) {
+boolean list_is_empty(ListUser L) {
     return L.length == 0;
 }
 
-boolean IsFull(ListUser L) {
+boolean list_is_full(ListUser L) {
     return L.length == MAX_CAPACITY;
 }

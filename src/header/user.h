@@ -26,6 +26,7 @@ typedef struct {
     char username[USERNAME_LEN];
     char password[PASSWORD_LEN];
     UserRole role;
+    int idUser;  // ID unik untuk setiap user
 
     union {
         Pasien *dataPasien;    // Jika role == ROLE_PASIEN
@@ -36,7 +37,7 @@ typedef struct {
 
 // Variabel global yang digunakan di seluruh program
 extern int user_count;         // Jumlah user yang terdaftar
-extern User* current_user;     // Pointer ke user yang sedang login
+extern User *currUser;     // Pointer ke user yang sedang login
 
 // Deklarasi fungsi utility
 // Di user.h

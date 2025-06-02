@@ -3,17 +3,18 @@
 
 #include "boolean.h"
 #include "obat.h"
+#include "../ADT/header/Stack.h"
 
-#define MAX_OBAT 10
 #define MAX_PENYAKIT 20
-#define MAX_KELUHAN 51
+// #define MAX_KELUHAN 51
 
 typedef enum {
     butuhDiagnosa,
     butuhDiberiObat,
     butuhMinumObat,
-    butuhSembuh,
-    butuhPulang
+    butuhPenawar,
+    butuhPulang,
+    meninggalDunia
 } StatusPasien;
 
 // unsigned int digunakan untuk variabel yang tidak pernah bernilai negatif
@@ -29,13 +30,16 @@ typedef struct {
     int kadarGulaDarah;
     unsigned int kadarKolesterol;
     unsigned int trombosit;
-    char keluhan[MAX_KELUHAN];
+    // char keluhan[MAX_KELUHAN];
     Obat daftarObat[MAX_OBAT];
-    Obat perutPasien[MAX_OBAT];
+    Obat daftarObatResep[MAX_OBAT];
+    Stack perutPasien;
     int jumlahObat;
+    int jumlahObatResep;
     StatusPasien status;
-    int id_dokter;
+    int idRuangan;
     int posisiAntrian;
+    int sisaNyawa;
 } Pasien;
 
 #endif

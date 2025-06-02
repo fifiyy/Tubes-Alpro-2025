@@ -1,5 +1,6 @@
 #include <string.h>
-#include "boolean.h"
+#include "Boolean.h"
+#include "../../header/Obat.h"
 
 #ifndef STACK_H
 #define STACK_H
@@ -7,12 +8,13 @@
 #define IDX_UNDEF -1
 #define CAPACITY 100
 
-typedef int ElType;
+typedef Obat ElType;
 
 typedef struct
 {
     ElType buffer[CAPACITY];
     int idxTop;
+    int maxSize;
 } Stack;
 
 #define IDX_TOP(s) (s).idxTop

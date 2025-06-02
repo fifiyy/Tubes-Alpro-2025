@@ -1,30 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../header/exit.h"
-#include "../header/user.h" // Untuk akses current_user
+#include "../header/Exit.h"
+#include "../header/User.h"
 
 void exit_system(ListUser *users) {
     char input[10];
 
+    printf("\n+-----------------------------------------------+\n");
+    printf("|                     EXIT                      |\n");
+    printf("+-----------------------------------------------+\n");
+    printf("Terima kasih telah menggunakan layanan RS!\n");
+
     printf("\nApakah Anda mau keluar dari rumah sakit? (y/n)\n");
 
     while (1) {
-        printf("Pilihan Anda: ");
+        printf("Pilihan Kamu: ");
         scanf("%s", input);
     
         if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-            if (current_user == NULL) {
-                printf("\nUser keluar dari Rumah Sakit,\nSampai jumpa!\n");
+            if (currUser == NULL) {
+                printf("\n>> User berhasil keluar dari Rumah Sakit Nimons.\nSampai jumpa!\n");
             } else {
-                printf("\n%s keluar dari Rumah Sakit,\nSampai jumpa!\n", current_user->username);
+                printf("\n>> @%s berhasil keluar dari Rumah Sakit Nimons.\nSampai jumpa!\n", currUser->username);
             }
             exit(0);
         } else if (strcmp(input, "N") == 0 || strcmp(input, "n") == 0) {
-            printf("\nKembali ke menu utama...\n");
+            printf("\n>> Kembali ke menu utama...\n");
             return;
         } else {
-            printf("Tidak valid. Pilih Y atau N ya!\n");
+            printf("ERROR: Input tidak valid.\n");
+            printf("HELP: Pilih Y atau N.\n");
         }
     }    
 }

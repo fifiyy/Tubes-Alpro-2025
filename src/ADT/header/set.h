@@ -2,19 +2,19 @@
 #define SET_H
 
 #include <string.h> // Untuk operasi string
-#include "boolean.h"
+#include "Boolean.h"
 
 #define Nil NULL
 #define MaxEl 100
 #define USERNAME_LEN 50 // Panjang maksimum username
 
 typedef struct {
-    char Elements[MaxEl][USERNAME_LEN]; // Array untuk menyimpan username
-    int Count; // Jumlah elemen dalam Set
+    char elements[MaxEl][USERNAME_LEN]; // Array untuk menyimpan username
+    int count; // Jumlah elemen dalam Set
 } Set;
 
 extern Set usernames; // Deklarasi variabel global untuk menyimpan daftar username
-extern Set doctor_usernames;
+extern Set doctorUsernames;
 
 /* Definisi Set S kosong : S.Count = Nil */
 /* S.Count = jumlah elemen Set */

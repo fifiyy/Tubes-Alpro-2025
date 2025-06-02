@@ -1,10 +1,11 @@
-#ifndef QUEUE_LINKEDLIST_H
-#define QUEUE_LINKEDLIST_H
+
+#ifndef QUEUE_LINKED_LIST_H
+#define QUEUE_LINKED_LIST_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "boolean.h"
-#include "../../header/user.h"
+#include "../../header/User.h"
 
 // Forward declaration instead of including user.h
 
@@ -20,14 +21,14 @@ typedef struct AntrianNode {
 } AntrianNode;
 
 typedef struct {
-    address First; // Pointer ke elemen pertama
-    address Last;  // Pointer ke elemen terakhir
+    address first; // Pointer ke elemen pertama
+    address last;  // Pointer ke elemen terakhir
     int jumlah; // Jumlah elemen dalam list
 } AntrianDokter;
 
 /* Struktur Queue berbasis Linked List */
 typedef struct {
-    int dokter_id; // ID dokter
+    int idRuangan; // ID dokter
     AntrianDokter antrian; // Antrian pasien untuk dokter tersebut
 } MapDokterAntrian;
 

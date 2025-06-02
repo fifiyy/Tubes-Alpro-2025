@@ -1,20 +1,18 @@
+
 #ifndef DOKTER_H
 #define DOKTER_H
 
-#include "../../ADT/header/queue_linkedlist.h"
-#include "../../ADT/header/ruangan.h"
+#include "../../ADT/header/Queue_Linkedlist.h"
+#include "../../ADT/header/Ruangan.h"
 
 #define MAX_PASIEN_RUANGAN 3
-
 
 typedef struct Dokter {
     int id;
     char username[USERNAME_LEN];
-    int ruangan;
-    // Pasien *pasienDiRuangan[MAX_PASIEN_RUANGAN];
-    // AntrianDokter antrian; // Uncommented this since it's used in dokter.c
+    int nomorRuangan;
 } Dokter;
 
-Pasien *assignPasienKeDokter(User *user, Dokter* dokter, Pasien* pasien, ListRuangan *ruangan);
+Pasien *assign_pasien_ke_dokter (User *user, Dokter* dokter, Pasien* pasien, ListRuangan *ruangan);
 
 #endif

@@ -1,6 +1,8 @@
 #ifndef OBAT_H
 #define OBAT_H
 
+#define MAX_OBAT 10
+
 typedef struct AtributObat
 {
     int id;
@@ -8,6 +10,6 @@ typedef struct AtributObat
 } Obat;
 
 extern Obat ketObat[];
-extern const int JUMLAH_OBAT;
+extern const int jumlahObat;
 
 #endif

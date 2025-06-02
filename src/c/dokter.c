@@ -1,25 +1,26 @@
+
 #include "dokter.h"
-#include "../../ADT/header/ruangan.h"
+#include "../ADT/header/Ruangan.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-Pasien* assignPasienKeDokter(User *user, Dokter* dokter, Pasien* pasien, ListRuangan *ruangan) {
+Pasien* assign_pasien_ke_dokter(User *user, Dokter* dokter, Pasien* pasien, ListRuangan *ruangan) {
     if (dokter == NULL || pasien == NULL) {
-        printf("Error: Data dokter atau pasien tidak valid\n");
+        printf("ERROR: Data dokter atau pasien tidak valid\n");
         return NULL;
     }
 
-    int idx_ruang = dokter->ruangan - 1; // ruangan biasanya 1-based
+    int idx_ruang = dokter->nomorRuangan - 1; // ruangan biasanya 1-based
     if (idx_ruang < 0 || idx_ruang >= ruangan->jumlah) {
-        printf("Error: Dokter belum punya ruangan yang valid\n");
+        printf("ERROR: Dokter belum punya ruangan yang valid\n");
         return NULL;
     }
 
     // Cek apakah pasien sudah ada di queue
-    address current = ruangan->ruang[idx_ruang].Antrian.First;
+    address current = ruangan->ruang[idx_ruang].Antrian.first;
     while (current != NULL) {
         if (current->pasien->dataPasien == pasien) {
-            printf("Pasien sudah berada dalam antrian atau ruangan!\n");
+            printf("ERROR: Pasien sudah berada dalam antrian atau ruangan!\n");
             return NULL;
         }
         current = current->next;
@@ -36,11 +37,11 @@ Pasien* assignPasienKeDokter(User *user, Dokter* dokter, Pasien* pasien, ListRua
         } else {
             pasien->posisiAntrian = jumlah_baru - ruangan->ruang[idx_ruang].kapasitas;
         }
-        pasien->id_dokter = dokter->id;
-        printf("Pasien berhasil didaftarkan ke antrian/ruangan\n");
+        pasien->idRuangan = dokter->nomorRuangan; // set id ruangan pasien
+        printf(">> Pasien berhasil didaftarkan ke antrian/ruangan\n");
         return pasien;
     }
 
-    printf("Gagal mendaftarkan pasien ke antrian\n");
+    printf("ERROR: Gagal mendaftarkan pasien ke antrian\n");
     return NULL;
 }
