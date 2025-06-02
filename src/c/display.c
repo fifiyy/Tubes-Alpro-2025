@@ -54,7 +54,11 @@ void display_status_user(const char* username, UserRole *role) {
         case butuhPulang:
             printf("   Status: Sudah Boleh Pulang!\n");
             break;
+        case butuhCheckup:
+            printf("   Status: Butuh Checkup\n");
+            break;
         default:
+            printf("   Status: Tidak Diketahui\n");
             break;
         }
         printf("   Sisa Nyawa:\033[1;31m%d\033[0m\n", currUser->dataPasien->sisaNyawa);

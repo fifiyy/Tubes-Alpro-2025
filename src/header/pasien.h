@@ -9,6 +9,7 @@
 // #define MAX_KELUHAN 51
 
 typedef enum {
+    butuhCheckup,
     butuhDiagnosa,
     butuhDiberiObat,
     butuhMinumObat,
