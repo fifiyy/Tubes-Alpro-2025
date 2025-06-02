@@ -1,10 +1,10 @@
 #ifndef DIAGNOSIS_H_
 #define DIAGNOSIS_H_
 
-#include "Penyakit.h"
-#include "User.h"
-#include "../../ADT/header/Queue_Linkedlist.h"
-#include "../ADT/header/List_User.h"
+#include "penyakit.h"
+#include "user.h"
+#include "../../ADT/header/queue_linkedlist.h"
+#include "../ADT/header/list_user.h"
 
 /**
  * @brief Mengidentifikasi penyakit pasien berdasarkan gejala yang dimiliki
@@ -22,7 +22,7 @@
     { I.S.: Data penyakit sudah dimuat, data pasien valid, jumlah penyakit > 0 }
     { F.S.: Mengembalikan nama penyakit jika ketemu, NULL jika tidak }
 */
-static char *identifikasi_penyakit (Pasien *pasien);
+static char *identifikasiPenyakit (Pasien *pasien);
 
 /**
  * @brief Melakukan proses diagnosis pasien oleh dokter
@@ -34,6 +34,6 @@ static char *identifikasi_penyakit (Pasien *pasien);
     { I.S.: db terinisialisasi, nama pasien valid }
     { F.S.: Pesan diagnosis tercetak ke layar }
 */
-void diagnosis_pasien(User *user_dokter);
+void diagnosisPasien (User *user_dokter);
 
 #endif
