@@ -50,6 +50,9 @@ void set_delete(Set *S, const char *Elmt);
         Elmt mungkin anggota / bukan anggota dari S */
 /* F.S. Elmt bukan anggota dari S */
 
+boolean set_is_unique (const Set *S, const char *usernames);
+/* Mengembalikan true jika usernames belum ada di dalam Set S */
+
 boolean set_is_member(Set S, const char *Elmt);
 /* Mengembalikan true jika Elmt adalah anggota dari S */
 

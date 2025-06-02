@@ -40,8 +40,39 @@ void set_delete (Set *S, const char *Elmt) {
     S->count--;
 }
 
+boolean set_is_unique (const Set *S, const char *usernames) {
+    for (int i = 0; i < S->count; i++) {
+        const char *a = S->elements[i];
+        const char *b = usernames;
+       
+        while (*a && *b) {
+            char a_char = *a;
+            char b_char = *b;
+           
+            // Case-insensitive comparison
+            if (a_char >= 'A' && a_char <= 'Z') a_char += 32;
+            if (b_char >= 'A' && b_char <= 'Z') b_char += 32;
+           
+            if (a_char != b_char) break;
+           
+            a++;
+            b++;
+        }
+       
+        if (*a == '\0' && *b == '\0') {
+            return false;
+        }
+    }
+    return true;
+}
+
 boolean set_is_member (Set S, const char *Elmt) {
+    if (set_is_empty(S)) return false; // Jika Set kosong, tidak ada anggota
+
     for (int i = 0; i < S.count; i++) {
+        if (set_is_unique(&S, Elmt)) return false; // Jika elemen unik, tidak ada anggota
+
+        // Cek apakah Elmt ada dalam Set
         if (strcmp(S.elements[i], Elmt) == 0) { // Bandingkan string
             return true;
         }
