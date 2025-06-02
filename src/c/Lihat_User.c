@@ -81,7 +81,7 @@ void lihat_user (ListUser L) {
     }
 
     if (currUser->role != ROLE_MANAGER){
-        printf ("nERROR: Hanya manajer yang bisa melihat user.\n");
+        printf ("\nERROR: Hanya manajer yang bisa melihat user.\n");
         return;
     }
     
