@@ -4,7 +4,7 @@
 #include "../header/User.h"    
 
 boolean is_username_unique(const Set *usernames, const char* username) {
-    return !set_is_member(*usernames, username); // Gunakan fungsi IsMember dari Set
+    return set_is_unique(usernames, username);
 }
 
 void register_pasien(ListUser *users, Set *usernames) {
@@ -67,7 +67,7 @@ void register_pasien(ListUser *users, Set *usernames) {
     newUser.dataPasien->posisiAntrian = -1; // Pasien belum dalam antrian   
     newUser.dataPasien->jumlahObatResep = 0; // Inisialisasi jumlah obat resep
     newUser.dataPasien->sisaNyawa = 3;
-    newUser.dataPasien->status = butuhDiagnosa; // Status awal pasien
+    newUser.dataPasien->status = butuhCheckup; // Status awal pasien
     
     list_set_el(users, list_nb_elmt(*users), newUser);
     // list_set_length(users, list_nb_elmt(*users) + 1);
