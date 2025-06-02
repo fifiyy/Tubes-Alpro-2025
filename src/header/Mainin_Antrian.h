@@ -2,5 +2,3 @@
 #include "../ADT/header/ruangan.h"
 
 void skip_antrian(User *user, ListRuangan *ruangan, int banyakUser);
-
-void cancel_antrian(User *user, ListRuangan *ruangan, int banyakUser);

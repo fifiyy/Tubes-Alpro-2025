@@ -80,6 +80,3 @@ void skip_antrian(User *user, ListRuangan *ruangan, int banyakUser) {
 
     printf(">> Kamu berhasil pindah ke posisi pertama antrian!\n");
 }
-
-void cancel_antrian(User *user, ListRuangan *ruangan, int banyakUser) {
-}
