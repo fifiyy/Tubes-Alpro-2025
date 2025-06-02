@@ -45,13 +45,13 @@ void lupa_password_system(ListUser *users) {
     }
     
     if (user == NULL) {
-        printf("Username tidak terdaftar!\n");
+        printf("ERROR: Username tidak terdaftar!\n");
         return;
     }
     
     printf("Kode Unik: ");
     if (scanf("%99s", kodeUnikInput) != 1) {
-        printf("Input tidak valid!\n");
+        printf("ERROR: Input tidak valid!\n");
         while (getchar() != '\n');
         return;
     }
@@ -59,7 +59,7 @@ void lupa_password_system(ListUser *users) {
     generate_kode_unik(user->username, kodeUnikAsli);
     
     if (strcmp(kodeUnikInput, kodeUnikAsli) != 0) {
-        printf("Kode unik salah!\n");
+        printf("ERROR: Kode unik salah!\n");
         return;
     }
     
@@ -67,11 +67,16 @@ void lupa_password_system(ListUser *users) {
            role_to_string(user->role), user->username);
     printf("Password Baru: ");
     if (scanf("%49s", newPassword) != 1) {
-        printf("Input tidak valid!\n");
+        printf("ERROR: Input tidak valid!\n");
         while (getchar() != '\n');
         return;
     }
     
+    if (user->password == newPassword) {
+        printf("ERROR: Password baru tidak boleh sama dengan password lama!\n");
+        return;
+    }
+
     strcpy(user->password, newPassword);
     printf("Password berhasil diubah!\n");
 }
