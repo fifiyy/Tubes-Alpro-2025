@@ -6,70 +6,86 @@
 
 extern ListRuangan ruangan;
 
-static char *identifikasiPenyakit (Pasien *pasien) {
-    static char nama_penyakit[MAX_PENYAKIT];
+static char *identifikasi_penyakit (Pasien *pasien) {
+    static char namaPenyakit[MAX_PENYAKIT];
     for (int i = 0; i < jumlahPenyakit; i++) {
         Penyakit p = ketPenyakit[i];
-        if (pasien->suhu >= p.suhu_min && pasien->suhu <= p.suhu_max &&
-            pasien->tekananDarah[0] >= p.bp_sis_min && pasien->tekananDarah[0] <= p.bp_sis_max &&
-            pasien->tekananDarah[1] >= p.bp_dias_min && pasien->tekananDarah[1] <= p.bp_dias_max &&
-            pasien->detakJantung >= p.bpm_min && pasien->detakJantung <= p.bpm_max &&
-            pasien->saturasiOksigen >= p.sats_min && pasien->saturasiOksigen <= p.sats_max &&
-            pasien->kadarGulaDarah >= p.bg_min && pasien->kadarGulaDarah <= p.bg_max &&
-            pasien->beratBadan >= p.bb_min && pasien->beratBadan <= p.bb_max &&
-            pasien->tinggiBadan >= p.tb_min && pasien->tinggiBadan <= p.tb_max &&
-            pasien->kadarKolesterol >= p.fat_min && pasien->kadarKolesterol <= p.fat_max &&
-            pasien->trombosit >= p.trom_min && pasien->trombosit <= p.trom_max) 
+        if (pasien->suhu >= p.suhuMin && pasien->suhu <= p.suhuMax &&
+            pasien->tekananDarah[0] >= p.bpSisMin && pasien->tekananDarah[0] <= p.bpSisMax &&
+            pasien->tekananDarah[1] >= p.bpDiasMin && pasien->tekananDarah[1] <= p.bpDiasMax &&
+            pasien->detakJantung >= p.bpmMin && pasien->detakJantung <= p.bpmMax &&
+            pasien->saturasiOksigen >= p.satsMin && pasien->saturasiOksigen <= p.satsMax &&
+            pasien->kadarGulaDarah >= p.bgMin && pasien->kadarGulaDarah <= p.bgMax &&
+            pasien->beratBadan >= p.bbMin && pasien->beratBadan <= p.bbMax &&
+            pasien->tinggiBadan >= p.tbMin && pasien->tinggiBadan <= p.tbMax &&
+            pasien->kadarKolesterol >= p.fatMin && pasien->kadarKolesterol <= p.fatMax &&
+            pasien->trombosit >= p.tromMin && pasien->trombosit <= p.tromMax) 
             {
                 strcpy(pasien->penyakit, p.nama);
-                strncpy(nama_penyakit, p.nama, MAX_PENYAKIT-1);
-                nama_penyakit[MAX_PENYAKIT-1] = '\0';
-                return nama_penyakit;
+                strncpy(namaPenyakit, p.nama, MAX_PENYAKIT-1);
+                namaPenyakit[MAX_PENYAKIT-1] = '\0';
+                return namaPenyakit;
             }
     }
     return NULL;
 } 
 
-void diagnosisPasien (User *user_dokter) {
-    if (user_dokter == NULL) {
-        printf("Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
+void diagnosis_pasien (User *userDokter) {
+    if (userDokter == NULL) {
+        printf("ERROR: Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
         return;
     }
-    if (user_dokter->role != ROLE_DOKTER) {
-        printf("Hanya dokter yang bisa diagnosis!\n");
+
+    if (userDokter->role != ROLE_DOKTER) {
+        printf("ERROR: Hanya dokter yang bisa diagnosis!\n");
         return;
     }
-    Dokter *dokter = user_dokter->dataDokter;
-    int idx_ruang = dokter->ruangan - 1;
-    if (idx_ruang < 0 || idx_ruang >= ruangan.jumlah) {
-        printf("[dr. %s] Anda belum memiliki ruangan.\n", user_dokter->username);
+
+    Dokter *dokter = userDokter->dataDokter;
+    int idxRuang = dokter->nomorRuangan - 1;
+    for (int i = 0; i < ruangan.jumlah; i++) {
+        if (ruangan.ruang[i].dokter != NULL && ruangan.ruang[i].dokter->id == dokter->id) {
+            idxRuang = i;
+            break;
+        }
+    }
+
+    if (idxRuang < 0 || idxRuang >= ruangan.jumlah) {
+        printf("[dr. %s] Kamu belum memiliki ruangan.\n", userDokter->username);
         return;
     }
-    Ruangan *r = &ruangan.ruang[idx_ruang];
-    address current = r->Antrian.First;
+
+    Ruangan *r = &ruangan.ruang[idxRuang];
+    address current = r->Antrian.first;
     if (current == NULL) {
-        printf("[dr. %s] Kamu lagi nggak ada pasien. Asik, free time!\n", user_dokter->username);
+        printf("[dr. %s] Kamu lagi nggak ada pasien. Asik, free time!\n", userDokter->username);
         return;
     }
-    User *user_pasien = current->pasien;
-    Pasien *pasien = user_pasien->dataPasien;
+
+    User *userPasien = current->pasien;
+    Pasien *pasien = userPasien->dataPasien;
+
     if (pasien->status == butuhDiberiObat) {
-        printf("[dr. %s] Pasien %s udah didiagnosa, tinggal dikasih obat aja\n", user_dokter->username, user_pasien->username);
+        printf("[dr. %s] Pasien @%s udah didiagnosa, tinggal dikasih obat aja.\n", userDokter->username, userPasien->username);
         return;
     }
+
     if (pasien->status != butuhDiagnosa) {
-        printf("[dr. %s] Pasien %s sudah didiagnosis sebelumnya, tidak perlu didiagnosis lagi.\n", user_dokter->username, user_pasien->username);
+        printf("[dr. %s] Pasien @%s tidak perlu didiagnosis lagi.\n", userDokter->username, userPasien->username);
         return;
     }
     
-    char *penyakit = identifikasiPenyakit(pasien);
+    char *penyakit = identifikasi_penyakit(pasien);
+    printf("\n+-----------------------------------------------+\n");
+    printf("|                     DIAGNOSA                  |\n");
+    printf("+-----------------------------------------------+\n");
     if (penyakit != NULL) {
         pasien->status = butuhDiberiObat;
-        printf("[dr. %s] Pasien %s terdiagnosa mengidap penyakit: %s\n", user_dokter->username, user_pasien->username, penyakit);
-        printf("Jangan lupa untuk diobatin ya, dr. %s!\n", user_dokter->username);
-        printf("Untuk mengobati pasien %s, ketik NGOBATIN!\n", user_pasien->username);
+        printf("[dr. %s] Pasien @%s terdiagnosa mengidap penyakit: %s\n", userDokter->username, userPasien->username, penyakit);
+        printf("[dr. %s] Jangan lupa untuk diobatin ya!\n", userDokter->username);
+        printf("HELP: Untuk mengobati pasien @%s, ketik NGOBATIN!\n", userPasien->username);
     } else {
         pasien->status = butuhPulang;
-        printf("[dr. %s] Pasien %s sehat banget! Dijamin kuat salto keliling kota!\n", user_dokter->username, user_pasien->username);
+        printf("[dr. %s] Pasien @%s sehat banget! Dijamin kuat salto keliling kota!\n", userDokter->username, userPasien->username);
     }
 }

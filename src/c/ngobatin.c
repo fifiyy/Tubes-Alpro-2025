@@ -47,7 +47,7 @@ void ngobatin (User *currUser, User *users, int banyakUser, ListRuangan *ruangan
     }
 
     // Cari pasien pertama di antrian
-    address current = ruanganDokter->Antrian.First;
+    address current = ruanganDokter->Antrian.first;
     if (current == NULL || current->pasien->dataPasien == NULL) {
         printf("[dr. %s] Kamu lagi nggak ada pasien. Ngobatin siapa?\n", currUser->username);
         return;

@@ -22,7 +22,7 @@
     { I.S.: Data penyakit sudah dimuat, data pasien valid, jumlah penyakit > 0 }
     { F.S.: Mengembalikan nama penyakit jika ketemu, NULL jika tidak }
 */
-static char *identifikasiPenyakit (Pasien *pasien);
+static char *identifikasi_penyakit (Pasien *pasien);
 
 /**
  * @brief Melakukan proses diagnosis pasien oleh dokter
@@ -34,6 +34,6 @@ static char *identifikasiPenyakit (Pasien *pasien);
     { I.S.: db terinisialisasi, nama pasien valid }
     { F.S.: Pesan diagnosis tercetak ke layar }
 */
-void diagnosisPasien (User *user_dokter);
+void diagnosis_pasien (User *user_dokter);
 
 #endif
