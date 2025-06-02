@@ -16,18 +16,7 @@ void display_main_menu() {
     printf("| EXIT                                                                                |\n");
     printf("| HELP                                                                                |\n");
     printf("=======================================================================================\n");
-}
-
-void display_menu_pasien() {
-    
-}
-
-void display_menu_dokter() {
-
-}
-
-void display_menu_manajer() {
-
+    printf("© 2025 - K03-A. All rights reserved.\n");
 }
 
 void display_status_user(const char* username, UserRole *role) {
