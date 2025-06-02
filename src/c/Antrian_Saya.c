@@ -34,9 +34,6 @@ void cek_antrian_saya (User *user, User *users, ListRuangan *ruangan, int banyak
             curr = curr->next;
             posisi++;
         }
-        if (found) {
-            break;
-        }
     }
 
     if (!found) {
