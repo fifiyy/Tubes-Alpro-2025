@@ -106,9 +106,11 @@ void pulangdok(User *user_pasien, ListRuangan *listRuangan) {
             printf("[@%s] Yayy Selamat! Kamu sudah dinyatakan sembuh oleh dokter. Silahkan pulang dan semoga sehat selalu\n", user_pasien->username);
     
             // reset data pasien seperti pas register
+
             make_default_pasien(pasien);
     
             int keluar = queue_dequeue(antrianDokterRuangan);
+            currUser = NULL;
             return;
         }
     }

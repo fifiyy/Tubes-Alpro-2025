@@ -9,6 +9,8 @@
 #include "../ADT/header/Queue_Linkedlist.h"
 #include "../ADT/header/Ruangan.h"
 
+void make_default_pasien(Pasien *pasien);
+
 void pulangdok(User *user_pasien, ListRuangan *listRuangan);
 
 #endif

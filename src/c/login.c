@@ -33,6 +33,32 @@ void login_system(ListUser *users) {
     for (int i = list_get_first_idx(*users); i <= list_get_last_idx(*users); i++) {
         User user = list_get_elmt(*users, i);
         if (strcmp(user.username, username) == 0) {
+            if (user.role == ROLE_PASIEN && user.dataPasien->status == meninggalDunia) {
+                    int loop = 5;
+                    while (loop > 0) {
+                        printf("\nERROR: ERORR ERORRR RORR\n");
+                        printf("hAaHhhh?!#$? KmOE MaW lOG1n p4K3 aeAkUN inII&^?@!?\n");
+                        printf("hANTUuUuUuU x_x\n\n");
+                        loop--;
+                    }
+                    printf("            █████           █████      \n");
+                    printf("         ██░░░░░░██      ██░░░░░░██    \n\n");
+ 
+                    printf("       ██████████   ██████████         \n");
+                    printf("     ██░░░░░░██      ██░░░░░░██        \n");
+                    printf("    ██░░████░░██    ██░░████░░██       \n");
+                    printf("    ██░░██░░░░██    ██░░██░░░░██       \n");
+                    printf("    ██░░██▄▄░░██    ██░░██▄▄░░██       \n");
+                    printf("    ██░░██▄▄░░██    ██░░██▄▄░░██       \n");
+                    printf("       ██████          ██████          \n\n");
+          
+                    printf("                     ░█                \n");
+                    printf("              ██████░                  \n");
+                    printf("            █░░░█                      \n");
+                    printf("           █░░░█                       \n");
+                    printf("            ██                         \n");
+                    return;
+                }
             if (strcmp(user.password, password) == 0) {
                 currUser = &users->data[i];
                 printf("\nSelamat datang, %s %s!\n", role_to_string(currUser->role), currUser->username);
