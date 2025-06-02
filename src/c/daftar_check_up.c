@@ -8,7 +8,7 @@
 // Validasi input angka positif
 boolean validasi_float (float nilai, const char* namaVar) {
     if (nilai <= 0) {
-        printf("\n ERROR: %s harus positif!\n", namaVar);
+        printf(" ERROR: %s harus positif!\n", namaVar);
         return false;
     }
     return true;
@@ -16,7 +16,7 @@ boolean validasi_float (float nilai, const char* namaVar) {
 
 boolean validasi_integer (int nilai, const char* namaVar) {
     if (nilai <= 0) {
-        printf("\nERROR: %s harus positif!\n", namaVar);
+        printf(" ERROR: %s harus positif!\n", namaVar);
         return false;
     }
     return true;
@@ -88,18 +88,9 @@ void daftar_check_up(User *currUser, User *users, int banyakUser, ListRuangan *r
         return;
     }
 
-    //cek apakah pasien sudah berada di ruangan/antrian (berdasarkan queue, bukan array manual)
-    for (int i = 0; i < ruangan->jumlah; i++) {
-        Ruangan *r = &ruangan->ruang[i];
-        address curr = r->Antrian.first;
-        while (curr != NULL) {
-            if (curr->pasien->dataPasien == pasien) {
-                printf("[@%s] Kamu sudah berada di ruangan %d (atau antrian ruangan %d)\n", 
-                    currUser->username, r->nomor, r->nomor);
-                return;
-            }
-            curr = curr->next;
-        }
+    if (pasien->status != butuhCheckup) {
+        printf("[@%s] Kamu sudah daftar checkup, silakan tunggu anda didiagnosis.\n", currUser->username);
+        return;
     }
 
     // Hitung jumlah dokter yang tersedia
@@ -117,39 +108,84 @@ void daftar_check_up(User *currUser, User *users, int banyakUser, ListRuangan *r
     printf(">> Input data medis:\n");
     do {
         printf("Suhu tubuh (Celcius): ");
-        scanf("%f", &pasien->suhu);
+        if (scanf("%f", &pasien->suhu) <=0) {
+            printf("\n ERROR: Input harus berupa angka!\n");
+            while (getchar() != '\n'); // flush buffer
+            pasien->suhu = -1;
+            continue;
+        }
     } while (!validasi_float(pasien->suhu, "Suhu"));
     do {
         printf("Tekanan darah (sistol/diastol, contoh: 120 80): ");
-        scanf("%d %d", &pasien->tekananDarah[0], &pasien->tekananDarah[1]);
+        if (scanf("%d %d", &pasien->tekananDarah[0], &pasien->tekananDarah[1]) != 2) {
+            printf("\n ERROR: Input harus berupa dua angka!\n");
+            while (getchar() != '\n');
+            pasien->tekananDarah[0] = pasien->tekananDarah[1] = -1;
+            continue;
+        }
     } while (pasien->tekananDarah[0] <= 0 || pasien->tekananDarah[1] <= 0);
     do {
         printf("Detak jantung (bpm): ");
-        scanf("%d", &pasien->detakJantung);
+        if (scanf("%d", &pasien->detakJantung) <=0) {
+            printf("\n ERROR: Input harus berupa angka!\n");
+            while (getchar() != '\n'); // flush buffer
+            pasien->suhu = -1;
+            continue;
+        }
     } while (!validasi_integer(pasien->detakJantung, "Detak jantung"));
     do {
         printf("Saturasi oksigen (persentase): ");
-        scanf("%f", &pasien->saturasiOksigen);
+        if (scanf("%f", &pasien->saturasiOksigen) <=0) {
+            printf("\n ERROR: Input harus berupa angka!\n");
+            while (getchar() != '\n'); // flush buffer
+            pasien->suhu = -1;
+            continue;
+        }
     } while (!validasi_float(pasien->saturasiOksigen, "Saturasi oksigen"));
     do {
         printf("Kadar gula darah (mg/dL): ");
-        scanf("%d", &pasien->kadarGulaDarah);
+        if (scanf("%d", &pasien->kadarGulaDarah) <=0) {
+            printf("\n ERROR: Input harus berupa angka!\n");
+            while (getchar() != '\n'); // flush buffer
+            pasien->suhu = -1;
+            continue;
+        }
     } while (!validasi_integer(pasien->kadarGulaDarah, "Kadar gula darah"));
     do {
         printf("Berat badan (kg): ");
-        scanf("%f", &pasien->beratBadan);
+        if (scanf("%f", &pasien->beratBadan) <=0) {
+            printf("\n ERROR: Input harus berupa angka!\n");
+            while (getchar() != '\n'); // flush buffer
+            pasien->suhu = -1;
+            continue;
+        }
     } while (!validasi_float(pasien->beratBadan, "Berat badan"));
     do {
         printf("Tinggi badan (cm): ");
-        scanf("%d", &pasien->tinggiBadan);
+        if (scanf("%d", &pasien->tinggiBadan) <=0) {
+            printf("\n ERROR: Input harus berupa angka!\n");
+            while (getchar() != '\n'); // flush buffer
+            pasien->suhu = -1;
+            continue;
+        }
     } while (!validasi_integer(pasien->tinggiBadan, "Tinggi badan"));
     do {
         printf("Kadar kolestrol (mg/dL): ");
-        scanf("%d", &pasien->kadarKolesterol);
+        if (scanf("%d", &pasien->kadarKolesterol) <=0) {
+            printf("\n ERROR: Input harus berupa angka!\n");
+            while (getchar() != '\n'); // flush buffer
+            pasien->suhu = -1;
+            continue;
+        }
     } while (!validasi_integer(pasien->kadarKolesterol, "Kadar kolestrol"));
     do {
         printf("Trombosit (ribu/µL): ");
-        scanf("%d", &pasien->trombosit);
+        if (scanf("%d", &pasien->trombosit) <=0) {
+            printf("\n ERROR: Input harus berupa angka!\n");
+            while (getchar() != '\n'); // flush buffer
+            pasien->suhu = -1;
+            continue;
+        }
     } while (!validasi_integer(pasien->trombosit, "Trombosit"));
     
     
@@ -213,6 +249,8 @@ void daftar_check_up(User *currUser, User *users, int banyakUser, ListRuangan *r
                dokterPilihan->nomorRuangan);
         printf("[@%s] Posisi antrian Kamu: %d\n", 
             currUser->username, result->posisiAntrian);
+
+        pasien->status = butuhDiagnosa; // Set status pasien
     } else {
         printf("ERROR: Gagal mendaftar!\n");
     }
