@@ -20,7 +20,7 @@ void cek_antrian_saya (User *user, User *users, ListRuangan *ruangan, int banyak
     
     // Cek apakah pasien ada di antrian/ruangan manapun (berdasarkan queue)
     int found = 0;
-    int posisi = 0;
+    int posisi = -1;
     int idxRuang = -1;
     for (int i = 0; i < ruangan->jumlah; i++) {
         address curr = ruangan->ruang[i].Antrian.first;
@@ -34,6 +34,7 @@ void cek_antrian_saya (User *user, User *users, ListRuangan *ruangan, int banyak
             curr = curr->next;
             posisi++;
         }
+        if (found) break;
     }
 
     if (!found) {
@@ -45,7 +46,7 @@ void cek_antrian_saya (User *user, User *users, ListRuangan *ruangan, int banyak
     }
 
     // Jika posisi < MAX_PASIEN_RUANGAN, berarti sudah di ruangan
-    if (posisi < MAX_PASIEN_RUANGAN) {
+    if (posisi < ruangan->ruang[idxRuang].kapasitas) {
         printf("[@%s] Kamu lagi di ruangan dokter, loh. Dokternya ga lagi tidur kan?\n", user->username);
         return;
     }

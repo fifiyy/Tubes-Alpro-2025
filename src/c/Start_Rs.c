@@ -19,6 +19,7 @@
 #include "Pulangdok.h"
 #include "Lihat_User.h"
 #include "Cari_User.h"
+#include "Mainin_Antrian.h"
 
 ListUser users;
 ListRuangan ruangan;
@@ -131,7 +132,9 @@ void run_rs() {
             minum_penawar(currUser);
         } else if (strcmp(command, "PULANG") == 0) {
             pulangdok(currUser, &ruangan);
-        }  else {
+        } else if (strcmp(command, "SKIP_ANTRIAN") == 0) {
+            skip_antrian(currUser, &ruangan, users.length);
+        } else {
             printf("Command tidak dikenali. Ketik HELP untuk bantuan.\n");
         }
     }
