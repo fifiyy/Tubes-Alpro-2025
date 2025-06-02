@@ -66,7 +66,7 @@ Dan karena hidup bersama ratusan makhluk kuning berbentuk kapsul adalah sumber k
 ---
 
 ### **F08 – Cari User**
-> Melakukan pencarian user berdasarkan nama/NIK
+> Melakukan pencarian user berdasarkan nama/ID
 
 ---
 
