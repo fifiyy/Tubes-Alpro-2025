@@ -1,6 +1,7 @@
 #include "../header/Antrian_Saya.h"
 #include <stdio.h>
 #include <string.h>
+//Random
 
 void cek_antrian_saya (User *user, User *users, ListRuangan *ruangan, int banyakUser) {
     if (currUser == NULL) {
