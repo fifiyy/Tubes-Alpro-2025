@@ -7,6 +7,13 @@ void cek_antrian_saya (User *user, User *users, ListRuangan *ruangan, int banyak
         printf("\nERROR: Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
         // return;
     }
+=======
+// void cek_antrian_saya (User *user, User *users, ListRuangan *ruangan, int banyakUser) {
+//     if (currUser == NULL) {
+//         printf("\nERROR: Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
+//         return;
+//     }
+>>>>>>> main
     
     if (user->role != ROLE_PASIEN) {
         printf("\nERROR: Hanya pasien yang bisa melihat antrian!\n");
