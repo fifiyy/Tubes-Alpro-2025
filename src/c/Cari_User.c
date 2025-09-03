@@ -1,4 +1,5 @@
 #include "../header/cari_user.h"
+//random
 
 int binary_search (ListUser L, int targetElement, int size){
     int left = 0, right = size - 1;
