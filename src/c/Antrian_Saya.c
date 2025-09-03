@@ -4,7 +4,7 @@
 
 void cek_antrian_saya (User *user, User *users, ListRuangan *ruangan, int banyakUser) {
     if (currUser == NULL) {
-        printf("\nERROR: Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
+        // printf("\nERROR: Kamu belum login. Silakan login terlebih dahulu dengan command LOGIN.\n");
         // return;
     }
     
